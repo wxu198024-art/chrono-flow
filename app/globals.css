@@ -25,3 +25,22 @@ body {
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(245, 244, 240, 0.2), transparent);
 }
+/* 优化：增强暗黑高光与水墨光晕层次 */
+body {
+  background: radial-gradient(circle at 50% 20%, #1a1a24 0%, #0d0d12 60%, #050508 100%) !important;
+  color: var(--foreground);
+}
+
+/* 赋予主标题极具质感的金白渐变光芒 */
+.font-serif-title {
+  font-family: 'Cinzel', Georgia, serif;
+  background: linear-gradient(180deg, #ffffff 0%, #a3a3a3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* 强化浮动光晕与爻线质感 */
+.yao-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.4), transparent);
+}
