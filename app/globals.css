@@ -1,46 +1,65 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500&family=Noto+Serif+SC:wght@300;400;600&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #0a0a0a;
-  --foreground: #ededed;
+  --obsidian: #121212;      /* 玄青 */
+  --rice-paper: #F5F4F0;    /* 宣纸白 */
+  --cinnabar: #C8322B;      /* 朱砂红 */
+  --ink-border: #262626;    /* 极细墨线 */
 }
 
+/* 整体背景：玄青色渐变，摒弃塑料感星空 */
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--obsidian);
+  background-image: radial-gradient(circle at 50% 15%, #1c1c1c 0%, #121212 70%);
+  color: var(--rice-paper);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow-x: hidden;
 }
 
-/* 史诗感字体定义 */
+/* 高冷史诗感衬线标题 */
 .font-serif-title {
-  font-family: 'Cinzel', Georgia, serif;
+  font-family: 'Cinzel', 'Noto Serif SC', serif;
+  letter-spacing: 0.15em;
 }
 
-/* 极细爻线与微光效果 */
-.yao-line {
+/* 核心视觉元素：爻线（Yao Lines） */
+/* 阳爻：连线 */
+.yao-yang {
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(245, 244, 240, 0.2), transparent);
-}
-/* 优化：增强暗黑高光与水墨光晕层次 */
-body {
-  background: radial-gradient(circle at 50% 20%, #1a1a24 0%, #0d0d12 60%, #050508 100%) !important;
-  color: var(--foreground);
+  background-color: rgba(245, 244, 240, 0.25);
+  width: 100%;
 }
 
-/* 赋予主标题极具质感的金白渐变光芒 */
-.font-serif-title {
-  font-family: 'Cinzel', Georgia, serif;
-  background: linear-gradient(180deg, #ffffff 0%, #a3a3a3 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* 强化浮动光晕与爻线质感 */
-.yao-line {
+/* 阴爻：断线 */
+.yao-yin {
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.4), transparent);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.yao-yin::before, .yao-yin::after {
+  content: '';
+  width: 44%;
+  height: 100%;
+  background-color: rgba(245, 244, 240, 0.25);
+}
+
+/* 极简朱砂强调点 */
+.cinnabar-dot {
+  width: 5px;
+  height: 5px;
+  background-color: var(--cinnabar);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* 干支矩阵代码文字（Code Matrix 质感） */
+.stems-matrix {
+  font-family: 'Cinzel', monospace;
+  letter-spacing: 0.2em;
+  color: #737373;
 }
