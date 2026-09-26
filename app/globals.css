@@ -202,3 +202,30 @@ body {
   letter-spacing: 0.2em;
   color: var(--text-muted);
 }
+/* 在 app/globals.css 底端加入以下补丁 */
+
+[data-theme="light"] .text-amber-100,
+[data-theme="light"] .text-amber-200,
+[data-theme="light"] .text-amber-300,
+[data-theme="light"] .text-amber-400,
+[data-theme="light"] .text-amber-500 {
+  color: #9A3412 !important; /* 暖沙模式下强制替换为高对比深赤琥珀色 */
+}
+
+[data-theme="light"] .text-neutral-100,
+[data-theme="light"] .text-neutral-200,
+[data-theme="light"] .text-neutral-300 {
+  color: #1C1917 !important; /* 暖沙模式下强制替换为高对比深碳木色 */
+}
+
+[data-theme="light"] .text-neutral-400,
+[data-theme="light"] .text-neutral-500 {
+  color: #4A443F !important; /* 暖沙模式下强制替换为高对比灰棕色 */
+}
+
+[data-theme="light"] .bg-neutral-900\/40,
+[data-theme="light"] .bg-neutral-900\/60,
+[data-theme="light"] .bg-neutral-950\/60 {
+  background-color: rgba(255, 253, 248, 0.90) !important; /* 暖沙卡片底色高亮 */
+  border-color: rgba(42, 39, 37, 0.25) !important;
+}
