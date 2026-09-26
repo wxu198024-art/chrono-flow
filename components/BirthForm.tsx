@@ -1,8 +1,11 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useLanguage } from '@/app/layout';
 
 export default function BirthForm() {
+  const { dict } = useLanguage();
+
   const [formData, setFormData] = useState({
     name: '',
     gender: 'male',
@@ -19,7 +22,7 @@ export default function BirthForm() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Spatiotemporal Parameters Submitted:', formData);
-    // 后续接入四柱能量矩阵计算引擎
+    // 后续接入时空能量阵列计算引擎
   };
 
   return (
@@ -30,17 +33,17 @@ export default function BirthForm() {
       {/* 顶部极细 1px 爻线装饰 */}
       <div className="absolute top-0 left-0 right-0 yao-yang"></div>
 
-      {/* 1. 标识与生物极性 (二列对齐) */}
+      {/* 1. 主体标识与生物极性 (二列等高对齐) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
         {/* Subject Identifier */}
         <div className="space-y-1.5">
           <label className="block text-[11px] h-4 leading-4 tracking-widest text-[var(--text-secondary)] uppercase font-medium">
-            Subject Identifier / 标识
+            {dict.identifierLabel}
           </label>
           <input
             type="text"
             name="name"
-            placeholder="e.g. 齐渊"
+            placeholder={dict.identifierPlaceholder}
             value={formData.name}
             onChange={handleChange}
             className="w-full h-11 px-3.5 bg-[var(--input-bg)] border border-[var(--input-border)] text-[var(--text-primary)] placeholder-[var(--text-muted)] text-xs rounded-sm focus:outline-none focus:border-[var(--yao-light)] transition-colors"
@@ -51,12 +54,12 @@ export default function BirthForm() {
         {/* Biological Polarity */}
         <div className="space-y-1.5">
           <label className="block text-[11px] h-4 leading-4 tracking-widest text-[var(--text-secondary)] uppercase font-medium">
-            Biological Polarity / 极性
+            {dict.polarityLabel}
           </label>
           <div className="grid grid-cols-2 gap-2 h-11">
             {[
-              { id: 'male', label: 'MALE / Male' },
-              { id: 'female', label: 'FEMALE / Female' },
+              { id: 'male', label: dict.polarityMale },
+              { id: 'female', label: dict.polarityFemale },
             ].map((g) => (
               <button
                 key={g.id}
@@ -75,12 +78,12 @@ export default function BirthForm() {
         </div>
       </div>
 
-      {/* 2. 出生日期与出生时间 (二列对齐) */}
+      {/* 2. 出生日期与出生时刻 (二列等高对齐) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
         {/* Birth Date */}
         <div className="space-y-1.5">
           <label className="block text-[11px] h-4 leading-4 tracking-widest text-[var(--text-secondary)] uppercase font-medium">
-            Birth Date / 出生日期
+            {dict.birthDateLabel}
           </label>
           <input
             type="date"
@@ -95,7 +98,7 @@ export default function BirthForm() {
         {/* Birth Time */}
         <div className="space-y-1.5">
           <label className="block text-[11px] h-4 leading-4 tracking-widest text-[var(--text-secondary)] uppercase font-medium">
-            Birth Time / 时辰 (UTC Local)
+            {dict.birthTimeLabel}
           </label>
           <input
             type="time"
@@ -111,15 +114,15 @@ export default function BirthForm() {
       {/* 3. 出生地点 (单列对齐) */}
       <div className="space-y-1.5">
         <label className="block text-[11px] h-4 leading-4 tracking-widest text-[var(--text-secondary)] uppercase font-medium flex justify-between items-center">
-          <span>Birth Location / 出生地点</span>
+          <span>{dict.locationLabel}</span>
           <span className="text-[var(--text-muted)] italic font-normal text-[10px]">
-            True Solar Time Correction • 真太阳时校正
+            {dict.locationHint}
           </span>
         </label>
         <input
           type="text"
           name="location"
-          placeholder="e.g. 上海市 (Shanghai) / 121.47° E"
+          placeholder={dict.locationPlaceholder}
           value={formData.location}
           onChange={handleChange}
           className="w-full h-11 px-3.5 bg-[var(--input-bg)] border border-[var(--input-border)] text-[var(--text-primary)] placeholder-[var(--text-muted)] text-xs rounded-sm focus:outline-none focus:border-[var(--yao-light)] transition-colors"
@@ -133,7 +136,7 @@ export default function BirthForm() {
           className="w-full h-12 border border-[var(--border-line-hover)] bg-[var(--bg-card-hover)] hover:bg-[var(--cinnabar)] hover:text-white text-[var(--text-primary)] text-xs tracking-[0.25em] uppercase font-medium transition-all duration-300 rounded-sm shadow-md flex items-center justify-center space-x-2 group"
         >
           <span className="cinnabar-dot group-hover:bg-white transition-colors"></span>
-          <span>Initiate Spatiotemporal Alignment • 开启时空对齐</span>
+          <span>{dict.submitButton}</span>
         </button>
       </div>
 
