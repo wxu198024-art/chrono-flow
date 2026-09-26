@@ -11,7 +11,6 @@ export default function Header() {
   const [isLangOpen, setIsLangOpen] = useState(false);
   const langDropdownRef = useRef<HTMLDivElement>(null);
 
-  // 初始化与监听主题切换
   useEffect(() => {
     const currentTheme = (document.documentElement.getAttribute('data-theme') as 'dark' | 'light') || 'dark';
     setTheme(currentTheme);
@@ -23,7 +22,6 @@ export default function Header() {
     document.documentElement.setAttribute('data-theme', nextTheme);
   };
 
-  // 点击外部自动关闭语言下拉框
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (langDropdownRef.current && !langDropdownRef.current.contains(event.target as Node)) {
@@ -52,31 +50,26 @@ export default function Header() {
         </span>
       </Link>
 
-      {/* 2. 时空干支 Cosmic Clock (保留时空矩阵) */}
+      {/* 2. 今日时空节律 (根据语言纯净展示，绝无异体中英混排) */}
       <div className="hidden md:flex items-center space-x-2 stems-matrix text-[11px]">
-        <span>2026.09.26</span>
-        <span className="text-[var(--cinnabar)]">/</span>
-        <span>BING-WU</span>
-        <span className="text-[var(--text-muted)]">丙午</span>
-        <span>DING-YOU</span>
-        <span className="text-[var(--text-muted)]">丁酉</span>
+        <span>{dict.todayRhythm}</span>
       </div>
 
-      {/* 3. 右侧交互控制区：阴阳场域切换 + 多语言 Popover */}
+      {/* 3. 右侧控制区：虚/实 场域切换 + LOCALE 语言切换 */}
       <div className="flex items-center space-x-6 text-[var(--text-secondary)]">
         
-        {/* 【虚 / 实】场域切换按钮 (VOID / FORM) */}
+        {/* 【虚 / 实】场域切换按钮 */}
         <button
           onClick={toggleTheme}
           className="flex items-center space-x-2 hover:text-[var(--text-primary)] transition-colors text-[11px] font-medium"
-          title="Toggle Spatiotemporal Field"
+          title="Toggle Theme"
         >
           <span className={`w-3.5 h-3.5 rounded-full border border-[var(--text-secondary)] flex items-center justify-center transition-all ${
             theme === 'dark' ? 'border-dashed' : 'border-solid bg-[var(--text-primary)]'
           }`}>
             {theme === 'dark' && <span className="w-1.5 h-1.5 rounded-full bg-[var(--cinnabar)]"></span>}
           </span>
-          <span>{theme === 'dark' ? 'VOID' : 'FORM'}</span>
+          <span>{theme === 'dark' ? dict.themeDark : dict.themeLight}</span>
         </button>
 
         <span className="text-[var(--border-line)]">•</span>
