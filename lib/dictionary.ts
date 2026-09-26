@@ -62,31 +62,27 @@ export const dictionaries = {
     
     termsContent: [
       {
-        section: 'I. Spatiotemporal Calculation Engine & Computation Principles',
-        body: 'CHRONO–FLOW operates on the ChronoEngine™ proprietary spatiotemporal matrix calculation model, executing non-linear energy field mapping based on user-provided birth parameters, geographic coordinates, and True Solar Time offsets. All calculation results represent energetic frequency projections and systemic homeostasis states within discrete temporal frames, provided solely for personal introspective awareness and philosophical exploration.'
+        section: '1. Non-Medical & Non-Psychological Guidance',
+        body: 'CHRONO–FLOW provides archetypal and field resonance analysis based on the ChronoEngine™ proprietary spatiotemporal matrix calculation model and non-linear energy field mapping algorithms. The insights provided are strictly for personal self-reflection, philosophical exploration, and energetic alignment. They do not constitute professional psychological counselling, medical advice, or financial planning.'
       },
       {
-        section: 'II. Boundaries of Perception & User Scope',
-        body: 'The field mapping and archetype matrices provided by CHRONO–FLOW do not constitute medical, legal, financial, or psychological guidance. Users should view all spatiotemporal resonance outputs through the lens of individual agency, using the insights as reflective reference points for personal growth.'
+        section: '2. Merchant of Record',
+        body: 'Our order process is conducted by our online reseller Paddle.com. Paddle.com is the Merchant of Record for all our orders. Paddle provides all customer service inquiries and handles returns.'
       },
       {
-        section: 'III. Intellectual Property & System Field Security',
-        body: 'All proprietary calculation models, matrix visual layouts, geometric symbols, and textual expressions within CHRONO–FLOW are protected under international copyright and intellectual property framework. Unauthorized reverse engineering, automated data extraction, or commercial reproduction is strictly prohibited.'
+        section: '3. Intellectual Property & Field Security',
+        body: 'All generated matrix reports, visual aesthetics, geometric symbols, and proprietary calculation code within CHRONO–FLOW are protected under international intellectual property laws. Users are granted a personal, non-exclusive license to view and share their spatiotemporal resonance outputs.'
       }
     ],
 
     privacyContent: [
       {
-        section: 'I. Data Minimization & Temporal Parameter Collection',
-        body: 'To generate precise spatiotemporal matrices, CHRONO–FLOW collects only necessary spatial and temporal parameters: name/identifier, gender polarity, date/time of birth, and geographic birthplace. This data is processed exclusively to calculate True Solar Time coordinates and energy field distributions.'
+        section: '1. Information We Collect',
+        body: 'We collect birth dates, birth times, gender polarity, and optional geographic location entries solely to compute your True Solar Time coordinates, construct your four-pillar energy matrix, and generate personalized resonance reports. We do not sell or monetize your personal temporal metadata.'
       },
       {
-        section: 'II. Data Isolation & Local Memory Processing',
-        body: 'Your spatiotemporal parameters are processed within isolated temporary computation nodes. CHRONO–FLOW never sells, trades, or exposes your personal temporal parameters to external third-party monetization networks.'
-      },
-      {
-        section: 'III. User Autonomy & Parameter Erasure',
-        body: 'Users retain full ownership over their input parameters. You may purge cached spatiotemporal data at any time by clearing your browser session state or executing a local data reset.'
+        section: '2. Processing via ChronoEngine™ Nodes',
+        body: 'Your computed spatiotemporal parameters are transmitted securely to isolated ChronoEngine™ computation nodes to execute energy matrix alignment and generate report texts. No government IDs, financial credentials, or sensitive personal identity records are stored on our primary servers.'
       }
     ],
 
@@ -158,31 +154,27 @@ export const dictionaries = {
     
     termsContent: [
       {
-        section: '一、 时空演算引擎与推演原则',
-        body: 'CHRONO–FLOW 依托 ChronoEngine™ 专有时空矩阵演算模型，基于用户输入的生辰参数、地理坐标与真太阳时偏移量执行非线性能量场域映射。所有计算与推演结果仅代表特定时间相位下的能量频率投影与系统内稳态表达，旨在提供自我认知观察与哲学探索参考。'
+        section: '1. 非医疗与非心理诊疗说明',
+        body: 'CHRONO–FLOW 依托 ChronoEngine™ 专有时空矩阵演算模型与非线性能量场映射算法，提供原型与能量场共振解析。所呈现的洞察仅供个人内在觉察、哲学探索与能量对齐参考，不构成专业心理咨询、医疗建议或财务规划。'
       },
       {
-        section: '二、 认知边界与使用者责任',
-        body: 'CHRONO–FLOW 所呈现的场域映射与原型矩阵不构成医疗、法律、财务或心理诊疗等专业建议。使用者应当以独立自主的觉察视角对待所有时空共振结果，将其作为内在觉察与自我探索的参照坐标。'
+        section: '2. 官方名义商家 (Merchant of Record)',
+        body: '我们的订单支付由在线经销商 Paddle.com 负责处理。Paddle.com 是我们所有订单的官方名义商家（Merchant of Record），负责提供相关客户服务并处理退款事宜。'
       },
       {
-        section: '三、 知识产权与场域安全',
-        body: 'CHRONO–FLOW 内包含的所有专有演算模型、矩阵视觉构图、几何符号及文本表达，均受国际著作权及知识产权法律体系保护。严禁任何未经授权的逆向工程、自动化数据提取或商业化复刻。'
+        section: '3. 知识产权与场域安全',
+        body: 'CHRONO–FLOW 内生成的能量矩阵报告、视觉美学布局、几何符号及专有演算代码，均受国际知识产权法律保护。使用者获授权获得个人非排他性许可，用于查看与分享其时空共振结果。'
       }
     ],
 
     privacyContent: [
       {
-        section: '一、 数据极化与时空参数采集',
-        body: '为生成精确的时空能量矩阵，CHRONO–FLOW 仅采集必要的时空参数：姓名/标识符、性别极性、出生日期时间及出生地理位置。此类数据仅用于计算真太阳时坐标与能量场分布。'
+        section: '1. 我们采集的信息',
+        body: '我们仅在必要范围内采集出生日期、出生时间、性别极性和可选的出生地理位置，用于计算真太阳时坐标、构建四柱能量矩阵并生成个性化共振报告。我们绝不出售或商业化变现您的个人时空元数据。'
       },
       {
-        section: '二、 隔离计算与本地内存处理',
-        body: '您的生辰时空参数均在隔离的临时计算节点中运行。CHRONO–FLOW 绝不向任何第三方商业化广告网络出售、交易或泄露您的个人时空参数。'
-      },
-      {
-        section: '三、 用户自主权与参数抹除',
-        body: '使用者对输入的时空参数享有绝对控制权。您随时可通过清理浏览器缓存或执行本地数据重置，彻底抹除所有暂存的时空演算记录。'
+        section: '2. 通过 ChronoEngine™ 节点演算',
+        body: '您的生辰时空参数均以加密形式传输至隔离的 ChronoEngine™ 演算节点，用于完成能量矩阵对齐与报告生成。我们的主服务器不存储任何政府身份证件、财务凭证或敏感个人身份信息。'
       }
     ],
 
@@ -254,31 +246,27 @@ export const dictionaries = {
     
     termsContent: [
       {
-        section: '一、 時空演算引擎與推演原則',
-        body: 'CHRONO–FLOW 依託 ChronoEngine™ 專有時空矩陣演算模型，基於使用者輸入的生辰參數、地理坐標與真太陽時偏移量執行非線性能量場域映射。所有計算與推演結果僅代表特定時間相位下的能量頻率投影與系統內穩態表達，旨在提供自我認知觀察與哲學探索參考。'
+        section: '1. 非醫療與非心理診療說明',
+        body: 'CHRONO–FLOW 依託 ChronoEngine™ 專有時空矩陣演算模型與非線性能量場映射算法，提供原型與能量場共振解析。所呈現的洞察僅供個人內在覺察、哲學探索與能量對齊參考，不構成專業心理諮詢、醫療建議或財務規劃。'
       },
       {
-        section: '二、 認知邊界與使用者責任',
-        body: 'CHRONO–FLOW 所呈現的場域映射與原型矩陣不構成醫療、法律、財務或心理診療等專業建議。使用者應當以獨立自主的覺察視角對待所有時空共振結果，將其作為內在覺察與自我探索的參照坐標。'
+        section: '2. 官方名義商家 (Merchant of Record)',
+        body: '我們的訂單支付由線上經銷商 Paddle.com 負責處理。Paddle.com 是我們所有訂單的官方名義商家（Merchant of Record），負責提供相關客戶服務並處理退款事宜。'
       },
       {
-        section: '三、 智慧財產權與場域安全',
-        body: 'CHRONO–FLOW 內包含的所有專有演算模型、矩陣視覺構圖、幾何符號及文本表達，均受國際著作權及智慧財產權法律體系保護。嚴禁任何未經授權的逆向工程、自動化數據提取或商業化複刻。'
+        section: '3. 智慧財產權與場域安全',
+        body: 'CHRONO–FLOW 內生成的能量矩陣報告、視覺美感佈局、幾何符號及專有演算代碼，均受國際智慧財產權法律保護。使用者獲授權獲得個人非排他性許可，用於查看與分享其時空共振結果。'
       }
     ],
 
     privacyContent: [
       {
-        section: '一、 數據極化與時空參數採集',
-        body: '為生成精確的時空能量矩陣，CHRONO–FLOW 僅採集必要的時空參數：姓名/標識符、性別極性、出生日期時間及出生地理位置。此類數據僅用於計算真太陽時坐標與能量場分態。'
+        section: '1. 我們採集的資訊',
+        body: '我們僅在必要範圍內採集出生日期、出生時間、性別極性和選填的出生地理位置，用於計算真太陽時坐標、構建四柱能量矩陣並生成個性化共振報告。我們絕不出售或商業化變現您的個人時空元數據。'
       },
       {
-        section: '二、 隔離計算與本地記憶體處理',
-        body: '您的生辰時空參數均在隔離的臨時計算節點中運行。CHRONO–FLOW 絕不向任何第三方商業化廣告網路出售、交易或洩露您的個人時空參數。'
-      },
-      {
-        section: '三、 使用者自主權與參數抹除',
-        body: '使用者對輸入的時空參數享有絕對控制權。您隨時可透過清理瀏覽器快取或執行本地數據重置，徹底抹除所有暫存的時空演算記錄。'
+        section: '2. 透過 ChronoEngine™ 節點演算',
+        body: '您的生辰時空參數均以加密形式傳輸至隔離的 ChronoEngine™ 演算節點，用於完成能量矩陣對齊與報告生成。我們的主伺服器不儲存任何政府身份證件、財務憑據或敏感個人身份資訊。'
       }
     ],
 
