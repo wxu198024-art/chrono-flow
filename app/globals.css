@@ -12,47 +12,55 @@
 :root,
 [data-theme="dark"] {
   --bg-primary: #0B0F12;           /* 深渊青黑 */
-  --bg-card: rgba(18, 24, 29, 0.65);/* 青黑毛玻璃卡片 */
-  --bg-card-hover: rgba(26, 35, 42, 0.85);
+  --bg-card: rgba(18, 24, 29, 0.75);/* 青黑毛玻璃卡片 */
+  --bg-card-hover: rgba(26, 35, 42, 0.90);
   
-  --text-primary: #F5F4F0;         /* 宣纸冷白 */
-  --text-secondary: #9EB0BC;       /* 灰青次要字 (提高对比度) */
-  --text-muted: #5D6E7A;           /* 极淡灰字 */
+  --text-primary: #F5F4F0;         /* 宣纸冷白 (清晰高对比) */
+  --text-secondary: #B0C0CC;       /* 灰青次要字 (再次提高对比度) */
+  --text-muted: #788A96;           /* 舒适辅助灰字 (大幅提升可读性) */
   
-  --border-line: rgba(255, 255, 255, 0.15); /* 1px 极细几何边框 */
-  --border-line-hover: rgba(0, 255, 204, 0.45);
+  --border-line: rgba(255, 255, 255, 0.18); /* 1px 极细几何边框 */
+  --border-line-hover: rgba(0, 255, 204, 0.55);
   
-  --input-bg: rgba(13, 18, 22, 0.8);        /* 输入框加深底色 */
-  --input-border: rgba(255, 255, 255, 0.2);
+  --input-bg: rgba(13, 18, 22, 0.85);       /* 输入框加深底色 */
+  --input-border: rgba(255, 255, 255, 0.25);
   
-  --yao-light: rgba(0, 255, 204, 0.65);    /* 玉冷青光线 (清晰可见) */
+  --yao-light: rgba(0, 255, 204, 0.75);    /* 玉冷青光线 */
   --cinnabar: #C8322B;                     /* 朱砂红 */
   --accent-glow: rgba(0, 255, 204, 0.15);
+  
+  /* 解决 Amber 刺眼眩光问题，改用沉稳微光琥珀金 */
+  --accent-amber: #E0A96D;
+  --accent-amber-glow: rgba(224, 169, 109, 0.18);
 }
 
 /* 2. 【实 / 阳】暖沙寂素 (Modern Wabi-Sabi) */
 [data-theme="light"] {
-  --bg-primary: #E6E1D5;           /* 暖钛砂石 / 哑光粗陶 */
-  --bg-card: rgba(255, 253, 248, 0.75); /* 提升卡片高光白色对比 */
-  --bg-card-hover: rgba(255, 255, 255, 0.95);
+  --bg-primary: #E8E3D8;           /* 暖钛砂石 / 哑光粗陶 */
+  --bg-card: rgba(255, 253, 248, 0.88); /* 提高卡片底色高光白色对比 */
+  --bg-card-hover: rgba(255, 255, 255, 0.98);
   
-  --text-primary: #1C1917;         /* 极深碳木色 (大幅提升清晰度) */
-  --text-secondary: #4A443F;       /* 风蚀深灰棕 */
-  --text-muted: #786E65;           /* 沉静浅赭 */
+  --text-primary: #1C1917;         /* 浓墨碳木色 (最高清晰度) */
+  --text-secondary: #3D3732;       /* 深沉风蚀灰棕 (大幅提升字迹识别度) */
+  --text-muted: #6B6158;           /* 沉静浅赭 (避免虚化) */
   
-  --border-line: rgba(42, 39, 37, 0.25); /* 明显刻痕线 */
-  --border-line-hover: rgba(184, 58, 46, 0.5);
+  --border-line: rgba(42, 39, 37, 0.28); /* 明显刻痕线 */
+  --border-line-hover: rgba(184, 58, 46, 0.6);
   
-  --input-bg: rgba(238, 233, 222, 0.9);   /* 输入框与卡片形成明暗阶梯 */
-  --input-border: rgba(42, 39, 37, 0.35);  /* 输入框高对比边框 */
+  --input-bg: rgba(238, 233, 222, 0.95);  /* 输入框明暗分层 */
+  --input-border: rgba(42, 39, 37, 0.40);  /* 输入框高对比边框 */
   
-  --yao-light: rgba(120, 100, 80, 0.75);  /* 浅赭断续线 (增强清晰度) */
+  --yao-light: rgba(100, 80, 60, 0.85);   /* 浅赭断续线 */
   --cinnabar: #B83A2E;                     /* 沉暗朱砂 */
-  --accent-glow: rgba(184, 58, 46, 0.12);
+  --accent-glow: rgba(184, 58, 46, 0.15);
+  
+  /* 暖沙模式下的沉稳棕琥珀，替代黄字 */
+  --accent-amber: #B45309;
+  --accent-amber-glow: rgba(180, 83, 9, 0.12);
 }
 
 /* ==========================================================================
-   GLOBAL BASE STYLES
+   GLOBAL BASE STYLES & TYPOGRAPHY SCALING (字号放大与舒适度修复)
    ========================================================================== */
 
 body {
@@ -61,13 +69,67 @@ body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   min-height: 100vh;
   overflow-x: hidden;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* 放大微小字号，解决视觉费眼问题 */
+.text-\[10px\] {
+  font-size: 0.75rem !important; /* 原 10px 强制升级为 12px */
+  line-height: 1.1rem !important;
+}
+
+.text-xs {
+  font-size: 0.875rem !important; /* 原 12px 强制升级为 14px */
+  line-height: 1.4rem !important;
+}
+
+.text-sm {
+  font-size: 1rem !important; /* 原 14px 强制升级为 16px */
+  line-height: 1.65rem !important;
 }
 
 /* 高冷史诗感衬线标题 */
 .font-serif-title {
   font-family: 'Cinzel', 'Noto Serif SC', serif;
   letter-spacing: 0.15em;
+}
+
+/* ==========================================================================
+   THEME ADAPTATION FOR TAILWIND UTILITIES (解决刺眼与多主题看不清)
+   ========================================================================== */
+
+/* 映射 TailWind 琥珀色/黄色系到高舒适度变量 */
+.text-amber-200, .text-amber-300, .text-amber-400, .text-amber-500 {
+  color: var(--accent-amber) !important;
+}
+
+.bg-amber-500\/15, .bg-amber-950\/30, .bg-amber-950\/20 {
+  background-color: var(--accent-amber-glow) !important;
+}
+
+.border-amber-500\/40, .border-amber-900\/50, .border-amber-800 {
+  border-color: var(--border-line) !important;
+}
+
+/* 映射 TailWind 暗暗中灰色文本到当前主题的高可读次要字体 */
+.text-neutral-300, .text-neutral-400 {
+  color: var(--text-secondary) !important;
+}
+
+.text-neutral-500 {
+  color: var(--text-muted) !important;
+}
+
+/* 卡片背景与边框主题自适应 */
+.bg-neutral-900\/40, .bg-neutral-900\/80, .bg-neutral-950\/60 {
+  background-color: var(--bg-card) !important;
+}
+
+.border-neutral-800, .border-neutral-800\/90, .border-neutral-900 {
+  border-color: var(--border-line) !important;
 }
 
 /* ==========================================================================
