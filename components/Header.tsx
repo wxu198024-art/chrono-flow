@@ -45,12 +45,14 @@ export default function Header() {
       <Link href="/" className="flex items-center space-x-3 font-serif-title font-bold text-sm text-[var(--text-primary)] hover:opacity-80 transition-opacity">
         <span className="cinnabar-dot"></span>
         <span>{dict.brand}</span>
-        <span className="text-[var(--text-muted)] font-normal text-[11px] hidden sm:inline">
-          / {dict.subtitle}
-        </span>
+        {dict.subtitle && (
+          <span className="text-[var(--text-muted)] font-normal text-[11px] hidden sm:inline">
+            / {dict.subtitle}
+          </span>
+        )}
       </Link>
 
-      {/* 2. 今日时空节律 (根据语言纯净展示，绝无异体中英混排) */}
+      {/* 2. 今日时空节律 (完全读取字典) */}
       <div className="hidden md:flex items-center space-x-2 stems-matrix text-[11px]">
         <span>{dict.todayRhythm}</span>
       </div>
