@@ -4,27 +4,58 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --obsidian: #121212;      /* 玄青 */
-  --rice-paper: #F5F4F0;    /* 宣纸白 */
-  --cinnabar: #C8322B;      /* 朱砂红 */
-  --ink-border: #2e2e2e;    /* 极细墨线 */
+/* ==========================================================================
+   CHRONO–FLOW DUAL THEME FIELD SYSTEM
+   ========================================================================== */
+
+/* 1. 【虚 / 阴】暗黑科技禅 (Dark Cyber Zen) - 默认 */
+:root,
+[data-theme="dark"] {
+  --bg-primary: #0B0F12;           /* 深渊青黑 */
+  --bg-card: rgba(18, 24, 29, 0.5); /* 青黑毛玻璃卡片 */
+  --bg-card-hover: rgba(26, 35, 42, 0.7);
+  
+  --text-primary: #F5F4F0;         /* 宣纸冷白 */
+  --text-secondary: #8E9BA4;       /* 灰青次要字 */
+  --text-muted: #52606B;           /* 极淡灰字 */
+  
+  --border-line: rgba(255, 255, 255, 0.12); /* 1px 极细几何边框 */
+  --border-line-hover: rgba(0, 255, 204, 0.4);
+  
+  --yao-light: rgba(0, 255, 204, 0.5);    /* 玉冷青光线 */
+  --cinnabar: #C8322B;                     /* 朱砂红 */
+  --accent-glow: rgba(0, 255, 204, 0.15);
 }
 
-/* 增强玄青水墨光晕与极细星斑背景 */
+/* 2. 【实 / 阳】暖沙寂素 (Modern Wabi-Sabi) */
+[data-theme="light"] {
+  --bg-primary: #E8E3D9;           /* 暖钛砂石 / 哑光粗陶 */
+  --bg-card: rgba(242, 239, 233, 0.65); /* 暖沙毛玻璃 */
+  --bg-card-hover: rgba(255, 255, 255, 0.85);
+  
+  --text-primary: #2A2725;         /* 深碳木色 */
+  --text-secondary: #6B645D;       /* 风蚀灰棕 */
+  --text-muted: #9E9385;           /* 钝化浅赭 */
+  
+  --border-line: rgba(42, 39, 37, 0.15); /* 风蚀细刻痕 */
+  --border-line-hover: rgba(42, 39, 37, 0.4);
+  
+  --yao-light: rgba(158, 147, 133, 0.6);  /* 浅赭断续线 */
+  --cinnabar: #B83A2E;                     /* 沉暗朱砂 */
+  --accent-glow: rgba(158, 147, 133, 0.2);
+}
+
+/* ==========================================================================
+   GLOBAL BASE STYLES
+   ========================================================================== */
+
 body {
-  background-color: var(--obsidian);
-  background-image: 
-    radial-gradient(circle at 50% 20%, #26262e 0%, #16161a 50%, #0d0d0f 100%),
-    radial-gradient(2px 2px at 20px 30px, rgba(245, 244, 240, 0.15), rgba(0,0,0,0)),
-    radial-gradient(2px 2px at 40px 70px, rgba(245, 244, 240, 0.1), rgba(0,0,0,0)),
-    radial-gradient(1.5px 1.5px at 90px 40px, rgba(245, 244, 240, 0.2), rgba(0,0,0,0));
-  background-repeat: repeat;
-  background-size: 100% 100%, 120px 120px, 180px 180px, 250px 250px;
-  color: var(--rice-paper);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  min-h-screen: 100vh;
+  min-height: 100vh;
   overflow-x: hidden;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 /* 高冷史诗感衬线标题 */
@@ -33,13 +64,18 @@ body {
   letter-spacing: 0.15em;
 }
 
-/* 爻线（Yao Lines）- 提高可见度 */
+/* ==========================================================================
+   1PX TRIGRAM & YAO GEOMETRY (1px 几何爻线系统)
+   ========================================================================== */
+
+/* 阳爻 (Continuous Line) */
 .yao-yang {
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(245, 244, 240, 0.35), transparent);
+  background: linear-gradient(90deg, transparent, var(--yao-light), transparent);
   width: 100%;
 }
 
+/* 阴爻 (Broken Line) */
 .yao-yin {
   height: 1px;
   width: 100%;
@@ -50,22 +86,22 @@ body {
   content: '';
   width: 44%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(245, 244, 240, 0.35));
+  background: linear-gradient(90deg, transparent, var(--yao-light));
 }
 
-/* 极简朱砂点 */
+/* 极简朱砂能量点 */
 .cinnabar-dot {
   width: 6px;
   height: 6px;
   background-color: var(--cinnabar);
   border-radius: 50%;
   display: inline-block;
-  box-shadow: 0 0 8px rgba(200, 50, 43, 0.6);
+  box-shadow: 0 0 8px var(--cinnabar);
 }
 
-/* 干支代码矩阵 */
+/* 时空参数矩阵字体 */
 .stems-matrix {
   font-family: 'Cinzel', monospace;
   letter-spacing: 0.2em;
-  color: #8e8e8e;
+  color: var(--text-muted);
 }
