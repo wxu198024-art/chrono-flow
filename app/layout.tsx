@@ -4,8 +4,8 @@ import Header from '@/components/Header';
 import InkBackground from '@/components/InkBackground';
 
 export const metadata = {
-  title: 'CHRONO–FLOW | Oriental Spatiotemporal Diagnostics',
-  description: 'Unveil your Jungian archetype through ancient Oriental temporal mechanics.',
+  title: 'CHRONO–FLOW | Spatiotemporal Mechanics & Archetype System',
+  description: 'Unveil your Jungian archetype through temporal mechanics and spatiotemporal alignment.',
 };
 
 export default function RootLayout({
@@ -17,7 +17,7 @@ export default function RootLayout({
     <html lang="en" data-theme="dark">
       <body className="min-h-screen flex flex-col justify-between selection:bg-[var(--cinnabar)] selection:text-white relative bg-[var(--bg-primary)] text-[var(--text-primary)] transition-colors duration-300">
         
-        {/* 全局 Canvas 动态背景 (1px 几何爻线 + 双场域粒子) */}
+        {/* 全局 Canvas 动态背景 (1px 几何爻线 + 向心漩涡水墨) */}
         <InkBackground />
 
         {/* 顶部统一 Header (包含 Void/Form 阴阳切换与 LOCALE 多语言 Popover) */}
@@ -47,7 +47,7 @@ export default function RootLayout({
             </Link>
           </div>
 
-          <p>© 2026 CHRONO–FLOW. ORIENTAL SPATIOTEMPORAL MECHANICS & JUNGIAN ARCHETYPES.</p>
+          <p>© 2026 CHRONO–FLOW. SPATIOTEMPORAL MECHANICS & JUNGIAN ARCHETYPES.</p>
         </footer>
 
       </body>
