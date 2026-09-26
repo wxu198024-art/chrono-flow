@@ -7,9 +7,10 @@ import Header from '@/components/Header';
 import InkBackground from '@/components/InkBackground';
 import { Locale, dictionaries } from '@/lib/dictionary';
 
-// 1. 创建全局语言 Context
+// 1. 创建全局语言 Context (补齐 lang 别名属性)
 interface LanguageContextType {
   locale: Locale;
+  lang: 'en' | 'zh';
   setLocale: (locale: Locale) => void;
   dict: typeof dictionaries['en'];
 }
@@ -41,6 +42,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   };
 
   const dict = dictionaries[locale];
+  // 计算出简化的 lang 别名，供后续逻辑精确识别 en / zh
+  const lang: 'en' | 'zh' = locale === 'en' ? 'en' : 'zh';
 
   return (
     <html lang={locale} data-theme="dark">
@@ -52,7 +55,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         />
       </head>
       <body className="min-h-screen flex flex-col justify-between selection:bg-[var(--cinnabar)] selection:text-white relative bg-[var(--bg-primary)] text-[var(--text-primary)] transition-colors duration-300">
-        <LanguageContext.Provider value={{ locale, setLocale, dict }}>
+        <LanguageContext.Provider value={{ locale, lang, setLocale, dict }}>
           {/* 全局 Canvas 动态背景 (1px 几何爻线 + 向心漩涡水墨) */}
           <InkBackground />
 
