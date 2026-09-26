@@ -12,37 +12,43 @@
 :root,
 [data-theme="dark"] {
   --bg-primary: #0B0F12;           /* 深渊青黑 */
-  --bg-card: rgba(18, 24, 29, 0.5); /* 青黑毛玻璃卡片 */
-  --bg-card-hover: rgba(26, 35, 42, 0.7);
+  --bg-card: rgba(18, 24, 29, 0.65);/* 青黑毛玻璃卡片 */
+  --bg-card-hover: rgba(26, 35, 42, 0.85);
   
   --text-primary: #F5F4F0;         /* 宣纸冷白 */
-  --text-secondary: #8E9BA4;       /* 灰青次要字 */
-  --text-muted: #52606B;           /* 极淡灰字 */
+  --text-secondary: #9EB0BC;       /* 灰青次要字 (提高对比度) */
+  --text-muted: #5D6E7A;           /* 极淡灰字 */
   
-  --border-line: rgba(255, 255, 255, 0.12); /* 1px 极细几何边框 */
-  --border-line-hover: rgba(0, 255, 204, 0.4);
+  --border-line: rgba(255, 255, 255, 0.15); /* 1px 极细几何边框 */
+  --border-line-hover: rgba(0, 255, 204, 0.45);
   
-  --yao-light: rgba(0, 255, 204, 0.5);    /* 玉冷青光线 */
+  --input-bg: rgba(13, 18, 22, 0.8);        /* 输入框加深底色 */
+  --input-border: rgba(255, 255, 255, 0.2);
+  
+  --yao-light: rgba(0, 255, 204, 0.65);    /* 玉冷青光线 (清晰可见) */
   --cinnabar: #C8322B;                     /* 朱砂红 */
   --accent-glow: rgba(0, 255, 204, 0.15);
 }
 
 /* 2. 【实 / 阳】暖沙寂素 (Modern Wabi-Sabi) */
 [data-theme="light"] {
-  --bg-primary: #E8E3D9;           /* 暖钛砂石 / 哑光粗陶 */
-  --bg-card: rgba(242, 239, 233, 0.65); /* 暖沙毛玻璃 */
-  --bg-card-hover: rgba(255, 255, 255, 0.85);
+  --bg-primary: #E6E1D5;           /* 暖钛砂石 / 哑光粗陶 */
+  --bg-card: rgba(255, 253, 248, 0.75); /* 提升卡片高光白色对比 */
+  --bg-card-hover: rgba(255, 255, 255, 0.95);
   
-  --text-primary: #2A2725;         /* 深碳木色 */
-  --text-secondary: #6B645D;       /* 风蚀灰棕 */
-  --text-muted: #9E9385;           /* 钝化浅赭 */
+  --text-primary: #1C1917;         /* 极深碳木色 (大幅提升清晰度) */
+  --text-secondary: #4A443F;       /* 风蚀深灰棕 */
+  --text-muted: #786E65;           /* 沉静浅赭 */
   
-  --border-line: rgba(42, 39, 37, 0.15); /* 风蚀细刻痕 */
-  --border-line-hover: rgba(42, 39, 37, 0.4);
+  --border-line: rgba(42, 39, 37, 0.25); /* 明显刻痕线 */
+  --border-line-hover: rgba(184, 58, 46, 0.5);
   
-  --yao-light: rgba(158, 147, 133, 0.6);  /* 浅赭断续线 */
+  --input-bg: rgba(238, 233, 222, 0.9);   /* 输入框与卡片形成明暗阶梯 */
+  --input-border: rgba(42, 39, 37, 0.35);  /* 输入框高对比边框 */
+  
+  --yao-light: rgba(120, 100, 80, 0.75);  /* 浅赭断续线 (增强清晰度) */
   --cinnabar: #B83A2E;                     /* 沉暗朱砂 */
-  --accent-glow: rgba(158, 147, 133, 0.2);
+  --accent-glow: rgba(184, 58, 46, 0.12);
 }
 
 /* ==========================================================================
