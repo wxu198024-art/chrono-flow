@@ -4,26 +4,42 @@ export const dictionaries = {
   'en': {
     brand: 'CHRONO–FLOW',
     subtitle: 'SPACE, TIME & THE UNSEEN SELF',
-    clockPrefix: 'SPATIOTEMPORAL MATRIX',
-    themeLight: 'FORM • Warm Sand',
-    themeDark: 'VOID • Cyber Zen',
+    
+    // Header Rhythm & Clock
+    todayRhythm: 'SEP 26, 2026 • BING-WU / DING-YOU',
+    
+    // Theme Switch
+    themeLight: 'FORM',
+    themeDark: 'VOID',
+
+    // Form Section Title & Notice
+    formTitle: 'ENTER BIRTH INFORMATION',
+    formNotice: 'The system will automatically transform data into a Four Pillars energy structure diagram based on True Solar Time.',
     
     // Form Inputs
-    identifierLabel: 'Subject Identifier',
+    identifierLabel: 'Name',
     identifierPlaceholder: 'e.g. Orion / Yuan',
     
-    polarityLabel: 'Biological Polarity',
-    polarityMale: 'MALE / Alpha',
-    polarityFemale: 'FEMALE / Beta',
+    polarityLabel: 'Gender',
+    polarityMale: 'Male',
+    polarityFemale: 'Female',
     
-    birthDateLabel: 'Temporal Coordinates (Date)',
-    birthTimeLabel: 'Temporal Anchor (Time UTC)',
+    birthDateLabel: 'Date of Birth',
+    birthTimeLabel: 'Time of Birth',
     
-    locationLabel: 'Spatial Coordinates',
-    locationPlaceholder: 'e.g. Shanghai / 121.47° E',
-    locationHint: 'True Solar Shift Correction',
+    locationLabel: 'Place of Birth',
+    locationPlaceholder: 'e.g. Shanghai',
+    locationHint: 'True Solar Time Adjustment',
     
     submitButton: 'ALIGN SPATIOTEMPORAL FREQUENCY',
+
+    // Bottom Three Feature Cards
+    card1Title: 'Personality Archetype',
+    card1Desc: 'Deep cognitive structure and innate temporal pattern',
+    card2Title: 'Temporal Evolution',
+    card2Desc: 'Trajectory of time cycles and energy progression',
+    card3Title: 'Relational Resonance',
+    card3Desc: 'Interpersonal field interaction and energetic connection',
     
     // Footer Navigation
     dictionary: 'Lexicon',
@@ -35,26 +51,42 @@ export const dictionaries = {
   'zh-CN': {
     brand: 'CHRONO–FLOW',
     subtitle: '时空与未显之己',
-    clockPrefix: '时空矩阵',
-    themeLight: '实 • 暖沙寂素',
-    themeDark: '虚 • 暗黑科技禅',
+    
+    // Header Rhythm & Clock
+    todayRhythm: '2026年9月26日 • 丙午年 丁酉月',
+    
+    // Theme Switch
+    themeLight: '实',
+    themeDark: '虚',
+
+    // Form Section Title & Notice
+    formTitle: '输入出生时空信息',
+    formNotice: '系统将基于真太阳时自动转化为四柱能量结构图',
     
     // Form Inputs
-    identifierLabel: '主体标识',
+    identifierLabel: '姓名',
     identifierPlaceholder: '例如：齐渊',
     
-    polarityLabel: '极性属性',
-    polarityMale: '极性 Alpha (男)',
-    polarityFemale: '极性 Beta (女)',
+    polarityLabel: '性别',
+    polarityMale: '男',
+    polarityFemale: '女',
     
     birthDateLabel: '出生日期',
-    birthTimeLabel: '出生时刻 (当地时间)',
+    birthTimeLabel: '出生时间',
     
-    locationLabel: '空间坐标',
-    locationPlaceholder: '例如：上海市 / 121.47° E',
+    locationLabel: '出生地点',
+    locationPlaceholder: '例如：上海',
     locationHint: '真太阳时偏移校正',
     
     submitButton: '开启时空场域对齐',
+
+    // Bottom Three Feature Cards
+    card1Title: '性格原型',
+    card1Desc: '探索认知底层与内在认知结构',
+    card2Title: '周程演化',
+    card2Desc: '洞察时空周期与能量演进轨迹',
+    card3Title: '双方共振',
+    card3Desc: '解析人际场域交互与能量关联',
     
     // Footer Navigation
     dictionary: '概念词典',
@@ -66,26 +98,42 @@ export const dictionaries = {
   'zh-TW': {
     brand: 'CHRONO–FLOW',
     subtitle: '時空與未顯之己',
-    clockPrefix: '時空矩陣',
-    themeLight: '實 • 暖沙寂素',
-    themeDark: '虛 • 暗黑科技禪',
+    
+    // Header Rhythm & Clock
+    todayRhythm: '2026年9月26日 • 丙午年 丁酉月',
+    
+    // Theme Switch
+    themeLight: '實',
+    themeDark: '虛',
+
+    // Form Section Title & Notice
+    formTitle: '輸入出生時空資訊',
+    formNotice: '系統將基於真太陽時自動轉化為四柱能量結構圖',
     
     // Form Inputs
-    identifierLabel: '主體標識',
+    identifierLabel: '姓名',
     identifierPlaceholder: '例如：齊淵',
     
-    polarityLabel: '極性屬性',
-    polarityMale: '極性 Alpha (男)',
-    polarityFemale: '極性 Beta (女)',
+    polarityLabel: '性別',
+    polarityMale: '男',
+    polarityFemale: '女',
     
     birthDateLabel: '出生日期',
-    birthTimeLabel: '出生時刻 (當地時間)',
+    birthTimeLabel: '出生時間',
     
-    locationLabel: '空間坐標',
-    locationPlaceholder: '例如：臺北市 / 121.56° E',
+    locationLabel: '出生地點',
+    locationPlaceholder: '例如：臺北',
     locationHint: '真太陽時偏移校正',
     
     submitButton: '開啟時空場域對齊',
+
+    // Bottom Three Feature Cards
+    card1Title: '性格原型',
+    card1Desc: '探索認知底層與內在認知結構',
+    card2Title: '周程演化',
+    card2Desc: '洞察時空週期與能量演進軌跡',
+    card3Title: '雙方共振',
+    card3Desc: '解析人際場域交互與能量關聯',
     
     // Footer Navigation
     dictionary: '概念詞典',
