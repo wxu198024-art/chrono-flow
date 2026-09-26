@@ -1,56 +1,65 @@
 'use client';
 
+import React, { useState } from 'react';
+
 interface PaywallOverlayProps {
   onUnlockSuccess: () => void;
+  lang?: 'zh' | 'en';
 }
 
-export default function PaywallOverlay({ onUnlockSuccess }: PaywallOverlayProps) {
-  const handlePaddleCheckout = () => {
-    // 阶段四：此处可挂载 Paddle.Checkout.open()
-    // 快速测试模拟：点击后模拟支付完成解锁
-    console.log('Initiating Paddle $1.99 Checkout...');
-    
-    // 模拟支付成功履约
+export default function PaywallOverlay({ onUnlockSuccess, lang = 'zh' }: PaywallOverlayProps) {
+  const isZh = lang === 'zh';
+  const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+    setLoading(true);
     setTimeout(() => {
+      setLoading(false);
       onUnlockSuccess();
-    }, 1000);
+    }, 600);
   };
 
   return (
-    <div className="relative border border-neutral-800 bg-neutral-950/90 rounded-2xl p-8 text-center space-y-6 overflow-hidden backdrop-blur-xl">
-      {/* 高级遮罩与背景水墨微粒 */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent pointer-events-none" />
-
-      <div className="relative z-10 space-y-4 max-w-md mx-auto pt-6">
-        <div className="inline-block border border-red-900/50 bg-red-950/30 text-red-400 px-3 py-1 rounded-full text-[10px] tracking-[0.25em] uppercase">
-          FULL ARCHETYPE MATRIX LOCKED
-        </div>
-
-        <h3 className="font-serif-title text-2xl text-neutral-100 tracking-wider">
-          UNVEIL YOUR 10-PAGE DEEP DIAGNOSTIC
-        </h3>
-
-        <p className="text-xs text-neutral-400 leading-relaxed">
-          Unlock your Social Mask (Month Pillar), Ancestral Origin (Year Pillar), Hidden Subconscious Horizon (Hour Pillar), and Elemental Shadow Warnings.
-        </p>
-
-        {/* 支付按钮 */}
-        <div className="pt-4 space-y-3">
-          <button
-            onClick={handlePaddleCheckout}
-            className="w-full bg-neutral-100 hover:bg-white text-black font-medium py-3.5 px-6 rounded-lg text-xs tracking-[0.25em] uppercase transition-all duration-300 shadow-xl"
-          >
-            Unlock Full Matrix • $1.99 USD
-          </button>
-          
-          <div className="flex items-center justify-center space-x-4 text-[10px] text-neutral-600 tracking-widest uppercase">
-            <span>Encrypted Checkout</span>
-            <span>•</span>
-            <span>Powered by Paddle</span>
-            <span>•</span>
-            <span>Instant PDF/Web Access</span>
+    <div className="w-full my-6 p-4 md:p-5 rounded-xl bg-gradient-to-r from-amber-950/20 via-neutral-900/60 to-amber-950/20 border border-amber-500/40 shadow-lg backdrop-blur-md transition-all duration-300">
+      <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+        
+        {/* 左侧：醒目提示文案 */}
+        <div className="space-y-1 text-center md:text-left">
+          <div className="flex items-center justify-center md:justify-start space-x-2">
+            <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+            <span className="text-xs font-mono tracking-widest text-amber-300 font-bold uppercase">
+              {isZh ? '✦ 免费注册即可解锁【四柱五行完整拓扑场域】' : '✦ FREE REGISTRATION TO UNLOCK FULL PILLARS & FIVE ELEMENTS FIELD'}
+            </span>
           </div>
+          <p className="text-xs text-neutral-300 leading-snug">
+            {isZh
+              ? '包含：四柱干支能量坍缩占比、五行相互作用图谱及终身大运临界点解析。'
+              : 'Includes: 4-Pillar energy density, 5-Element dynamics map & existential pivot timeline.'}
+          </p>
         </div>
+
+        {/* 右侧：单行极简输入框 + 一键解锁按钮 */}
+        <form onSubmit={handleSubmit} className="flex items-center w-full md:w-auto gap-2">
+          <input
+            type="email"
+            required
+            placeholder={isZh ? '输入邮箱即刻解锁...' : 'Enter your email...'}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="px-3 py-2 text-xs rounded-lg bg-neutral-950/80 border border-neutral-700 text-neutral-100 placeholder-neutral-500 focus:outline-none focus:border-amber-400 w-full md:w-60"
+          />
+          <button
+            type="submit"
+            disabled={loading}
+            className="px-5 py-2 whitespace-nowrap text-xs font-bold rounded-lg bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-neutral-950 transition-all shadow-md active:scale-95"
+          >
+            {loading ? (isZh ? '解锁中...' : 'Unlocking...') : isZh ? '免费解锁' : 'Unlock Now'}
+          </button>
+        </form>
+
       </div>
     </div>
   );
