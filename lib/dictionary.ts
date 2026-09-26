@@ -12,6 +12,16 @@ export const dictionaries = {
     themeLight: 'FORM',
     themeDark: 'VOID',
 
+    // Section 1: Daily Rhythm Card
+    dailyRhythmTag: 'YOUR DAILY SPATIOTEMPORAL RHYTHM',
+    dailyRhythmQuote: '" Silence is your energy anchor today. "',
+    dailyRhythmDetail: 'DAILY RHYTHM: GATHER & STORE / AVOID: IMPETUOUS ACTION',
+    dailyRhythmSubQuote: '"Water is dominant in your current pillar. Do not mistake motion for progress."',
+
+    // Section 2: Spatiotemporal Coordinates Title
+    spatiotemporalTitle: 'INPUT SPATIOTEMPORAL COORDINATES',
+    spatiotemporalNotice: 'Input birth parameters. The system will convert them into a 4-Pillar Energy Matrix based on True Solar Time.',
+
     // Form Section Title & Notice
     formTitle: 'ENTER BIRTH INFORMATION',
     formNotice: 'The system will automatically transform data into a Four Pillars energy structure diagram based on True Solar Time.',
@@ -35,11 +45,16 @@ export const dictionaries = {
 
     // Bottom Three Feature Cards
     card1Title: 'Personality Archetype',
-    card1Desc: 'Deep cognitive structure and innate temporal pattern',
+    card1SubTitle: 'Archetype Analysis',
+    card1Desc: '4-Pillar Matrix and internal homeostatic factor analysis.',
+    
     card2Title: 'Temporal Evolution',
-    card2Desc: 'Trajectory of time cycles and energy progression',
+    card2SubTitle: 'Pattern Trends',
+    card2Desc: 'Decadal macro trends and annual environment friction coefficients.',
+    
     card3Title: 'Relational Resonance',
-    card3Desc: 'Interpersonal field interaction and energetic connection',
+    card3SubTitle: 'Relational Sync',
+    card3Desc: 'Dual system alignment and relational friction mapping.',
     
     // Footer Navigation
     dictionary: 'Lexicon',
@@ -58,6 +73,16 @@ export const dictionaries = {
     // Theme Switch
     themeLight: '实',
     themeDark: '虚',
+
+    // Section 1: Daily Rhythm Card
+    dailyRhythmTag: '今日时空节律',
+    dailyRhythmQuote: '“ 沉寂，即是今日的能量之锚。”',
+    dailyRhythmDetail: '今日节律：蓄力沉淀 / 忌：急躁盲动',
+    dailyRhythmSubQuote: '“ 水局主事，切莫将无休止的动作误认为前行。”',
+
+    // Section 2: Spatiotemporal Coordinates Title
+    spatiotemporalTitle: '输入生辰时空参数',
+    spatiotemporalNotice: '输入生辰参数，系统将基于真太阳时自动转化为四柱能量结构图。',
 
     // Form Section Title & Notice
     formTitle: '输入出生时空信息',
@@ -82,11 +107,16 @@ export const dictionaries = {
 
     // Bottom Three Feature Cards
     card1Title: '性格原型',
-    card1Desc: '探索认知底层与内在认知结构',
+    card1SubTitle: '',
+    card1Desc: '四柱能量结构与系统内稳态因子解析。',
+    
     card2Title: '周程演化',
-    card2Desc: '洞察时空周期与能量演进轨迹',
+    card2SubTitle: '',
+    card2Desc: '十年宏观趋势与年度环境阻力系数。',
+    
     card3Title: '双方共振',
-    card3Desc: '解析人际场域交互与能量关联',
+    card3SubTitle: '',
+    card3Desc: '双人时空共振与摩擦点图谱。',
     
     // Footer Navigation
     dictionary: '概念词典',
@@ -105,6 +135,16 @@ export const dictionaries = {
     // Theme Switch
     themeLight: '實',
     themeDark: '虛',
+
+    // Section 1: Daily Rhythm Card
+    dailyRhythmTag: '今日時空節律',
+    dailyRhythmQuote: '「 沉寂，即是今日的能量之錨。」',
+    dailyRhythmDetail: '今日節律：蓄力沉澱 / 忌：急躁盲動',
+    dailyRhythmSubQuote: '「 水局主事，切莫將無休止的動作誤認為前行。」',
+
+    // Section 2: Spatiotemporal Coordinates Title
+    spatiotemporalTitle: '輸入生辰時空參數',
+    spatiotemporalNotice: '輸入生辰參數，系統將基於真太陽時自動轉化為四柱能量結構圖。',
 
     // Form Section Title & Notice
     formTitle: '輸入出生時空資訊',
@@ -129,11 +169,16 @@ export const dictionaries = {
 
     // Bottom Three Feature Cards
     card1Title: '性格原型',
-    card1Desc: '探索認知底層與內在認知結構',
+    card1SubTitle: '',
+    card1Desc: '四柱能量結構與系統內穩態因子解析。',
+    
     card2Title: '周程演化',
-    card2Desc: '洞察時空週期與能量演進軌跡',
+    card2SubTitle: '',
+    card2Desc: '十年宏觀趨勢與年度環境阻力係數。',
+    
     card3Title: '雙方共振',
-    card3Desc: '解析人際場域交互與能量關聯',
+    card3SubTitle: '',
+    card3Desc: '雙人時空共振與摩擦點圖譜。',
     
     // Footer Navigation
     dictionary: '概念詞典',
