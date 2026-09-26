@@ -8,11 +8,10 @@ export default function BirthForm() {
     gender: 'male',
     birthDate: '',
     birthTime: '12:00',
-    calendarType: 'solar', // solar | lunar
     location: '',
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
@@ -20,21 +19,22 @@ export default function BirthForm() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Spatiotemporal Parameters Submitted:', formData);
-    // 后续接入四柱排盘逻辑
+    // 后续接入四柱能量矩阵计算引擎
   };
 
   return (
     <form 
       onSubmit={handleSubmit}
-      className="p-6 md:p-8 border border-[var(--border-line)] bg-[var(--bg-card)] backdrop-blur-xl rounded-sm space-y-6 text-left shadow-2xl relative transition-all duration-300"
+      className="p-6 md:p-8 border border-[var(--border-line)] bg-[var(--bg-card)] backdrop-blur-xl rounded-sm space-y-5 text-left shadow-2xl relative transition-all duration-300"
     >
-      {/* 顶部极细装饰线 */}
+      {/* 顶部极细 1px 爻线装饰 */}
       <div className="absolute top-0 left-0 right-0 yao-yang"></div>
 
-      {/* 1. 姓名与性别 */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div className="space-y-2">
-          <label className="block text-[11px] tracking-widest text-[var(--text-secondary)] uppercase font-medium">
+      {/* 1. 标识与生物极性 (二列对齐) */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
+        {/* Subject Identifier */}
+        <div className="space-y-1.5">
+          <label className="block text-[11px] h-4 leading-4 tracking-widest text-[var(--text-secondary)] uppercase font-medium">
             Subject Identifier / 标识
           </label>
           <input
@@ -43,25 +43,26 @@ export default function BirthForm() {
             placeholder="e.g. 齐渊"
             value={formData.name}
             onChange={handleChange}
-            className="w-full px-3.5 py-2.5 bg-[var(--input-bg)] border border-[var(--input-border)] text-[var(--text-primary)] placeholder-[var(--text-muted)] text-xs rounded-sm focus:outline-none focus:border-[var(--yao-light)] transition-colors"
+            className="w-full h-11 px-3.5 bg-[var(--input-bg)] border border-[var(--input-border)] text-[var(--text-primary)] placeholder-[var(--text-muted)] text-xs rounded-sm focus:outline-none focus:border-[var(--yao-light)] transition-colors"
             required
           />
         </div>
 
-        <div className="space-y-2">
-          <label className="block text-[11px] tracking-widest text-[var(--text-secondary)] uppercase font-medium">
-            Polarity / 极性
+        {/* Biological Polarity */}
+        <div className="space-y-1.5">
+          <label className="block text-[11px] h-4 leading-4 tracking-widest text-[var(--text-secondary)] uppercase font-medium">
+            Biological Polarity / 极性
           </label>
-          <div className="grid grid-cols-2 gap-2 pt-0.5">
+          <div className="grid grid-cols-2 gap-2 h-11">
             {[
-              { id: 'male', label: 'YANG • 乾 / 男' },
-              { id: 'female', label: 'YIN • 坤 / 女' },
+              { id: 'male', label: 'MALE / Male' },
+              { id: 'female', label: 'FEMALE / Female' },
             ].map((g) => (
               <button
                 key={g.id}
                 type="button"
                 onClick={() => setFormData((prev) => ({ ...prev, gender: g.id }))}
-                className={`py-2 text-[10px] tracking-wider rounded-sm border transition-all ${
+                className={`h-full text-[10px] tracking-wider rounded-sm border transition-all flex items-center justify-center ${
                   formData.gender === g.id
                     ? 'border-[var(--cinnabar)] bg-[var(--accent-glow)] text-[var(--text-primary)] font-medium'
                     : 'border-[var(--input-border)] bg-[var(--input-bg)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
@@ -74,59 +75,26 @@ export default function BirthForm() {
         </div>
       </div>
 
-      {/* 2. 历法选择器 (公历 / 农历) */}
-      <div className="space-y-2">
-        <label className="block text-[11px] tracking-widest text-[var(--text-secondary)] uppercase font-medium">
-          Temporal Calendar System / 历法
-        </label>
-        <div className="flex space-x-4 text-xs text-[var(--text-secondary)] pt-1">
-          <label className="flex items-center space-x-2 cursor-pointer group">
-            <input
-              type="radio"
-              name="calendarType"
-              value="solar"
-              checked={formData.calendarType === 'solar'}
-              onChange={handleChange}
-              className="accent-[var(--cinnabar)] cursor-pointer"
-            />
-            <span className="group-hover:text-[var(--text-primary)] transition-colors">
-              Solar Calendar / 公历 (阳历)
-            </span>
-          </label>
-          <label className="flex items-center space-x-2 cursor-pointer group">
-            <input
-              type="radio"
-              name="calendarType"
-              value="lunar"
-              checked={formData.calendarType === 'lunar'}
-              onChange={handleChange}
-              className="accent-[var(--cinnabar)] cursor-pointer"
-            />
-            <span className="group-hover:text-[var(--text-primary)] transition-colors">
-              Lunar Calendar / 农历 (阴历)
-            </span>
-          </label>
-        </div>
-      </div>
-
-      {/* 3. 出生日期与准确时间 */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div className="space-y-2">
-          <label className="block text-[11px] tracking-widest text-[var(--text-secondary)] uppercase font-medium">
-            Birth Date / 日期
+      {/* 2. 出生日期与出生时间 (二列对齐) */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
+        {/* Birth Date */}
+        <div className="space-y-1.5">
+          <label className="block text-[11px] h-4 leading-4 tracking-widest text-[var(--text-secondary)] uppercase font-medium">
+            Birth Date / 出生日期
           </label>
           <input
             type="date"
             name="birthDate"
             value={formData.birthDate}
             onChange={handleChange}
-            className="w-full px-3.5 py-2.5 bg-[var(--input-bg)] border border-[var(--input-border)] text-[var(--text-primary)] text-xs rounded-sm focus:outline-none focus:border-[var(--yao-light)] transition-colors"
+            className="w-full h-11 px-3.5 bg-[var(--input-bg)] border border-[var(--input-border)] text-[var(--text-primary)] text-xs rounded-sm focus:outline-none focus:border-[var(--yao-light)] transition-colors"
             required
           />
         </div>
 
-        <div className="space-y-2">
-          <label className="block text-[11px] tracking-widest text-[var(--text-secondary)] uppercase font-medium">
+        {/* Birth Time */}
+        <div className="space-y-1.5">
+          <label className="block text-[11px] h-4 leading-4 tracking-widest text-[var(--text-secondary)] uppercase font-medium">
             Birth Time / 时辰 (UTC Local)
           </label>
           <input
@@ -134,15 +102,15 @@ export default function BirthForm() {
             name="birthTime"
             value={formData.birthTime}
             onChange={handleChange}
-            className="w-full px-3.5 py-2.5 bg-[var(--input-bg)] border border-[var(--input-border)] text-[var(--text-primary)] text-xs rounded-sm focus:outline-none focus:border-[var(--yao-light)] transition-colors"
+            className="w-full h-11 px-3.5 bg-[var(--input-bg)] border border-[var(--input-border)] text-[var(--text-primary)] text-xs rounded-sm focus:outline-none focus:border-[var(--yao-light)] transition-colors"
             required
           />
         </div>
       </div>
 
-      {/* 4. 出生地点 (用于真太阳时校准) */}
-      <div className="space-y-2">
-        <label className="block text-[11px] tracking-widest text-[var(--text-secondary)] uppercase font-medium flex justify-between">
+      {/* 3. 出生地点 (单列对齐) */}
+      <div className="space-y-1.5">
+        <label className="block text-[11px] h-4 leading-4 tracking-widest text-[var(--text-secondary)] uppercase font-medium flex justify-between items-center">
           <span>Birth Location / 出生地点</span>
           <span className="text-[var(--text-muted)] italic font-normal text-[10px]">
             True Solar Time Correction • 真太阳时校正
@@ -154,15 +122,15 @@ export default function BirthForm() {
           placeholder="e.g. 上海市 (Shanghai) / 121.47° E"
           value={formData.location}
           onChange={handleChange}
-          className="w-full px-3.5 py-2.5 bg-[var(--input-bg)] border border-[var(--input-border)] text-[var(--text-primary)] placeholder-[var(--text-muted)] text-xs rounded-sm focus:outline-none focus:border-[var(--yao-light)] transition-colors"
+          className="w-full h-11 px-3.5 bg-[var(--input-bg)] border border-[var(--input-border)] text-[var(--text-primary)] placeholder-[var(--text-muted)] text-xs rounded-sm focus:outline-none focus:border-[var(--yao-light)] transition-colors"
         />
       </div>
 
-      {/* 提交按钮 */}
+      {/* 4. 提交按钮 */}
       <div className="pt-2">
         <button
           type="submit"
-          className="w-full py-3.5 border border-[var(--border-line-hover)] bg-[var(--bg-card-hover)] hover:bg-[var(--cinnabar)] hover:text-white text-[var(--text-primary)] text-xs tracking-[0.25em] uppercase font-medium transition-all duration-300 rounded-sm shadow-md flex items-center justify-center space-x-2 group"
+          className="w-full h-12 border border-[var(--border-line-hover)] bg-[var(--bg-card-hover)] hover:bg-[var(--cinnabar)] hover:text-white text-[var(--text-primary)] text-xs tracking-[0.25em] uppercase font-medium transition-all duration-300 rounded-sm shadow-md flex items-center justify-center space-x-2 group"
         >
           <span className="cinnabar-dot group-hover:bg-white transition-colors"></span>
           <span>Initiate Spatiotemporal Alignment • 开启时空对齐</span>
