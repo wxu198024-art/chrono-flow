@@ -47,7 +47,7 @@ export default function ChartResultPage() {
     }
   }, [birthDate, birthTime]);
 
-  const { free_tier, locked_tier, subscription_tier } = mockReport;
+  const { free_tier, locked_tier, subscription_tier } = mockReport as any;
 
   const handleSubscribe = (plan: string, priceId: string) => {
     alert(
