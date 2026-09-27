@@ -169,4 +169,91 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
       },
     ],
   },
+  'four-pillars': {
+    id: 'four-pillars',
+    level: 4,
+    codeName: 'THE FOUR PILLARS',
+    title: {
+      zh: '四柱结构',
+      en: 'The Four Pillars',
+    },
+    mapping: {
+      zh: '底层映射：生命系统在时空连续体中的四维承重支柱',
+      en: 'Core Mapping: Four-Dimensional Load-Bearing Pillars of Life System',
+    },
+    definition: {
+      zh: '支撑你整个生命物理框架的四维时空支柱。从印刻在骨髓中的基因遗传，到现实环境的持续磨削，再到核心自我与终局指向，四柱共同构成了你抗击现实重力的力学拓扑网。',
+      en: 'The four-dimensional spatiotemporal pillars supporting your entire ontological structure. From inherited genetic baselines to environmental friction and ultimate directional collapse, they form your load-bearing framework against reality.',
+    },
+    visceralHook: {
+      zh: '剖析你生命承重墙的结构缺陷，指出哪一根支柱正在承受超载的应力，引发你系统性崩溃的风险。',
+      en: 'Analyzes structural vulnerabilities in your life’s load-bearing walls, exposing which pillar is under catastrophic stress.',
+    },
+    children: [
+      {
+        id: 'year-pillar-field',
+        codeName: 'YEAR PILLAR FIELD',
+        title: {
+          zh: '年柱·基因场域',
+          en: 'Year Pillar: Genetic Field',
+        },
+        definition: {
+          zh: '印刻在基因与骨髓里的时代底色与家族遗产。你无法选择的先天重力环境与幼年无意识吸收的防御机制。',
+          en: 'The ancestral lineage and generational baseline imprinted upon your genetics. The immutable gravitational field of your origin.',
+        },
+        visceralHook: {
+          zh: '精确指出你身上那些明明极度讨厌、却无意识重演的父母同款行为与情绪模式。',
+          en: 'Exposes the exact behavioral patterns and emotional reactions you inherited from your lineage despite your conscious resistance.',
+        },
+      },
+      {
+        id: 'month-pillar-shear',
+        codeName: 'MONTH PILLAR SHEAR',
+        title: {
+          zh: '月柱·环境剪力',
+          en: 'Month Pillar: Environmental Shear',
+        },
+        definition: {
+          zh: '青年与中年期所遭遇的现实磨削力。涵盖职场生存、社会规训以及外部环境对你个人意愿的持续挤压。',
+          en: 'The continuous friction and environmental shear forces exerted by societal training and professional survival.',
+        },
+        visceralHook: {
+          zh: '点破你在现实撕扯下被迫妥协的边界，揭示你为了在职场生存而牺牲掉的最初灵气。',
+          en: 'Pinpoints where you compromised your core integrity under societal pressure just to survive the career grind.',
+        },
+      },
+      {
+        id: 'day-pillar-core',
+        codeName: 'DAY PILLAR CORE',
+        title: {
+          zh: '日柱·核心主体',
+          en: 'Day Pillar: Core Ego',
+        },
+        definition: {
+          zh: '除去所有社会名片与外部角色后，纯粹的自我意识与主体内核。是你抵抗全宇宙熵增的最后阵地。',
+          en: 'The unadorned core ego and ultimate locus of consciousness once all outer roles and social masks are stripped away.',
+        },
+        visceralHook: {
+          zh: '直击你内心的终极孤立感——哪怕身边喧嚣簇拥，那个孤独的内核依然在独自承受一切。',
+          en: 'Strikes at your deep, existential solitude—the raw core that remains isolated even in crowded rooms.',
+        },
+      },
+      {
+        id: 'hour-pillar-vector',
+        codeName: 'HOUR PILLAR VECTOR',
+        title: {
+          zh: '时柱·终局向量',
+          en: 'Hour Pillar: Terminal Vector',
+        },
+        definition: {
+          zh: '生命系统向未来延伸的归宿与坍缩方向。涵盖晚年状态、潜意识信仰以及你留给时空连续体的精神残影。',
+          en: 'The vector describing the ultimate convergence, terminal trajectory, and lingering footprint of your life system.',
+        },
+        visceralHook: {
+          zh: '预判你生命后半程的心理归宿，揭示你一生拼搏最终试图证明或安放的到底是什么。',
+          en: 'Forecasts the psychological retreat of your later years, revealing what your soul is ultimately trying to prove.',
+        },
+      },
+    ],
+  },
 };
