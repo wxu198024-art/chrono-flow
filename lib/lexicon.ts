@@ -359,4 +359,75 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
       },
     ],
   },
+  'lunar-tides': {
+    id: 'lunar-tides',
+    level: 6,
+    codeName: 'THE LUNAR TIDES',
+    title: {
+      zh: '情绪潮汐',
+      en: 'The Lunar Tides',
+    },
+    mapping: {
+      zh: '底层映射：潜意识引力与周期性心理能量涨落',
+      en: 'Core Mapping: Subconscious Gravitational Pull & Cyclical Emotional Waves',
+    },
+    definition: {
+      zh: '控制你潜意识情绪波动的无形周期节律。它像引力牵引海洋一样，在不经意间操纵着你的情绪涨落、敏感度峰值与能量枯竭周期。它解释了为何你的心理状态总呈现出不可控的周期性起伏。',
+      en: 'The invisible gravitational mechanics governing your unconscious emotional cycles. Like tides pulled by celestial bodies, it dictates your cyclical surges of acute sensitivity and sudden energetic ebbs.',
+    },
+    visceralHook: {
+      zh: '破译你情绪“无预警崩溃”与“突然厌世”的隐性时间周期，让你不再为不可避免的生理与心理低谷感到内疚。',
+      en: 'Decodes the hidden timeline behind your unprovoked breakdowns and sudden urges to disconnect from the world.',
+    },
+    children: [
+      {
+        id: 'syzygy-surge-phase',
+        codeName: 'SYZYGY SURGE PHASE',
+        title: {
+          zh: '极高潮期',
+          en: 'Syzygy Surge Phase',
+        },
+        definition: {
+          zh: '潜意识感官与情绪能量无预警冲顶的峰值状态。此时理性的逻辑防线极易崩溃，感官被无限放大，极易做出冲动决策。',
+          en: 'The peak state where intuitive sensitivity and emotional volume overflow rational containment, triggering impulsive choices.',
+        },
+        visceralHook: {
+          zh: '精准锁定你最容易因为“情绪过载”而说错话、做错决定，甚至亲手破坏重要关系的危险时刻。',
+          en: 'Pinpoints the exact threshold where emotional overload compromises your judgment and leads to impulsive self-sabotage.',
+        },
+      },
+      {
+        id: 'apogee-ebbing-phase',
+        codeName: 'APOGEE EBBING PHASE',
+        title: {
+          zh: '极退潮期',
+          en: 'Apogee Ebbing Phase',
+        },
+        definition: {
+          zh: '心理能量被瞬间抽干的空心状态。表现为对一切失去兴趣、情感极度麻木，以及想要彻底切断与外界联系的强烈避世本能。',
+          en: 'The absolute energetic drawdown. Characterized by profound numbness, apathy, and an instinctive urge to isolate completely.',
+        },
+        visceralHook: {
+          zh: '直击你在“退潮期”的绝望感——那种明明什么都没发生，却连回一条短信都觉得无比艰难的窒息麻木。',
+          en: 'Strikes at your deep fatigue during ebb states—where even replying to a simple message feels like moving a mountain.',
+        },
+      },
+      {
+        id: 'sub-current-resonance',
+        codeName: 'SUB-CURRENT RESONANCE',
+        title: {
+          zh: '暗潮共振带',
+          en: 'Sub-Current Resonance',
+        },
+        definition: {
+          zh: '潜意识深层对外界微弱信号（一句话、一个眼神、一种氛围）产生的延迟剧烈共振，常在深夜或独处时爆发。',
+          en: 'The subterranean reverberation triggered by subtle external cues, culminating in delayed nocturnal emotional surges.',
+        },
+        visceralHook: {
+          zh: '剖析你在深夜突然情绪失控的真相——那不是当下的问题，而是白天被你强行压下去的无声暗潮。',
+          en: 'Exposes the true origin of your late-night breakdowns—unprocessed emotions delayed from daytime survival mode.',
+        },
+      },
+    ],
+  },
 };
