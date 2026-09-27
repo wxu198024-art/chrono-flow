@@ -169,6 +169,7 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
       },
     ],
   },
+
   'four-pillars': {
     id: 'four-pillars',
     level: 4,
@@ -256,6 +257,7 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
       },
     ],
   },
+
   'wuxing-factors': {
     id: 'wuxing-factors',
     level: 5,
@@ -359,148 +361,7 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
       },
     ],
   },
-  'lunar-tides': {
-    id: 'lunar-tides',
-    level: 6,
-    codeName: 'THE LUNAR TIDES',
-    title: {
-      zh: '情绪潮汐',
-      en: 'The Lunar Tides',
-    },
-    mapping: {
-      zh: '底层映射：潜意识引力与周期性心理能量涨落',
-      en: 'Core Mapping: Subconscious Gravitational Pull & Cyclical Emotional Waves',
-    },
-    definition: {
-      zh: '控制你潜意识情绪波动的无形周期节律。它像引力牵引海洋一样，在不经意间操纵着你的情绪涨落、敏感度峰值与能量枯竭周期。它解释了为何你的心理状态总呈现出不可控的周期性起伏。',
-      en: 'The invisible gravitational mechanics governing your unconscious emotional cycles. Like tides pulled by celestial bodies, it dictates your cyclical surges of acute sensitivity and sudden energetic ebbs.',
-    },
-    visceralHook: {
-      zh: '破译你情绪“无预警崩溃”与“突然厌世”的隐性时间周期，让你不再为不可避免的生理与心理低谷感到内疚。',
-      en: 'Decodes the hidden timeline behind your unprovoked breakdowns and sudden urges to disconnect from the world.',
-    },
-    children: [
-      {
-        id: 'syzygy-surge-phase',
-        codeName: 'SYZYGY SURGE PHASE',
-        title: {
-          zh: '极高潮期',
-          en: 'Syzygy Surge Phase',
-        },
-        definition: {
-          zh: '潜意识感官与情绪能量无预警冲顶的峰值状态。此时理性的逻辑防线极易崩溃，感官被无限放大，极易做出冲动决策。',
-          en: 'The peak state where intuitive sensitivity and emotional volume overflow rational containment, triggering impulsive choices.',
-        },
-        visceralHook: {
-          zh: '精准锁定你最容易因为“情绪过载”而说错话、做错决定，甚至亲手破坏重要关系的危险时刻。',
-          en: 'Pinpoints the exact threshold where emotional overload compromises your judgment and leads to impulsive self-sabotage.',
-        },
-      },
-      {
-        id: 'apogee-ebbing-phase',
-        codeName: 'APOGEE EBBING PHASE',
-        title: {
-          zh: '极退潮期',
-          en: 'Apogee Ebbing Phase',
-        },
-        definition: {
-          zh: '心理能量被瞬间抽干的空心状态。表现为对一切失去兴趣、情感极度麻木，以及想要彻底切断与外界联系的强烈避世本能。',
-          en: 'The absolute energetic drawdown. Characterized by profound numbness, apathy, and an instinctive urge to isolate completely.',
-        },
-        visceralHook: {
-          zh: '直击你在“退潮期”的绝望感——那种明明什么都没发生，却连回一条短信都觉得无比艰难的窒息麻木。',
-          en: 'Strikes at your deep fatigue during ebb states—where even replying to a simple message feels like moving a mountain.',
-        },
-      },
-      {
-        id: 'sub-current-resonance',
-        codeName: 'SUB-CURRENT RESONANCE',
-        title: {
-          zh: '暗潮共振带',
-          en: 'Sub-Current Resonance',
-        },
-        definition: {
-          zh: '潜意识深层对外界微弱信号（一句话、一个眼神、一种氛围）产生的延迟剧烈共振，常在深夜或独处时爆发。',
-          en: 'The subterranean reverberation triggered by subtle external cues, culminating in delayed nocturnal emotional surges.',
-        },
-        visceralHook: {
-          zh: '剖析你在深夜突然情绪失控的真相——那不是当下的问题，而是白天被你强行压下去的无声暗潮。',
-          en: 'Exposes the true origin of your late-night breakdowns—unprocessed emotions delayed from daytime survival mode.',
-        },
-      },
-    ],
-  },
-  'axial-tilt': {
-    id: 'axial-tilt',
-    level: 7,
-    codeName: 'THE AXIAL TILT',
-    title: {
-      zh: '轴向转折',
-      en: 'The Axial Tilt',
-    },
-    mapping: {
-      zh: '底层映射：生命系统长周期黄赤交角偏转与重力场跃迁',
-      en: 'Core Mapping: Long-Term Rotational Axis Shift & Gravitational Field Phase Transition',
-    },
-    definition: {
-      zh: '描述你生命系统在漫长岁月里发生的自转轴角度偏转与磁场跃迁（即传统大运与流年交替）。它决定了你在不同人生阶段的整体风向、价值观翻转以及现实环境的剧烈重组。',
-      en: 'The macro-structural tilt in your systemic rotation axis over multi-year cycles. It governs tectonic shifts in your value system, life focus, and macro-environmental gravity during major life transitions.',
-    },
-    visceralHook: {
-      zh: '解释为何过去行之有效的生活经验突然失效，揭示你当前正处于何种级别的轴向偏转与现实卡点中。',
-      en: 'Explains why your past proven playbooks suddenly fail, revealing the exact macro-axial shift currently dismantling your old life pattern.',
-    },
-    children: [
-      {
-        id: 'obliquity-shift-phase',
-        codeName: 'OBLIQUITY SHIFT PHASE',
-        title: {
-          zh: '黄赤偏角跃迁',
-          en: 'Obliquity Shift Phase',
-        },
-        definition: {
-          zh: '长周期底层磁场换轨时的临界状态。旧的环境与人际圈层加速崩解，新的重力场强行介入，常伴随着强烈的阵痛与失重感。',
-          en: 'The volatile phase boundary during major epochal shifts, where former social circles dissolve to force realignments with new gravity fields.',
-        },
-        visceralHook: {
-          zh: '击中你在“交运换轨”期巨大的失控与恐慌——旧的抓不住，新的还没建立，整个人悬空在半山腰。',
-          en: 'Strikes at the vertiginous panic during life realignments—holding onto crumbling pillars while suspended over an uncertain void.',
-        },
-      },
-      {
-        id: 'precession-centrifugal-force',
-        codeName: 'PRECESSION CENTRIFUGAL FORCE',
-        title: {
-          zh: '进动离心力',
-          en: 'Precession Centrifugal Force',
-        },
-        definition: {
-          zh: '阶段性流年引力所施加的强大离心力。它将你从舒适区强行甩出，逼迫你打破原有平衡，去应对全新的现实挑战。',
-          en: 'The transient centrifugal pressure exerted by yearly planetary forces, driving you violently out of comfortable stasis.',
-        },
-        visceralHook: {
-          zh: '揭示你为何在某些年份会突然感到一种被某种力量“逼着往前走”、不得不做出巨大变革的压迫感。',
-          en: 'Exposes why certain years force unavoidable transformations upon you, stripping away all options to remain static.',
-        },
-      },
-      {
-        id: 'orbital-correction-zone',
-        codeName: 'ORBITAL CORRECTION ZONE',
-        title: {
-          zh: '轨道修正带',
-          en: 'Orbital Correction Zone',
-        },
-        definition: {
-          zh: '系统发生严重偏航时自动触发的重力自我校准机制。往往表现为突如其来的挫折与阻碍，实则是系统强行终止你错误消耗的保护动作。',
-          en: 'The emergency gravitational braking zone activated when your trajectory veers into self-destruction, halting wrong momentum via sudden friction.',
-        },
-        visceralHook: {
-          zh: '剖析你所遭遇的某种“重大受挫”——那不是命运的惩罚，而是系统为了防止你彻底偏航而拉响的紧急刹车。',
-          en: 'Re-frames major failures not as curses, but as emergency systemic brakes deployed to avert fatal orbital decay.',
-        },
-      },
-    ],
-  },
+
   'six-stage-flow': {
     id: 'six-stage-flow',
     level: 6,
