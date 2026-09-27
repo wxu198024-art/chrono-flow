@@ -430,4 +430,75 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
       },
     ],
   },
+  'axial-tilt': {
+    id: 'axial-tilt',
+    level: 7,
+    codeName: 'THE AXIAL TILT',
+    title: {
+      zh: '轴向转折',
+      en: 'The Axial Tilt',
+    },
+    mapping: {
+      zh: '底层映射：生命系统长周期黄赤交角偏转与重力场跃迁',
+      en: 'Core Mapping: Long-Term Rotational Axis Shift & Gravitational Field Phase Transition',
+    },
+    definition: {
+      zh: '描述你生命系统在漫长岁月里发生的自转轴角度偏转与磁场跃迁（即传统大运与流年交替）。它决定了你在不同人生阶段的整体风向、价值观翻转以及现实环境的剧烈重组。',
+      en: 'The macro-structural tilt in your systemic rotation axis over multi-year cycles. It governs tectonic shifts in your value system, life focus, and macro-environmental gravity during major life transitions.',
+    },
+    visceralHook: {
+      zh: '解释为何过去行之有效的生活经验突然失效，揭示你当前正处于何种级别的轴向偏转与现实卡点中。',
+      en: 'Explains why your past proven playbooks suddenly fail, revealing the exact macro-axial shift currently dismantling your old life pattern.',
+    },
+    children: [
+      {
+        id: 'obliquity-shift-phase',
+        codeName: 'OBLIQUITY SHIFT PHASE',
+        title: {
+          zh: '黄赤偏角跃迁',
+          en: 'Obliquity Shift Phase',
+        },
+        definition: {
+          zh: '长周期底层磁场换轨时的临界状态。旧的环境与人际圈层加速崩解，新的重力场强行介入，常伴随着强烈的阵痛与失重感。',
+          en: 'The volatile phase boundary during major epochal shifts, where former social circles dissolve to force realignments with new gravity fields.',
+        },
+        visceralHook: {
+          zh: '击中你在“交运换轨”期巨大的失控与恐慌——旧的抓不住，新的还没建立，整个人悬空在半山腰。',
+          en: 'Strikes at the vertiginous panic during life realignments—holding onto crumbling pillars while suspended over an uncertain void.',
+        },
+      },
+      {
+        id: 'precession-centrifugal-force',
+        codeName: 'PRECESSION CENTRIFUGAL FORCE',
+        title: {
+          zh: '进动离心力',
+          en: 'Precession Centrifugal Force',
+        },
+        definition: {
+          zh: '阶段性流年引力所施加的强大离心力。它将你从舒适区强行甩出，逼迫你打破原有平衡，去应对全新的现实挑战。',
+          en: 'The transient centrifugal pressure exerted by yearly planetary forces, driving you violently out of comfortable stasis.',
+        },
+        visceralHook: {
+          zh: '揭示你为何在某些年份会突然感到一种被某种力量“逼着往前走”、不得不做出巨大变革的压迫感。',
+          en: 'Exposes why certain years force unavoidable transformations upon you, stripping away all options to remain static.',
+        },
+      },
+      {
+        id: 'orbital-correction-zone',
+        codeName: 'ORBITAL CORRECTION ZONE',
+        title: {
+          zh: '轨道修正带',
+          en: 'Orbital Correction Zone',
+        },
+        definition: {
+          zh: '系统发生严重偏航时自动触发的重力自我校准机制。往往表现为突如其来的挫折与阻碍，实则是系统强行终止你错误消耗的保护动作。',
+          en: 'The emergency gravitational braking zone activated when your trajectory veers into self-destruction, halting wrong momentum via sudden friction.',
+        },
+        visceralHook: {
+          zh: '剖析你所遭遇的某种“重大受挫”——那不是命运的惩罚，而是系统为了防止你彻底偏航而拉响的紧急刹车。',
+          en: 'Re-frames major failures not as curses, but as emergency systemic brakes deployed to avert fatal orbital decay.',
+        },
+      },
+    ],
+  },
 };
