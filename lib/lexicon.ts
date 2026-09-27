@@ -256,4 +256,107 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
       },
     ],
   },
+  'wuxing-factors': {
+    id: 'wuxing-factors',
+    level: 5,
+    codeName: 'THE FIVE DYNAMIC EQUILIBRIUM FACTORS',
+    title: {
+      zh: '五行均衡因子',
+      en: 'Dynamic Equilibrium Factors',
+    },
+    mapping: {
+      zh: '底层映射：系统五维环境力学与心理能量的动态失衡与补偿',
+      en: 'Core Mapping: Five Environmental & Energetic Mechanics of the Psyche',
+    },
+    definition: {
+      zh: '构成你生命系统演化的 5 个动态均衡因子。它们脱离了传统的概念表象，化为 5 种充满张力的环境力学与心理能量频段，决定了你的扩张冲动、渴望显化的程度、自我消化力、割舍冷酷度与潜流直觉。',
+      en: 'The five dynamic mechanics governing your psyches equilibrium. They represent raw tension and environmental force vectors—dictating your drive to expand, project, anchor, prune, and adapt under reality’s pressure.',
+    },
+    visceralHook: {
+      zh: '定位你能量结构中最不稳定的那个频段，揭示你为何总会在“盲目蔓延”或“过度裁决”之间陷入自我反噬。',
+      en: 'Pinpoints your default energetic imbalance, revealing why you oscillate between boundless expansion and brutal self-sabotage.',
+    },
+    children: [
+      {
+        id: 'expansion-factor',
+        codeName: 'EXPANSION FACTOR',
+        title: {
+          zh: '蔓延因子',
+          en: 'Expansion Factor',
+        },
+        definition: {
+          zh: '破土而出、向外拓展边界的本能欲望。代表创生力与生命张力，但在失去抑制时会演变为没有边际的内耗与贪婪。',
+          en: 'The primal instinct to breach limits and expand outward. It fuels raw creativity, yet risks reckless boundary-pushing when unchecked.',
+        },
+        visceralHook: {
+          zh: '击中你内心难以遏制的躁动与贪婪——哪怕精疲力竭，也无法停止向外无休止地蔓延和占有。',
+          en: 'Exposes your relentless restlessness—the urge to expand and conquer even when your resources are depleted.',
+        },
+      },
+      {
+        id: 'visibility-factor',
+        codeName: 'VISIBILITY FACTOR',
+        title: {
+          zh: '显化因子',
+          en: 'Visibility Factor',
+        },
+        definition: {
+          zh: '渴望被看见、被赞美、将内心激情向外辐射的能量。它是你独特魅力的源泉，也是你最容易被他人利用和灼伤的脆弱弱点。',
+          en: 'The urge to project passion, be recognized, and radiate presence. It is your ultimate charisma, but also your most vulnerable exposure.',
+        },
+        visceralHook: {
+          zh: '揭开你对“认可”的隐性上瘾——明明讨厌社交，却极度害怕在人群中被完全忽视与边缘化。',
+          en: 'Pierces your subtle addiction to validation—hating the spotlight, yet terrified of becoming invisible.',
+        },
+      },
+      {
+        id: 'anchoring-factor',
+        codeName: 'ANCHORING FACTOR',
+        title: {
+          zh: '锚定因子',
+          en: 'Anchoring Factor',
+        },
+        definition: {
+          zh: '在动荡现实中承载万物与自我消化的重力场。缺乏它会让你像无根之草般漂泊失控，过强则会让你陷入顽固沉闷的泥潭。',
+          en: 'The heavy grounding mass that digests reality. Deficits leave you floating like seaweed; excess traps you in unyielding stagnation.',
+        },
+        visceralHook: {
+          zh: '直击你内心的“绝望停滞感”——过度追求安全与稳固，反而让自己困在死寂的舒适区里无法动弹。',
+          en: 'Strikes at your paralyzing inertia—where your desperate need for safety seals you inside a tomb of your own making.',
+        },
+      },
+      {
+        id: 'precision-factor',
+        codeName: 'PRECISION FACTOR',
+        title: {
+          zh: '裁决因子',
+          en: 'Precision Factor',
+        },
+        definition: {
+          zh: '划定绝对边界、做出果断割舍的冷酷理性。它是帮你的生命斩断有毒伤害的利刃，但也极易成为刺伤最亲密关系的凶器。',
+          en: 'The razor-sharp boundary-setting force. A indispensable scalpel that severs toxicity, yet turns lethal in intimate spheres.',
+        },
+        visceralHook: {
+          zh: '刺痛你冷酷切割关系后的后悔——为了不被伤害，你提前用最冰冷的“裁决”推开了所有真正关心你的人。',
+          en: 'Exposes your defensive pre-emptive strikes—severing connections prematurely so they can never hurt you first.',
+        },
+      },
+      {
+        id: 'adaptation-factor',
+        codeName: 'ADAPTATION FACTOR',
+        title: {
+          zh: '潜流因子',
+          en: 'Adaptation Factor',
+        },
+        definition: {
+          zh: '如水般渗透、感知与情绪流动的深层直觉力。它是极度敏锐的同理心，但也极易让你在别人的情绪狂浪中彻底淹没自我。',
+          en: 'The fluid, subterranean current of empathy and intuition. It provides deep absorption, but risks drowning your core self in outer tides.',
+        },
+        visceralHook: {
+          zh: '剖析你“情绪过载”的真正源头——你总是无底线地吸收别人的痛苦与负能量，直到把你自己挤压坍缩。',
+          en: 'Locates the root of your emotional drowning—sponging up foreign pain until your own structure collapses under water weight.',
+        },
+      },
+    ],
+  },
 };
