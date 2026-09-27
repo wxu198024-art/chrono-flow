@@ -95,6 +95,75 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
           en: 'Explains your sudden, irrational urge to burn down your own success when high pressure builds up.',
         },
       },
+   'tri-axial-strain': {
+    id: 'tri-axial-strain',
+    level: 3,
+    codeName: 'THE TRI-AXIAL STRAIN',
+    title: {
+      zh: '三轴应力交叠',
+      en: 'The Tri-Axial Strain',
+    },
+    mapping: {
+      zh: '底层映射：时间、情绪与身份的三维立体剪切力',
+      en: 'Core Mapping: 3D Structural Stress of Time, Emotion, and Identity',
+    },
+    definition: {
+      zh: '你在现实生存结构中所承受的三维力学挤压。当时间流逝压力、隐性情绪消耗与外界身份期待在同一时刻交叠，系统内部便会产生严重的应力集中，导致无预警的心理疲惫与自我觉察剥离。',
+      en: 'The three-dimensional mechanical compression you endure within reality. When temporal pressure, emotional energy dissipation, and identity expectations intersect, severe stress concentrations occur, triggering unannounced systemic exhaustion.',
+    },
+    visceralHook: {
+      zh: '精确指出你为何即使什么都没做，只是静坐一整天，也会感到一种像被巨石碾压过一样的深度骨髓疲惫感。',
+      en: 'Pinpoints exactly why you feel bone-deep exhaustion even after doing nothing, as if crushed by an invisible weight all day.',
+    },
+    children: [
+      {
+        id: 'temporal-shear-axis',
+        codeName: 'TEMPORAL SHEAR AXIS',
+        title: {
+          zh: '时间扭曲轴',
+          en: 'Temporal Shear Axis',
+        },
+        definition: {
+          zh: '注意力在“对未来的失控恐惧”与“对过去的无法改写”之间被双向拉扯撕裂的应力轴向。',
+          en: 'The strain axis where your presence is torn between future loss of control and unalterable past regret.',
+        },
+        visceralHook: {
+          zh: '揭示你无法享受当下任何休假与放松的根本原因——你的大脑永远在预演最坏的未来。',
+          en: 'Exposes why you cannot enjoy rest—your mind is perpetually simulating catastrophic worst-case futures.',
+        },
+      },
+      {
+        id: 'emotional-dissipation-axis',
+        codeName: 'EMOTIONAL DISSIPATION AXIS',
+        title: {
+          zh: '情绪耗散轴',
+          en: 'Emotional Dissipation Axis',
+        },
+        definition: {
+          zh: '为了在外界面前维持“一切正常”与“理性体面”而持续泄漏、无法回收的隐形能量损耗。',
+          en: 'The invisible, irrecoverable energy leakage spent maintaining an illusion of composure and rationality.',
+        },
+        visceralHook: {
+          zh: '定位你体内那个隐形的“电池漏洞”，解释为何一句轻微的批评就能瞬间抽空你所有的情绪储备。',
+          en: 'Locates the invisible drain in your psyche, explaining how a minor remark can instantly drain your emotional battery.',
+        },
+      },
+      {
+        id: 'identity-anchor-axis',
+        codeName: 'IDENTITY ANCHOR AXIS',
+        title: {
+          zh: '身份锚定轴',
+          en: 'Identity Anchor Axis',
+        },
+        definition: {
+          zh: '外界赋予你的社会角色（子女/职员/伴侣）与你内心深处纯粹主体意识之间的错位剪切带。',
+          en: 'The fault line between society’s assigned roles and your core, unadorned sense of self.',
+        },
+        visceralHook: {
+          zh: '刺痛你在完成所有社会期待与优秀标准后，突然产生的那个灵魂质问：“那我到底是谁？”',
+          en: 'Strikes at the haunting existential doubt after fulfilling all expectations: "Who am I underneath all this?"',
+        },
+      },
     ],
   },
 };
