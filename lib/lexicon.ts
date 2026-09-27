@@ -95,7 +95,10 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
           en: 'Explains your sudden, irrational urge to burn down your own success when high pressure builds up.',
         },
       },
-   'tri-axial-strain': {
+    ],
+  },
+
+  'tri-axial-strain': {
     id: 'tri-axial-strain',
     level: 3,
     codeName: 'THE TRI-AXIAL STRAIN',
