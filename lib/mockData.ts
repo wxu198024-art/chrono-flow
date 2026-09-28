@@ -1,4 +1,4 @@
-import { getLexiconLevelsArray } from './lexicon';
+import { getLexiconLevelsArray, isLevelUnlocked } from './lexicon';
 
 export interface MockReport {
   lang: 'zh' | 'en';
@@ -21,13 +21,12 @@ export interface MockReport {
       days_remaining: number;
     };
   };
-  // L1-L9 高阶诊断层级数据接口
   locked_tier: {
     levels: Array<{
       level: number;
       title: string;
-      content?: string; // 兼容 lexicon 输出格式
-      definition?: string;
+      content: string; // 兼容旧组件字段
+      definition: string;
       unlocked: boolean;
     }>;
   };
@@ -36,6 +35,17 @@ export interface MockReport {
     pivot_calendar_preview: string;
   };
 }
+
+// 辅助函数：将 Lexicon 数据转为 MockReport 所需的结构
+const buildLockedTierLevels = (lang: 'zh' | 'en') => {
+  return getLexiconLevelsArray(lang).map((item) => ({
+    level: item.level,
+    title: item.title,
+    content: item.definition, // 映射到 content 属性，防止旧页面报错
+    definition: item.definition,
+    unlocked: item.unlocked,
+  }));
+};
 
 export const MOCK_REPORTS: Record<string, MockReport> = {
   SCENARIO_A_ZH: {
@@ -61,9 +71,9 @@ export const MOCK_REPORTS: Record<string, MockReport> = {
         days_remaining: 14,
       },
     },
-    // 动态统一调用 Lexicon 数据，确保双端一致
+    // ✅ 动态读取 lexicon，不再硬编码旧标题！
     locked_tier: {
-      levels: getLexiconLevelsArray('zh') as any,
+      levels: buildLockedTierLevels('zh'),
     },
     subscription_tier: {
       daily_pulse: '场域阻力微调中，建议收敛能量',
@@ -94,7 +104,7 @@ export const MOCK_REPORTS: Record<string, MockReport> = {
       },
     },
     locked_tier: {
-      levels: getLexiconLevelsArray('en') as any,
+      levels: buildLockedTierLevels('en'),
     },
     subscription_tier: {
       daily_pulse: 'Field friction adjusting, suggest focus and convergence.',
