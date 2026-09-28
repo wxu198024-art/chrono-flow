@@ -630,4 +630,30 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
       en: 'Triggers ultimate release—transitioning from a passive entity in the force field to the sovereign architect of your reality.',
     },
   },
-};
+}; // <-- LEXICON_DATA 对象在此处闭合！
+
+/**
+ * ============================================================================
+ * 辅助转换工具：将 LEXICON_DATA 转换为前端组件/API 可直接使用的 Array 格式
+ * ============================================================================
+ */
+export function getLexiconLevelsArray(lang: LexiconLang = 'zh') {
+  return Object.values(LEXICON_DATA).map((item) => {
+    return {
+      level: item.level,
+      codeName: item.codeName,
+      title: item.title[lang] || item.title.zh,
+      mapping: item.mapping[lang] || item.mapping.zh,
+      definition: item.definition[lang] || item.definition.zh,
+      visceralHook: item.visceralHook[lang] || item.visceralHook.zh,
+      unlocked: isLevelUnlocked(item.level),
+      children: item.children?.map((child) => ({
+        id: child.id,
+        codeName: child.codeName,
+        title: child.title[lang] || child.title.zh,
+        definition: child.definition[lang] || child.definition.zh,
+        visceralHook: child.visceralHook[lang] || child.visceralHook.zh,
+      })),
+    };
+  });
+}
