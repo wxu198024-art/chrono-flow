@@ -5,7 +5,8 @@ import { useLanguage } from '@/app/layout';
 
 export default function DojoHeader() {
   const languageContext = useLanguage();
-  const dict = languageContext?.dict || {};
+  // 显式标注类型为 any，阻止 TypeScript 将其推导为 {}，彻底解决打包报错
+  const dict: Record<string, any> = languageContext?.dict || {};
 
   return (
     <section className="p-6 border border-[var(--border-line)] bg-[var(--bg-card)] backdrop-blur-md rounded-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4 transition-all duration-300">
