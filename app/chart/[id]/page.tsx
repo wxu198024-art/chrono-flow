@@ -8,17 +8,18 @@ import PaywallOverlay from '@/components/PaywallOverlay';
 import PillarsUnlocked from '@/components/PillarsUnlocked';
 import SubscriptionCard from '@/components/SubscriptionCard';
 import { useLanguage } from '@/app/layout'; // 引入全局语言 Provider
+import { isLevelUnlocked } from '@/lib/lexicon'; // 1. 引入 lexicon 中的解锁判断函数
 
 export default function ChartResultPage() {
   const params = useParams();
   const searchParams = useSearchParams();
 
-  // 1. 获取全局 Context 中的语言设置
+  // 获取全局 Context 中的语言设置
   const { lang: globalLang } = useLanguage();
 
   const rawScenarioId = (params?.id as string) || '';
 
-  // 2. 动态匹配场景 Mock 数据：优先使用 URL ID，否则根据全局语言自动选择中文/英文默认 Mock
+  // 动态匹配场景 Mock 数据：优先使用 URL ID，否则根据全局语言自动选择中文/英文默认 Mock
   const scenarioId =
     rawScenarioId && MOCK_REPORTS[rawScenarioId]
       ? rawScenarioId
@@ -36,7 +37,9 @@ export default function ChartResultPage() {
   const birthDate = searchParams.get('date') || '1995-11-03';
   const birthTime = searchParams.get('time') || '21:15';
 
-  const [isPaid, setIsPaid] = useState(false);
+  // 2. 移除纯硬编码的 state，结合 lexicon.ts 检查 L6 是否默认解锁或读取本地/环境状态
+  // 此处判断如果 L6 已经在 lexicon.ts 中开启/解锁，则默认渲染内容
+  const [isPaid, setIsPaid] = useState<boolean>(() => isLevelUnlocked(6));
 
   // 兼容算盘/物理演化逻辑
   const chartData = useMemo(() => {
@@ -131,24 +134,23 @@ export default function ChartResultPage() {
         </div>
       </section>
 
-      {/* SECTION 4: 禁区解锁与订阅入口 */}
+      {/* SECTION 4: 核心诊断解密与解锁逻辑 */}
       <section className="relative pt-4 space-y-8">
+        {/* 如果 isPaid 为 false，显示遮罩；如果已解锁，直接渲染 PillarsUnlocked */}
         {!isPaid ? (
-          /* 未解锁状态：先展示单次 PaywallOverlay */
           <PaywallOverlay onUnlockSuccess={() => setIsPaid(true)} />
         ) : (
-          /* 已解锁状态：平滑展示解锁内容 */
           <div className="space-y-6 animate-fade-in">
             <PillarsUnlocked data={locked_tier} lang={currentLang} />
           </div>
         )}
 
-        {/* 长效续订卡片：使用最新 PPP 策略与节律包装，并精确传入当前语言 currentLang */}
+        {/* 长效续订卡片：精确传入当前语言 currentLang */}
         <div className="pt-6 border-t border-neutral-800/80">
           <SubscriptionCard
             data={subscription_tier}
             lang={currentLang}
-            tier="T1" // 可根据地理 IP 逻辑动态传入 T1/T2/T3
+            tier="T1"
             onSubscribe={handleSubscribe}
           />
         </div>
