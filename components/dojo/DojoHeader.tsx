@@ -4,7 +4,8 @@ import React from 'react';
 import { useLanguage } from '@/app/layout';
 
 export default function DojoHeader() {
-  const { dict } = useLanguage();
+  const languageContext = useLanguage();
+  const dict = languageContext?.dict || {};
 
   return (
     <section className="p-6 border border-[var(--border-line)] bg-[var(--bg-card)] backdrop-blur-md rounded-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4 transition-all duration-300">
@@ -14,7 +15,7 @@ export default function DojoHeader() {
             {dict.dojoOriginAnchor || '时空原点'}
           </span>
           <span className="text-[10px] uppercase tracking-[0.15em] px-2.5 py-1 rounded-full border border-[#0284c7]/30 bg-[#0284c7]/10 text-[#38bdf8]">
-            {dict.dojoSpatialDrift || '空间漂移重力差'}: 800 km
+            {(dict.dojoSpatialDrift || '空间漂移重力差') + ': 800 km'}
           </span>
         </div>
         
