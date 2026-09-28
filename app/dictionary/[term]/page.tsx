@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useLanguage } from '@/app/layout';
-import { LEXICON_DATA, LexiconLang } from '@/lib/lexicon';
+import { LEXICON_DATA, LexiconLang, isLevelUnlocked } from '@/lib/lexicon';
 
 export default function DictionaryTermPage() {
   const params = useParams();
@@ -19,18 +19,16 @@ export default function DictionaryTermPage() {
   // 2. 匹配对应路由词条，若未找到则安全回退到 L1
   const entry = LEXICON_DATA[decodedTerm] || LEXICON_DATA['primordial-anchor'];
 
-  // 3. 9 级导航矩阵数据
-  const matrixItems = [
-    { level: 1, id: 'primordial-anchor', name: isZh ? 'L1 原点锚块' : 'L1 Primordial Anchor' },
-    { level: 2, id: 'dual-vector', name: isZh ? 'L2 双向向量场' : 'L2 Dual Vector Field' },
-    { level: 3, id: 'tri-axial-strain', name: isZh ? 'L3 三轴应力' : 'L3 Tri-Axial Strain' },
-    { level: 4, id: 'four-pillars', name: isZh ? 'L4 四柱结构' : 'L4 Four Pillars' },
-    { level: 5, id: 'wuxing-factors', name: isZh ? 'L5 均衡因子' : 'L5 Wuxing Factors' },
-    { level: 6, id: 'lunar-tides', name: isZh ? 'L6 情绪潮汐' : 'L6 Lunar Tides' },
-    { level: 7, id: 'axial-tilt', name: isZh ? 'L7 轴向转折' : 'L7 Axial Tilt' },
-    { level: 8, id: 'relational-sync', name: isZh ? 'L8 双人共振' : 'L8 Relational Sync' },
-    { level: 9, id: 'orbit-continuum', name: isZh ? 'L9 轨道图谱' : 'L9 Orbit Continuum' },
-  ];
+  // 3. 动态从 LEXICON_DATA 生成 1-9 级矩阵导航数据（Single Source of Truth）
+  const matrixItems = Object.values(LEXICON_DATA)
+    .filter((item) => item.level > 0) // 过滤掉 Level 0 元节点，仅展示 1-9 级
+    .sort((a, b) => a.level - b.level)
+    .map((item) => ({
+      level: item.level,
+      id: item.id,
+      name: `L${item.level} ${item.title[currentLang] || item.title.zh}`,
+      unlocked: isLevelUnlocked(item.level), // 读取 lexicon.ts 的统一解锁判断
+    }));
 
   return (
     <div className="relative min-h-screen text-[var(--text-primary)] transition-colors duration-500 pb-20 pt-8 px-4 sm:px-6 lg:px-8">
@@ -129,7 +127,7 @@ export default function DictionaryTermPage() {
           <div className="yao-yin" />
         </div>
 
-        {/* 底部 1-9 级矩阵控制台 (彻底解决 L1-L9 链接问题) */}
+        {/* 底部 1-9 级矩阵控制台 (彻底打通 LEXICON_DATA 数据) */}
         <div className="pt-6 text-center space-y-4">
           <div className="text-xs font-mono text-[var(--text-muted)] uppercase tracking-widest">
             // {isZh ? '时空锚典矩阵控制台' : 'CHRONO–LEXICON MATRIX NAVIGATOR'}
@@ -137,27 +135,27 @@ export default function DictionaryTermPage() {
           <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
             {matrixItems.map((item) => {
               const isActive = entry.level === item.level;
-              const isImplemented = !!LEXICON_DATA[item.id]; // 自动判断是否已在 lexicon.ts 里实现
+              const isUnlocked = item.unlocked;
 
               return (
                 <Link
                   key={item.level}
-                  href={isImplemented ? `/dictionary/${item.id}` : '#'}
+                  href={isUnlocked ? `/dictionary/${item.id}` : '#'}
                   className={`px-3.5 py-2 rounded-lg border text-xs font-mono transition-all flex items-center gap-1.5 ${
                     isActive
                       ? 'border-[var(--yao-light)] text-[var(--text-primary)] bg-[var(--bg-card-hover)] shadow-lg scale-105 font-bold'
-                      : isImplemented
+                      : isUnlocked
                       ? 'border-[var(--border-line)] bg-[var(--bg-card)] text-[var(--text-secondary)] hover:border-[var(--border-line-hover)]'
                       : 'border-[var(--border-line)] opacity-40 cursor-not-allowed text-[var(--text-muted)]'
                   }`}
                 >
                   <span
                     className={`w-1.5 h-1.5 rounded-full ${
-                      isImplemented ? 'bg-[var(--yao-light)]' : 'bg-neutral-600'
+                      isUnlocked ? 'bg-[var(--yao-light)]' : 'bg-neutral-600'
                     }`}
                   />
                   <span>{item.name}</span>
-                  {!isImplemented && <span className="text-[10px]">🔒</span>}
+                  {!isUnlocked && <span className="text-[10px]">🔒</span>}
                 </Link>
               );
             })}
