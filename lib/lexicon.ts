@@ -19,6 +19,45 @@ export interface LexiconEntry {
   children?: SubLexiconEntry[];
 }
 
+/**
+ * ============================================================================
+ * 权限与锁定控制逻辑 (Locking Logic)
+ * ============================================================================
+ */
+
+// 测试阶段总开关：设置为 true 时完全解锁 L1-L9 及 Level 0
+export const ENABLE_ALL_LEVELS_FOR_TEST = true;
+
+// 实际上线阶段：用户当前允许解锁的最大层级（例如：L1-L5 默认解锁，L6-L9 拦截锁定）
+export const USER_MAX_UNLOCKED_LEVEL = 5;
+
+/**
+ * 判断指定层级是否解锁
+ * @param level 层级数字 (0~9)
+ */
+export function isLevelUnlocked(level: number): boolean {
+  if (ENABLE_ALL_LEVELS_FOR_TEST) {
+    return true; // 测试阶段全开
+  }
+  // Level 0 为隐藏/高级元节点，线上需达到特定条件（如解锁全套 L9 或特殊权限）
+  if (level === 0) {
+    return USER_MAX_UNLOCKED_LEVEL >= 9;
+  }
+  return level <= USER_MAX_UNLOCKED_LEVEL;
+}
+
+/**
+ * 获取解锁该层级所需的最低等级要求（上线预留机制）
+ */
+export function getRequiredUnlockLevel(level: number): number {
+  return level;
+}
+
+/**
+ * ============================================================================
+ * Lexicon Data 数据定义
+ * ============================================================================
+ */
 export const LEXICON_DATA: Record<string, LexiconEntry> = {
   'primordial-anchor': {
     id: 'primordial-anchor',
@@ -107,28 +146,28 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
       en: 'The Tri-Axial Strain',
     },
     mapping: {
-      zh: '底层映射：时间、情绪与身份的三维立体剪切力',
-      en: 'Core Mapping: 3D Structural Stress of Time, Emotion, and Identity',
+      zh: '底层映射：时间、空间与社会关系的三维立体剪切力',
+      en: 'Core Mapping: 3D Structural Stress of Time, Space, and Social Relations',
     },
     definition: {
-      zh: '你在现实生存结构中所承受的三维力学挤压。当时间流逝压力、隐性情绪消耗与外界身份期待在同一时刻交叠，系统内部便会产生严重的应力集中，导致无预警的心理疲惫与自我觉察剥离。',
-      en: 'The three-dimensional mechanical compression you endure within reality. When temporal pressure, emotional energy dissipation, and identity expectations intersect, severe stress concentrations occur, triggering unannounced systemic exhaustion.',
+      zh: '作用于个体的三维现代空间力学挤压：涵盖时间重力轴（出生刻度）、空间漂移轴（现居 IP 地理坐标）以及社会关系应力轴（他人期望形成的挤压感）。当三轴交叠时，系统内部便会产生严重的应力集中。',
+      en: 'The three-dimensional mechanical compression you endure: Temporal Gravity Axis, Spatial Drift Axis, and Social Relation Stress Axis. When they intersect, severe stress concentrations occur.',
     },
     visceralHook: {
-      zh: '精确指出你为何即使什么都没做，只是静坐一整天，也会感到一种像被巨石碾压过一样的深度骨髓疲惫感。',
-      en: 'Pinpoints exactly why you feel bone-deep exhaustion even after doing nothing, as if crushed by an invisible weight all day.',
+      zh: '揭示你为何在某个城市或某个年龄段感到窒息与割裂，精确指出你即使什么都没做，也会感到像被巨石碾压过一样的深度疲惫感。',
+      en: 'Exposes why you feel suffocated in specific cities or ages, pinpointing why you feel bone-deep exhaustion even after doing nothing.',
     },
     children: [
       {
         id: 'temporal-shear-axis',
-        codeName: 'TEMPORAL SHEAR AXIS',
+        codeName: 'TEMPORAL GRAVITY AXIS',
         title: {
-          zh: '时间扭曲轴',
-          en: 'Temporal Shear Axis',
+          zh: '时间重力轴',
+          en: 'Temporal Gravity Axis',
         },
         definition: {
-          zh: '注意力在“对未来的失控恐惧”与“对过去的无法改写”之间被双向拉扯撕裂的应力轴向。',
-          en: 'The strain axis where your presence is torn between future loss of control and unalterable past regret.',
+          zh: '由出生时间刻度与年龄增长带来的生命时间重力，注意力在未来的失控恐惧与过去的无法改写之间被双向拉扯撕裂。',
+          en: 'The strain axis anchored to your birth timestamp and aging, torn between future loss of control and unalterable past regret.',
         },
         visceralHook: {
           zh: '揭示你无法享受当下任何休假与放松的根本原因——你的大脑永远在预演最坏的未来。',
@@ -136,31 +175,31 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
         },
       },
       {
-        id: 'emotional-dissipation-axis',
-        codeName: 'EMOTIONAL DISSIPATION AXIS',
+        id: 'spatial-drift-axis',
+        codeName: 'SPATIAL DRIFT AXIS',
         title: {
-          zh: '情绪耗散轴',
-          en: 'Emotional Dissipation Axis',
+          zh: '空间漂移轴',
+          en: 'Spatial Drift Axis',
         },
         definition: {
-          zh: '为了在外界面前维持“一切正常”与“理性体面”而持续泄漏、无法回收的隐形能量损耗。',
-          en: 'The invisible, irrecoverable energy leakage spent maintaining an illusion of composure and rationality.',
+          zh: '由现居 IP 地理坐标与出生原点之间的公里数差值所形成的地理引力差与环境水土磨削。',
+          en: 'The spatial strain formed by the distance between your current geographical coordinates and your birthplace.',
         },
         visceralHook: {
-          zh: '定位你体内那个隐形的“电池漏洞”，解释为何一句轻微的批评就能瞬间抽空你所有的情绪储备。',
-          en: 'Locates the invisible drain in your psyche, explaining how a minor remark can instantly drain your emotional battery.',
+          zh: '定位你因频繁更换城市或长期漂泊所产生的归属感缺失与无根飘零感。',
+          en: 'Locates your rootlessness and lack of belonging caused by geographic displacement.',
         },
       },
       {
-        id: 'identity-anchor-axis',
-        codeName: 'IDENTITY ANCHOR AXIS',
+        id: 'social-relation-axis',
+        codeName: 'SOCIAL RELATION STRESS AXIS',
         title: {
-          zh: '身份锚定轴',
-          en: 'Identity Anchor Axis',
+          zh: '社会关系应力轴',
+          en: 'Social Relation Stress Axis',
         },
         definition: {
-          zh: '外界赋予你的社会角色（子女/职员/伴侣）与你内心深处纯粹主体意识之间的错位剪切带。',
-          en: 'The fault line between society’s assigned roles and your core, unadorned sense of self.',
+          zh: '外界与他人赋予你的角色期待（子女/职员/伴侣）与你内心真实主体意识之间的错位剪切带。',
+          en: 'The fault line between external role expectations and your core, unadorned sense of self.',
         },
         visceralHook: {
           zh: '刺痛你在完成所有社会期待与优秀标准后，突然产生的那个灵魂质问：“那我到底是谁？”',
@@ -173,18 +212,18 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
   'four-pillars': {
     id: 'four-pillars',
     level: 4,
-    codeName: 'THE FOUR PILLARS',
+    codeName: 'THE FOUR PILLARS OF EXISTENCE',
     title: {
-      zh: '四柱结构',
-      en: 'The Four Pillars',
+      zh: '四柱存在结构',
+      en: 'The Four Pillars of Existence',
     },
     mapping: {
-      zh: '底层映射：生命系统在时空连续体中的四维承重支柱',
-      en: 'Core Mapping: Four-Dimensional Load-Bearing Pillars of Life System',
+      zh: '底层映射：承载个体生命张力的四座现代心理与时空支柱',
+      en: 'Core Mapping: Four Load-Bearing Pillars of Individual Life Tension',
     },
     definition: {
-      zh: '支撑你整个生命物理框架的四维时空支柱。从印刻在骨髓中的基因遗传，到现实环境的持续磨削，再到核心自我与终局指向，四柱共同构成了你抗击现实重力的力学拓扑网。',
-      en: 'The four-dimensional spatiotemporal pillars supporting your entire ontological structure. From inherited genetic baselines to environmental friction and ultimate directional collapse, they form your load-bearing framework against reality.',
+      zh: '承载个体生命张力的四座现代心理与时空骨架。从基因遗产与环境磨削，到核心自我与潜匿地平线，四柱共同构成了你抗击现实重力的力学拓扑结构。',
+      en: 'The four structural pillars supporting your entire psychological and spatiotemporal framework against the gravitational forces of reality.',
     },
     visceralHook: {
       zh: '剖析你生命承重墙的结构缺陷，指出哪一根支柱正在承受超载的应力，引发你系统性崩溃的风险。',
@@ -192,15 +231,15 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
     },
     children: [
       {
-        id: 'year-pillar-field',
-        codeName: 'YEAR PILLAR FIELD',
+        id: 'origin-pillar',
+        codeName: 'THE ORIGIN PILLAR',
         title: {
-          zh: '年柱·基因场域',
-          en: 'Year Pillar: Genetic Field',
+          zh: '原点之柱',
+          en: 'The Origin Pillar',
         },
         definition: {
           zh: '印刻在基因与骨髓里的时代底色与家族遗产。你无法选择的先天重力环境与幼年无意识吸收的防御机制。',
-          en: 'The ancestral lineage and generational baseline imprinted upon your genetics. The immutable gravitational field of your origin.',
+          en: 'The ancestral lineage and origin baseline imprinted upon your genetics. The immutable gravitational field of your origin.',
         },
         visceralHook: {
           zh: '精确指出你身上那些明明极度讨厌、却无意识重演的父母同款行为与情绪模式。',
@@ -208,11 +247,11 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
         },
       },
       {
-        id: 'month-pillar-shear',
-        codeName: 'MONTH PILLAR SHEAR',
+        id: 'social-mask-pillar',
+        codeName: 'THE SOCIAL MASK',
         title: {
-          zh: '月柱·环境剪力',
-          en: 'Month Pillar: Environmental Shear',
+          zh: '社会投影之柱',
+          en: 'The Social Mask',
         },
         definition: {
           zh: '青年与中年期所遭遇的现实磨削力。涵盖职场生存、社会规训以及外部环境对你个人意愿的持续挤压。',
@@ -224,11 +263,11 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
         },
       },
       {
-        id: 'day-pillar-core',
-        codeName: 'DAY PILLAR CORE',
+        id: 'core-ego-pillar',
+        codeName: 'THE CORE EGO',
         title: {
-          zh: '日柱·核心主体',
-          en: 'Day Pillar: Core Ego',
+          zh: '内核原点之柱',
+          en: 'The Core Ego',
         },
         definition: {
           zh: '除去所有社会名片与外部角色后，纯粹的自我意识与主体内核。是你抵抗全宇宙熵增的最后阵地。',
@@ -240,14 +279,14 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
         },
       },
       {
-        id: 'hour-pillar-vector',
-        codeName: 'HOUR PILLAR VECTOR',
+        id: 'hidden-horizon-pillar',
+        codeName: 'THE HIDDEN HORIZON',
         title: {
-          zh: '时柱·终局向量',
-          en: 'Hour Pillar: Terminal Vector',
+          zh: '潜匿地平线之柱',
+          en: 'The Hidden Horizon',
         },
         definition: {
-          zh: '生命系统向未来延伸的归宿与坍缩方向。涵盖晚年状态、潜意识信仰以及你留给时空连续体的精神残影。',
+          zh: '生命系统向未来延伸的归宿与潜伏地平线。涵盖晚年状态、潜意识信仰以及你留给时空连续体的精神残影。',
           en: 'The vector describing the ultimate convergence, terminal trajectory, and lingering footprint of your life system.',
         },
         visceralHook: {
@@ -264,15 +303,15 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
     codeName: 'THE FIVE DYNAMIC EQUILIBRIUM FACTORS',
     title: {
       zh: '五行均衡因子',
-      en: 'Dynamic Equilibrium Factors',
+      en: 'The Five Dynamic Equilibrium Factors',
     },
     mapping: {
-      zh: '底层映射：系统五维环境力学与心理能量的动态失衡与补偿',
-      en: 'Core Mapping: Five Environmental & Energetic Mechanics of the Psyche',
+      zh: '底层映射：维持个体心理系统内部稳态的 5 种环境力学因子',
+      en: 'Core Mapping: Five Environmental Mechanics Factors Maintaining Psychological Homeostasis',
     },
     definition: {
-      zh: '构成你生命系统演化的 5 个动态均衡因子。它们脱离了传统的概念表象，化为 5 种充满张力的环境力学与心理能量频段，决定了你的扩张冲动、渴望显化的程度、自我消化力、割舍冷酷度与潜流直觉。',
-      en: 'The five dynamic mechanics governing your psyches equilibrium. They represent raw tension and environmental force vectors—dictating your drive to expand, project, anchor, prune, and adapt under reality’s pressure.',
+      zh: '维持个体心理系统内部稳态（Homeostasis）的 5 种环境力学因子。脱离传统概念表象，化为扩张蔓延、显化张力、重力锚定、裁决边界与潜流直觉 5 种平衡能量。',
+      en: 'The five dynamic mechanics governing your psychological homeostasis—Expansion, Visibility, Anchoring, Precision, and Adaptation.',
     },
     visceralHook: {
       zh: '定位你能量结构中最不稳定的那个频段，揭示你为何总会在“盲目蔓延”或“过度裁决”之间陷入自我反噬。',
@@ -281,7 +320,7 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
     children: [
       {
         id: 'expansion-factor',
-        codeName: 'EXPANSION FACTOR',
+        codeName: 'EXPANSION',
         title: {
           zh: '蔓延因子',
           en: 'Expansion Factor',
@@ -297,7 +336,7 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
       },
       {
         id: 'visibility-factor',
-        codeName: 'VISIBILITY FACTOR',
+        codeName: 'VISIBILITY',
         title: {
           zh: '显化因子',
           en: 'Visibility Factor',
@@ -313,7 +352,7 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
       },
       {
         id: 'anchoring-factor',
-        codeName: 'ANCHORING FACTOR',
+        codeName: 'ANCHORING',
         title: {
           zh: '锚定因子',
           en: 'Anchoring Factor',
@@ -329,7 +368,7 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
       },
       {
         id: 'precision-factor',
-        codeName: 'PRECISION FACTOR',
+        codeName: 'PRECISION',
         title: {
           zh: '裁决因子',
           en: 'Precision Factor',
@@ -345,7 +384,7 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
       },
       {
         id: 'adaptation-factor',
-        codeName: 'ADAPTATION FACTOR',
+        codeName: 'ADAPTATION',
         title: {
           zh: '潜流因子',
           en: 'Adaptation Factor',
@@ -367,16 +406,16 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
     level: 6,
     codeName: 'THE 6-STAGE FLOW CYCLE',
     title: {
-      zh: '六阶相位流',
+      zh: '六维状态流',
       en: 'The 6-Stage Flow Cycle',
     },
     mapping: {
-      zh: '底层映射：个体面对环境冲击时心理能量必经的 6 段状态相态跃迁',
+      zh: '底层映射：个体面对外部环境冲击时心理能量必经的 6 段状态相态跃迁',
       en: 'Core Mapping: Six Continuous Phase Transitions Under Environmental Stress',
     },
     definition: {
-      zh: '描述你的生命系统在外部环境挤压与内部张力拉扯下，心理能量必经的 6 个连续状态相态（潜藏、显露、警惕、跃迁、巅峰、收敛）。它决定了你当前是处于积累蓄势期、破局临界点，还是能量退潮期。',
-      en: 'The continuous six-stage phase transition cycle governing your energy state. It defines whether you are currently in stasis, breaching limits, or undergoing essential energetic recession.',
+      zh: '描述你的生命系统在外部环境挤压与内部张力拉扯下，心理能量必经的 6 个连续状态相态（Inception 潜藏 → Emergence 显露 → Consolidation 警惕 → Transition 跃迁 → Apex 巅峰 → Recession 收敛）。',
+      en: 'The continuous six-stage phase transition cycle governing your energy state: Inception → Emergence → Consolidation → Transition → Apex → Recession.',
     },
     visceralHook: {
       zh: '定位你当下的相态卡顿，揭示你为何明明机会就在眼前（跃迁期），却因内耗向量而被强行锁定在原地。',
@@ -385,42 +424,42 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
     children: [
       {
         id: 'flow-inception',
-        codeName: 'INCEPTION PHASE',
+        codeName: 'INCEPTION',
         title: { zh: '潜藏相态', en: 'Inception' },
         definition: { zh: '能量蓄积于地表之下的隐匿期。外界看似停滞，实则是底层结构在无声重构。', en: 'Energy subterranean accumulation; structural re-alignment beneath stillness.' },
         visceralHook: { zh: '告诉你此刻盲目向外冲锋只会徒增损耗，安心沉淀才是最高效的破局。', en: 'Reassures that forced action now only dissipates essential potential.' },
       },
       {
         id: 'flow-emergence',
-        codeName: 'EMERGENCE PHASE',
+        codeName: 'EMERGENCE',
         title: { zh: '显露相态', en: 'Emergence' },
         definition: { zh: '破土而出的初生期。新方向初具雏形，对外界刺激高度敏感。', en: 'Initial emergence into visibility; heightened sensitivity to ambient friction.' },
         visceralHook: { zh: '刺穿你对未知方向的恐惧，提醒你幼苗破土时最需要的不是犹豫而是保护。', en: 'Validates early vulnerability while urging bold protection of nascent momentum.' },
       },
       {
         id: 'flow-consolidation',
-        codeName: 'CONSOLIDATION PHASE',
+        codeName: 'CONSOLIDATION',
         title: { zh: '警惕相态', en: 'Consolidation' },
         definition: { zh: '遭遇现实阻力与规训的防御期。系统需要建立强有力的边界以防能量泄漏。', en: 'Defensive phase against reality resistance; establishing rigid systemic containment.' },
         visceralHook: { zh: '指出你为何在事业或关系刚有起色时突然变得高度戒备与焦虑。', en: 'Explains your hyper-vigilance just as new achievements begin to solidify.' },
       },
       {
         id: 'flow-transition',
-        codeName: 'TRANSITION PHASE',
+        codeName: 'TRANSITION',
         title: { zh: '跃迁相态', en: 'Transition' },
         definition: { zh: '能级跨越的临界爆发期。旧轨道彻底断裂，新轨道尚未完全固化的动荡区间。', en: 'Critical threshold jump; orbit-cleaving kinetic window between state bounds.' },
         visceralHook: { zh: '直击你临门一脚时的巨大失重感，解释你为何总在即将成功前夜产生毁掉一切的冲动。', en: 'Strikes at your fear of success when standing upon the precipice of real transformation.' },
       },
       {
         id: 'flow-apex',
-        codeName: 'APEX PHASE',
+        codeName: 'APEX',
         title: { zh: '巅峰相态', en: 'Apex' },
         definition: { zh: '能量与辐射力达到顶峰的高光期。影响力最大化，但内部耗散速度也同时达到极致。', en: 'Peak energetic radiance and maximum footprint, accompanied by accelerated dissipation.' },
         visceralHook: { zh: '警示你在高光狂欢之下的空虚感，防止你在顶峰因盲目膨胀而瞬间坍缩。', en: 'Cautions against blinding arrogance that precedes sudden systemic collapse.' },
       },
       {
         id: 'flow-recession',
-        codeName: 'RECESSION PHASE',
+        codeName: 'RECESSION',
         title: { zh: '收敛相态', en: 'Recession' },
         definition: { zh: '高光过后的主动撤退与休养期。系统卸下过载负荷，进行能量的自我回收与净化。', en: 'Systemic retreat and internal purge; shedding structural overload after peak emission.' },
         visceralHook: { zh: '接纳你突如其来的厌世与麻木，告诉你暂时的撤退与躺平是系统防烧毁的保护机制。', en: 'Normalizes sudden exhaustion as a critical anti-burnout safety override.' },
@@ -437,15 +476,15 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
       en: 'The Septenary Chrono-Pulse',
     },
     mapping: {
-      zh: '底层映射：以 7 天为周期的环境高频微波与日常行为微调',
+      zh: '底层映射：以 7 天为周期的环境高频微波与日常高频行为校准',
       en: 'Core Mapping: High-Frequency 7-Day Micro-Wave Environmental Friction & Behavior Calibration',
     },
     definition: {
-      zh: '以 7 天为微观周期的环境高频重力脉搏。它并非宏观运势，而是你日常生活中面临的即时摩擦点与能量锚点，为你提供高冷、精准且具极强执行力的行为校准。',
+      zh: '以 7 天为微观周期的环境高频重力脉搏。它并非宏观运势，而是你日常生活中面临的即时摩擦点与能量锚点，为你提供高冷、精准且具极强执行力的日常行为校准。',
       en: 'The 7-day micro-gravitational pulse providing daily tactical adjustments, pinpointing friction vectors, and grounding anchors for execution.',
     },
     visceralHook: {
-      zh: '捕捉你今天为何会无端对某个细节烦躁，提供即时可执行的能量锚点以防日间能量泄漏。',
+      zh: '捕捉你今天为何会无端对某个细节烦躁，提供即时可执行的能量锚点与每日准则，防范日间能量泄漏。',
       en: 'Captures daily micro-irritations and grounds your focus against ambient energetic leaks.',
     },
     children: [
@@ -458,16 +497,16 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
       },
       {
         id: 'pulse-friction-point',
-        codeName: 'FRICTION POINT',
+        codeName: 'THE FRICTION POINT',
         title: { zh: '今日摩擦点', en: 'The Friction Point' },
         definition: { zh: '今天环境中容易与你的 L5 因子产生高频剧烈剪切的特定人际或事务陷阱。', en: 'The specific environmental trap likely to trigger shear strain with your factors.' },
         visceralHook: { zh: '预判你今天最容易踩爆的情绪雷区。', en: 'Pre-empts the exact emotional minefield awaiting you today.' },
       },
       {
         id: 'pulse-dos-donts',
-        codeName: 'CHRONO DOS & DONTS',
-        title: { zh: '时空行为准则', en: 'Chrono Dos & Don’ts' },
-        definition: { zh: '基于当前 7 天微波高频算法推演出的极简行动指南。', en: 'Algorithmic action directives derived from 7-day micro-pulse calculations.' },
+        codeName: 'DAILY DOS & DONTS',
+        title: { zh: 'Daily Dos & Don’ts', en: 'Daily Dos & Don’ts' },
+        definition: { zh: '基于当前 7 天微波高频算法推演出的极简高效率行动与避坑指南。', en: 'Algorithmic action directives derived from 7-day micro-pulse calculations.' },
         visceralHook: { zh: '剔除情绪干扰，直接给出高冷的无隐患行动选项。', en: 'Bypasses emotional fatigue with cold, optimal decision paths.' },
       },
     ],
@@ -483,11 +522,11 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
     },
     mapping: {
       zh: '底层映射：两个四柱存在结构相撞时在 8 个维度上的系统碰撞与能量重组',
-      en: 'Core Mapping: Eight-Dimensional Gravitational Collision & Relational System Re-organization',
+      en: 'Core Mapping: Eight-Dimensional Collision of Two Four Pillars Structures & Relational Re-organization',
     },
     definition: {
-      zh: '当两个独立的四柱生命系统（L4）互相靠近并发生碰撞时，在 8 个维度上激发的系统共振矩阵。它彻底解构了双人合盘，精准计算出你们之间的相位摩擦系数、能量互补锚点与暗面互动模式。',
-      en: 'The eight-dimensional collision array generated when two discrete life structures intersect. It computes friction indices, complementary anchors, and shadow interactions.',
+      zh: '当两个独立的“四柱存在结构”（L4）互相靠近并发生碰撞时，在 8 个维度上激发的系统共振矩阵。它彻底解构了传统合盘，精准计算出双方之间的相位摩擦系数、能量互补锚点与暗面互动模式。',
+      en: 'The eight-dimensional collision array generated when two discrete Four Pillars structures intersect. It computes friction indices, complementary anchors, and shadow interactions.',
     },
     visceralHook: {
       zh: '剖析你与特定人之间为何会产生“只要靠近就会互相打乱能量脉搏”或“无法逃离的重力吸附”的深层力学真相。',
@@ -527,12 +566,12 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
       en: 'The Ennead Trajectory Cycles',
     },
     mapping: {
-      zh: '底层映射：个体运行在宇宙长程重力轨道上的动态偏转图谱与长程订阅载体',
-      en: 'Core Mapping: Macro-Spatiotemporal Gravity Trajectories & Subscription Cycles',
+      zh: '底层映射：个体运行在宇宙长程重力轨道上的动态偏转图谱与 Stripe 订阅载体',
+      en: 'Core Mapping: Macro Orbital Gravity Trajectories & Subscription Cycles Delivery Vehicle',
     },
     definition: {
-      zh: '描述你的生命系统在长程时空重力场中运行的宏观偏转图谱。它涵盖月度月相盈亏、季度地轴倾角偏转、年度环形重力轨道以及地理坐标公里数引力差，是 Stripe 付费订阅的核心交付载体。',
-      en: 'The macro-orbital path mapping your systems long-term gravity deflections across monthly, quarterly, annual, and geodynamic dimensions.',
+      zh: '描述你的生命系统在长程时空重力场中运行的宏观偏转图谱。涵盖月相盈亏周期（30天）、地轴倾角周期（90天）、轨道连续图谱（365天）以及地理坐标引力差（空间漂移），是 Stripe 付费订阅的核心交付载体。',
+      en: 'The macro-orbital path mapping your system\'s long-term gravity deflections across monthly, quarterly, annual, and geodynamic dimensions. Core delivery vehicle for subscriptions.',
     },
     visceralHook: {
       zh: '预判未来长程周期中的重力过载压强点，让你提前对即将到来的环境大转向做好系统加固。',
@@ -542,28 +581,28 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
       {
         id: 'cycle-lunar-phase',
         codeName: 'LUNAR PHASE EQUILIBRIUM',
-        title: { zh: '月相盈亏周期', en: 'Lunar Phase Equilibrium' },
-        definition: { zh: '30 天潜意识潮汐周期，影响敏感度峰值与情绪退潮。', en: '30-day subconscious tide cycle dictating sensitivity peaks and emotional ebbs.' },
+        title: { zh: '月相盈亏周期（月度订阅）', en: 'Lunar Phase Equilibrium' },
+        definition: { zh: '30 天潜意识潮汐周期，决定敏感度峰值与情绪退潮规律。', en: '30-day subconscious tide cycle dictating sensitivity peaks and emotional ebbs.' },
         visceralHook: { zh: '破译你每月固定几天无预警崩溃的情绪潮汐规律。', en: 'Decodes your predictable monthly window of sudden sensitivity overload.' },
       },
       {
         id: 'cycle-axial-tilt',
         codeName: 'AXIAL TILT SHIFT',
-        title: { zh: '地轴倾角周期', en: 'Axial Tilt Shift' },
+        title: { zh: '地轴倾角周期（季度订阅）', en: 'Axial Tilt Shift' },
         definition: { zh: '90 天环境力学大转向，决定季度核心风向与重力场交替。', en: '90-day macro environmental shift governing seasonal focus and structural drift.' },
         visceralHook: { zh: '解释为何每过三个月你都会产生一种“想把过去全盘推翻”的转向冲动。', en: 'Explains the quarterly urge to overhaul your priorities and reset direction.' },
       },
       {
         id: 'cycle-continuous-orbit',
         codeName: 'CONTINUOUS ORBIT TRAJECTORY',
-        title: { zh: '轨道连续图谱', en: 'Continuous Orbit Trajectory' },
+        title: { zh: '轨道连续图谱（年度订阅）', en: 'Continuous Orbit Trajectory' },
         definition: { zh: '365 天环形重力偏转轨迹，映射整年的重大跃迁与危机节点。', en: '365-day orbital loop mapping annual transformation nodes and hazard zones.' },
         visceralHook: { zh: '为你绘制全年最容易发生系统卡顿或爆发性跃迁的时空地图。', en: 'Maps your highest-stakes transformation windows and stress traps for the year.' },
       },
       {
         id: 'cycle-geodynamic-drift',
         codeName: 'GEODYNAMIC DRIFT',
-        title: { zh: '地理坐标引力差', en: 'Geodynamic Drift' },
+        title: { zh: '地理坐标引力差（空间漂移）', en: 'Geodynamic Drift' },
         definition: { zh: '现居地与出生原点之间的地理公里数漂移对 L5 因子的物理再平衡修正。', en: 'Spatial offset miles between current location and birthplace modifying factor balance.' },
         visceralHook: { zh: '解释为何换一个城市或跨国生活后，你的性格与运气发生了翻天覆地的剧变。', en: 'Explains how shifting your geographic coordinates physically alters your internal baseline.' },
       },
@@ -579,11 +618,11 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
       en: 'The Unbound Void',
     },
     mapping: {
-      zh: '底层映射：全系统的隐藏元节点（Meta-Node），跳出时空重力场的主权自我',
+      zh: '底层映射：全系统的隐藏元节点，跳出外部时空重力场的主权自我',
       en: 'Core Mapping: Meta-Node Beyond Spatiotemporal Gravity; Sovereign Ego Unbound',
     },
     definition: {
-      zh: '隐藏于系统最深处的元节点（Meta-Node）。前九级展示了你如何在重力场内被撕扯、被决定、被影响；而 Level 0 则是当你看清前九级的全貌后，通过认知觉醒与主动干预，卸载所有重力与心理面具，回归绝对的主权自我（The Sovereign Ego）。',
+      zh: '隐藏于系统最深处的元节点（Meta-Node）。前九级展示了你如何在重力场内被撕扯与影响；而 Level 0 则是当你看清前九级的全貌后，卸载所有重力与心理面具，回归绝对的主权自我（The Sovereign Ego）。',
       en: 'The meta-node hovering outside the gravitational matrix. Having deconstructed Levels 1-9, you strip away armor and environmental force to reclaim the Sovereign Ego.',
     },
     visceralHook: {
