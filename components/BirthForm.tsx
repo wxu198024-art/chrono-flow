@@ -42,9 +42,10 @@ export default function BirthForm() {
     'Frequency alignment complete. Manifesting chart...',
   ];
 
-  // 根据 lang 精准选择文案
-  const isEn = lang === 'en';
-  const isTW = lang === 'zh-TW' || lang === 'zh-HK' || lang === 'tw';
+  // 安全转换为 string 进行比较，规避 TS2367 类型报错
+  const currentLang = (lang as string) || 'zh';
+  const isEn = currentLang === 'en';
+  const isTW = currentLang === 'zh-TW' || currentLang === 'zh-HK' || currentLang === 'tw';
 
   const currentSteps = isEn ? stepsEn : isTW ? stepsZhTW : stepsZh;
 
@@ -281,7 +282,7 @@ export default function BirthForm() {
             </p>
           </div>
 
-          {/* 下方查看分析引导文字（增加微光提示） */}
+          {/* 下方查看分析引导文字 */}
           <div className="pt-2 flex items-center justify-center space-x-1.5 text-[11px] text-[var(--text-muted)] tracking-widest animate-bounce">
             <span>↓</span>
             <span>
