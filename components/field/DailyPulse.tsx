@@ -11,21 +11,14 @@ export default function DailyPulse() {
   const isTW = currentLang === 'zh-TW' || currentLang === 'zh-HK' || currentLang === 'tw';
 
   return (
-    <section className="p-6 border border-[var(--border-line)] bg-[var(--bg-card)] backdrop-blur-md rounded-lg space-y-6 transition-all duration-300 relative overflow-hidden">
+    <section className="p-6 border border-[var(--border-line)] bg-[var(--bg-card)] backdrop-blur-md rounded-lg space-y-6 transition-colors duration-300 relative overflow-hidden">
       {/* 顶部极细爻线 */}
       <div className="absolute top-0 left-0 right-0 yao-yin"></div>
 
       <div className="flex flex-col md:flex-row md:items-center justify-between border-b border-[var(--border-line)] pb-4 gap-2">
-        <div>
-          <div className="inline-flex items-center gap-2 text-[10px] font-mono text-[var(--cinnabar)] uppercase tracking-widest mb-1">
-            <span>[ LEVEL 2 ]</span>
-            <span>•</span>
-            <span>{isEn ? 'DAILY GRAVITY WAVE PULSE' : isTW ? '今日重力波脈搏' : '今日重力波脉搏'}</span>
-          </div>
-          <h2 className="font-serif-title text-lg md:text-xl text-[var(--text-primary)] uppercase tracking-wide">
-            {isEn ? 'GRAVITY WAVE PULSE' : isTW ? '今日重力波脈搏' : '今日重力波脉搏'}
-          </h2>
-        </div>
+        <h2 className="font-serif-title text-lg md:text-xl text-[var(--text-primary)] uppercase tracking-wide">
+          {isEn ? 'GRAVITY WAVE PULSE' : isTW ? '今日重力波脈搏' : '今日重力波脉搏'}
+        </h2>
         <div className="text-xs font-mono text-[var(--text-muted)]">
           {isEn ? 'PHASE: HIGH TENSION' : '当前相态：高压强折射'}
         </div>
@@ -33,31 +26,28 @@ export default function DailyPulse() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="p-4 border border-[var(--border-line)] bg-[var(--bg-card-hover)]/40 rounded-sm space-y-2">
-          <span className="text-[10px] font-mono text-[var(--text-muted)]">VECTOR-01</span>
           <h3 className="text-sm font-medium text-[var(--text-primary)]">
             {isEn ? 'Cognitive Friction' : '认知阻力指数'}
           </h3>
-          <p className="text-xs text-[var(--text-secondary)] font-sans">
+          <p className="text-xs text-[var(--text-secondary)] font-sans leading-relaxed">
             {isEn ? 'High mental load. Avoid impulsive decision making.' : '环境期望压强升高，建议降低决策频率，保持观察。'}
           </p>
         </div>
 
         <div className="p-4 border border-[var(--border-line)] bg-[var(--bg-card-hover)]/40 rounded-sm space-y-2">
-          <span className="text-[10px] font-mono text-[var(--text-muted)]">VECTOR-02</span>
           <h3 className="text-sm font-medium text-[var(--text-primary)]">
             {isEn ? 'Anchor Balance' : '锚定内稳态'}
           </h3>
-          <p className="text-xs text-[var(--text-secondary)] font-sans">
+          <p className="text-xs text-[var(--text-secondary)] font-sans leading-relaxed">
             {isEn ? 'Stable inner order. Ideal for strategic planning.' : '内部心理防线稳固，适合深层自省与长远布局。'}
           </p>
         </div>
 
         <div className="p-4 border border-[var(--border-line)] bg-[var(--bg-card-hover)]/40 rounded-sm space-y-2">
-          <span className="text-[10px] font-mono text-[var(--text-muted)]">VECTOR-03</span>
           <h3 className="text-sm font-medium text-[var(--text-primary)]">
             {isEn ? 'Boundary Tension' : '界限张力'}
           </h3>
-          <p className="text-xs text-[var(--text-secondary)] font-sans">
+          <p className="text-xs text-[var(--text-secondary)] font-sans leading-relaxed">
             {isEn ? 'Critical deficit in precision vector. Say No.' : '裁决因子偏弱，需警惕他人情感绑架，建立明确边界。'}
           </p>
         </div>
