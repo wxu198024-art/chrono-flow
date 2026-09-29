@@ -35,16 +35,14 @@ export default function FieldHeader() {
   const displayTime = origin?.birthTime || '14:30';
 
   return (
-    <section className="p-6 border border-[var(--border-line)] bg-[var(--bg-card)] backdrop-blur-md rounded-lg space-y-4 transition-all duration-300 relative overflow-hidden">
+    <section className="p-6 border border-[var(--border-line)] bg-[var(--bg-card)] backdrop-blur-md rounded-lg space-y-4 transition-colors duration-300 relative overflow-hidden">
       {/* 顶部极细爻线 */}
       <div className="absolute top-0 left-0 right-0 yao-yang"></div>
 
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <div className="inline-flex items-center gap-2 text-[10px] font-mono text-[var(--cinnabar)] uppercase tracking-widest mb-1">
-            <span>[ LEVEL 1 ]</span>
-            <span>•</span>
-            <span>{isEn ? 'CHRONO COORDINATES' : isTW ? '時空坐標' : '时空坐标'}</span>
+          <div className="text-[10px] font-mono text-[var(--cinnabar)] uppercase tracking-widest mb-1">
+            {isEn ? 'CHRONO COORDINATES' : isTW ? '時空坐標' : '时空坐标'}
           </div>
           <h1 className="font-serif-title text-xl md:text-2xl text-[var(--text-primary)] font-semibold tracking-wide">
             {displayName}
