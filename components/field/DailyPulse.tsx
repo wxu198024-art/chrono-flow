@@ -1,80 +1,65 @@
 'use client';
 
 import React from 'react';
-import { Locale, dictionaries } from '@/lib/dictionary';
 import { useLanguage } from '@/app/layout';
 
-interface DailyPulseProps {
-  lang?: Locale;
-}
+export default function DailyPulse() {
+  const { dict, lang } = useLanguage?.() || { dict: {}, lang: 'zh' };
 
-export default function DailyPulse({ lang }: DailyPulseProps) {
-  // 优先使用传入的 lang，若无则读取 layout 中的 useLanguage，最后降级至 'zh-CN'
-  const contextLang = useLanguage?.()?.lang as Locale;
-  const currentLang = lang || contextLang || 'zh-CN';
-
-  const dict =
-    dictionaries[currentLang]?.chronoField?.dailyPulse ||
-    dictionaries['zh-CN']?.chronoField?.dailyPulse ||
-    {
-      tag: '今日动态脉搏',
-      frictionIndex: '阻力指数',
-      resistanceHigh: '高阻力场',
-      resistanceLow: '低阻力场',
-      directiveLabel: '场域避险指令',
-      directiveText: '收敛扩张欲望，避免重大决策摩擦。',
-      anchorLabel: '内稳态锚点',
-      anchorText: '保持观察者姿态，充沛内部能量。',
-    };
-
-  // 阻力指数模拟（可后续对接真实算法）
-  const resistanceScore = 38; 
-  const isHighResistance = resistanceScore > 60;
+  const currentLang = (lang as string) || 'zh';
+  const isEn = currentLang === 'en';
+  const isTW = currentLang === 'zh-TW' || currentLang === 'zh-HK' || currentLang === 'tw';
 
   return (
-    <section className="w-full max-w-4xl mx-auto p-6 my-6 border border-neutral-800 bg-neutral-950/80 backdrop-blur-md rounded-xl text-neutral-100 transition-all duration-300">
-      {/* 顶部 Tag 标识 */}
-      <div className="flex items-center justify-between pb-4 border-b border-neutral-800/60 mb-6">
-        <span className="text-xs font-mono tracking-widest text-neutral-400 uppercase">
-          [ {dict.tag} ]
-        </span>
-        <span className="text-xs font-mono px-2 py-0.5 rounded border border-emerald-500/30 text-emerald-400 bg-emerald-500/10">
-          FIELD: ACTIVE
-        </span>
+    <section className="p-6 border border-[var(--border-line)] bg-[var(--bg-card)] backdrop-blur-md rounded-lg space-y-6 transition-all duration-300 relative overflow-hidden">
+      {/* 顶部极细爻线 */}
+      <div className="absolute top-0 left-0 right-0 yao-yin"></div>
+
+      <div className="flex flex-col md:flex-row md:items-center justify-between border-b border-[var(--border-line)] pb-4 gap-2">
+        <div>
+          <div className="inline-flex items-center gap-2 text-[10px] font-mono text-[var(--cinnabar)] uppercase tracking-widest mb-1">
+            <span>[ LEVEL 2 ]</span>
+            <span>•</span>
+            <span>{isEn ? 'DAILY GRAVITY WAVE PULSE' : isTW ? '今日重力波脈搏' : '今日重力波脉搏'}</span>
+          </div>
+          <h2 className="font-serif-title text-lg md:text-xl text-[var(--text-primary)] uppercase tracking-wide">
+            {isEn ? 'GRAVITY WAVE PULSE' : isTW ? '今日重力波脈搏' : '今日重力波脉搏'}
+          </h2>
+        </div>
+        <div className="text-xs font-mono text-[var(--text-muted)]">
+          {isEn ? 'PHASE: HIGH TENSION' : '当前相态：高压强折射'}
+        </div>
       </div>
 
-      {/* 核心阻力指数展示 */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center mb-6">
-        <div className="md:col-span-1 flex flex-col items-start justify-center p-4 bg-neutral-900/50 rounded-lg border border-neutral-800">
-          <span className="text-xs text-neutral-400 mb-1">{dict.frictionIndex}</span>
-          <div className="flex items-baseline space-x-2">
-            <span className="text-4xl font-light font-mono text-neutral-100">{resistanceScore}</span>
-            <span className="text-xs text-neutral-500">/ 100</span>
-          </div>
-          <span className={`text-[10px] mt-2 font-mono uppercase tracking-wider ${isHighResistance ? 'text-amber-400' : 'text-emerald-400'}`}>
-            {isHighResistance ? dict.resistanceHigh : dict.resistanceLow}
-          </span>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="p-4 border border-[var(--border-line)] bg-[var(--bg-card-hover)]/40 rounded-sm space-y-2">
+          <span className="text-[10px] font-mono text-[var(--text-muted)]">VECTOR-01</span>
+          <h3 className="text-sm font-medium text-[var(--text-primary)]">
+            {isEn ? 'Cognitive Friction' : '认知阻力指数'}
+          </h3>
+          <p className="text-xs text-[var(--text-secondary)] font-sans">
+            {isEn ? 'High mental load. Avoid impulsive decision making.' : '环境期望压强升高，建议降低决策频率，保持观察。'}
+          </p>
         </div>
 
-        {/* 场域避险指令与内稳态锚点 */}
-        <div className="md:col-span-2 space-y-4">
-          <div className="p-3 bg-neutral-900/30 border-l-2 border-amber-500/80 rounded-r-md">
-            <span className="text-xs text-amber-400 font-mono block mb-1">
-              • {dict.directiveLabel}
-            </span>
-            <p className="text-sm text-neutral-300 leading-relaxed font-sans">
-              {dict.directiveText}
-            </p>
-          </div>
+        <div className="p-4 border border-[var(--border-line)] bg-[var(--bg-card-hover)]/40 rounded-sm space-y-2">
+          <span className="text-[10px] font-mono text-[var(--text-muted)]">VECTOR-02</span>
+          <h3 className="text-sm font-medium text-[var(--text-primary)]">
+            {isEn ? 'Anchor Balance' : '锚定内稳态'}
+          </h3>
+          <p className="text-xs text-[var(--text-secondary)] font-sans">
+            {isEn ? 'Stable inner order. Ideal for strategic planning.' : '内部心理防线稳固，适合深层自省与长远布局。'}
+          </p>
+        </div>
 
-          <div className="p-3 bg-neutral-900/30 border-l-2 border-emerald-500/80 rounded-r-md">
-            <span className="text-xs text-emerald-400 font-mono block mb-1">
-              • {dict.anchorLabel}
-            </span>
-            <p className="text-sm text-neutral-300 leading-relaxed font-sans">
-              {dict.anchorText}
-            </p>
-          </div>
+        <div className="p-4 border border-[var(--border-line)] bg-[var(--bg-card-hover)]/40 rounded-sm space-y-2">
+          <span className="text-[10px] font-mono text-[var(--text-muted)]">VECTOR-03</span>
+          <h3 className="text-sm font-medium text-[var(--text-primary)]">
+            {isEn ? 'Boundary Tension' : '界限张力'}
+          </h3>
+          <p className="text-xs text-[var(--text-secondary)] font-sans">
+            {isEn ? 'Critical deficit in precision vector. Say No.' : '裁决因子偏弱，需警惕他人情感绑架，建立明确边界。'}
+          </p>
         </div>
       </div>
     </section>
