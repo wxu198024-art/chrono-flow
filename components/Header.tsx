@@ -6,21 +6,9 @@ import { useLanguage } from '@/app/layout';
 import { Locale } from '@/lib/dictionary';
 
 export default function Header() {
-  const { locale, setLocale, dict } = useLanguage();
-  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
+  const { locale, theme, toggleTheme, setLocale, dict } = useLanguage();
   const [isLangOpen, setIsLangOpen] = useState(false);
   const langDropdownRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const currentTheme = (document.documentElement.getAttribute('data-theme') as 'dark' | 'light') || 'dark';
-    setTheme(currentTheme);
-  }, []);
-
-  const toggleTheme = () => {
-    const nextTheme = theme === 'dark' ? 'light' : 'dark';
-    setTheme(nextTheme);
-    document.documentElement.setAttribute('data-theme', nextTheme);
-  };
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -52,7 +40,7 @@ export default function Header() {
         )}
       </Link>
 
-      {/* 2. 今日时空节律 (完全读取字典) */}
+      {/* 2. 今日时空节律 */}
       <div className="hidden md:flex items-center space-x-2 stems-matrix text-[11px]">
         <span>{dict.todayRhythm}</span>
       </div>
@@ -100,21 +88,21 @@ export default function Header() {
           {/* 下拉 Popover 菜单 */}
           {isLangOpen && (
             <div className="absolute right-0 mt-3 w-36 bg-[var(--bg-card)] border border-[var(--border-line)] backdrop-blur-xl shadow-2xl rounded-sm py-1.5 z-50">
-              {languages.map((lang) => (
+              {languages.map((langItem) => (
                 <button
-                  key={lang.code}
+                  key={langItem.code}
                   onClick={() => {
-                    setLocale(lang.code);
+                    setLocale(langItem.code);
                     setIsLangOpen(false);
                   }}
                   className={`w-full text-left px-4 py-2 text-[11px] tracking-wider transition-colors flex items-center justify-between ${
-                    locale === lang.code
+                    locale === langItem.code
                       ? 'text-[var(--text-primary)] bg-[var(--accent-glow)] font-medium'
                       : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--input-bg)]'
                   }`}
                 >
-                  <span>{lang.label}</span>
-                  {locale === lang.code && <span className="cinnabar-dot"></span>}
+                  <span>{langItem.label}</span>
+                  {locale === langItem.code && <span className="cinnabar-dot"></span>}
                 </button>
               ))}
             </div>
