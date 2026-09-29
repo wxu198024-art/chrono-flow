@@ -57,6 +57,29 @@ export default function BirthForm() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Spatiotemporal Parameters Submitted:', formData);
+
+    // 1. 构建生辰原点坐标对象
+    const originCoordinates = {
+      name: formData.name || (isEn ? 'Seeker' : '探索者'),
+      gender: formData.gender,
+      birthDate: formData.birthDate || '1995-11-03',
+      birthTime: formData.birthTime || '12:00',
+      location: formData.location || '',
+      timestamp: Date.now(),
+    };
+
+    // 2. 写入 localStorage 持久化锁定原点与游客状态
+    try {
+      localStorage.setItem('chrono_origin_coordinates', JSON.stringify(originCoordinates));
+      localStorage.setItem('chrono_has_tested', 'true');
+      if (!localStorage.getItem('chrono_user_role')) {
+        localStorage.setItem('chrono_user_role', 'guest');
+      }
+    } catch (err) {
+      console.error('Failed to save spatiotemporal coordinates to localStorage:', err);
+    }
+
+    // 3. 开启分析动画
     setIsAnalyzing(true);
   };
 
@@ -74,19 +97,17 @@ export default function BirthForm() {
       });
     }, 1400);
 
-    // 4.8 秒后平滑跳转
+    // 4.8 秒后平滑跳转至个人时空场域 /dashboard
     const jumpTimer = setTimeout(() => {
-      const targetScenario = isEn ? 'SCENARIO_A_EN' : 'SCENARIO_A_ZH';
-
       const query = new URLSearchParams({
         name: formData.name || 'Seeker',
         gender: formData.gender,
         date: formData.birthDate || '1995-11-03',
-        time: formData.birthTime || '21:15',
+        time: formData.birthTime || '12:00',
         location: formData.location || '',
       }).toString();
 
-      router.push(`/chart/${targetScenario}?${query}`);
+      router.push(`/dashboard?${query}`);
     }, 4800);
 
     return () => {
