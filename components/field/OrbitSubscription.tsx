@@ -3,7 +3,13 @@
 import React from 'react';
 import { useLanguage } from '@/app/layout';
 
-export default function OrbitSubscription() {
+// 1. 添加 Props 接口声明
+interface OrbitSubscriptionProps {
+  userRole?: 'guest' | 'member' | string;
+}
+
+// 2. 在组件参数中接收 userRole
+export default function OrbitSubscription({ userRole }: OrbitSubscriptionProps) {
   const { dict, lang } = useLanguage?.() || { dict: {}, lang: 'zh' };
 
   const currentLang = (lang as string) || 'zh';
@@ -45,7 +51,7 @@ export default function OrbitSubscription() {
           ))}
         </div>
 
-        {/* 居中卡片化遮罩，紧凑优雅 */}
+        {/* 居中卡片化遮罩 */}
         <div className="absolute inset-0 flex items-center justify-center bg-[var(--bg-card)]/80 backdrop-blur-sm p-4">
           <div className="max-w-md w-full border border-[var(--border-line-hover)] bg-[var(--bg-card)] p-5 rounded text-center space-y-3 shadow-lg">
             <h3 className="font-serif-title text-sm md:text-base text-[var(--text-primary)]">
