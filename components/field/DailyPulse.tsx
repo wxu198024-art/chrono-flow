@@ -2,13 +2,30 @@
 
 import React from 'react';
 import { Locale, dictionaries } from '@/lib/dictionary';
+import { useLanguage } from '@/app/layout';
 
 interface DailyPulseProps {
   lang?: Locale;
 }
 
-export default function DailyPulse({ lang = 'zh-CN' }: DailyPulseProps) {
-  const dict = dictionaries[lang]?.chronoField?.dailyPulse || dictionaries['zh-CN'].chronoField.dailyPulse;
+export default function DailyPulse({ lang }: DailyPulseProps) {
+  // 优先使用传入的 lang，若无则读取 layout 中的 useLanguage，最后降级至 'zh-CN'
+  const contextLang = useLanguage?.()?.lang as Locale;
+  const currentLang = lang || contextLang || 'zh-CN';
+
+  const dict =
+    dictionaries[currentLang]?.chronoField?.dailyPulse ||
+    dictionaries['zh-CN']?.chronoField?.dailyPulse ||
+    {
+      tag: '今日动态脉搏',
+      frictionIndex: '阻力指数',
+      resistanceHigh: '高阻力场',
+      resistanceLow: '低阻力场',
+      directiveLabel: '场域避险指令',
+      directiveText: '收敛扩张欲望，避免重大决策摩擦。',
+      anchorLabel: '内稳态锚点',
+      anchorText: '保持观察者姿态，充沛内部能量。',
+    };
 
   // 阻力指数模拟（可后续对接真实算法）
   const resistanceScore = 38; 
