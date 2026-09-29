@@ -55,6 +55,54 @@ export const dictionaries = {
     card3Title: 'Relational Resonance',
     card3SubTitle: 'Relational Sync',
     card3Desc: 'Dual system alignment and relational friction mapping.',
+
+    // ----------------------------------------------------
+    // 【时空场域模块】The Chrono-Field Dashboard Academic Dictionary
+    // ----------------------------------------------------
+    chronoField: {
+      title: 'THE CHRONO-FIELD',
+      subtitle: 'Spatiotemporal State & Homeostatic Dashboard',
+      
+      header: {
+        fieldStatus: 'Field Status',
+        statusCalibrated: 'CALIBRATED',
+        statusDistorted: 'IMPEDED',
+        calibrateAction: 'Calibrate Field',
+        modeForm: 'FORM MODE',
+        modeVoid: 'VOID MODE',
+      },
+
+      dailyPulse: {
+        tag: 'DAILY GRAVITATIONAL PULSE',
+        title: 'Gravitational Wave & Frequency Alignment',
+        frictionIndex: 'Field Resistance Index',
+        resistanceLow: 'LOW RESISTANCE / FLOW STATE',
+        resistanceHigh: 'HIGH RESISTANCE / DIVERGENCE',
+        directiveLabel: 'Field Evasion Directive',
+        directiveText: 'High ambient noise detected. Defer major structural decisions until nightfall.',
+        anchorLabel: 'Homeostatic Anchor',
+        anchorText: 'Maintain internal stillness; avoid reactive friction.',
+      },
+
+      fourPillars: {
+        tag: 'SPATIOTEMPORAL COORDINATES',
+        title: 'Four-Pillar Structural Homeostasis',
+        yearPillar: 'Year Pillar',
+        monthPillar: 'Month Pillar',
+        dayPillar: 'Day Pillar',
+        hourPillar: 'Hour Pillar',
+        homeostasisFactor: 'Homeostasis Factor',
+        vectorBalance: 'Vector Balance Analysis',
+      },
+
+      annualOrbit: {
+        tag: 'MACRO TRAJECTORY',
+        title: '52-Week Gravitational Trace & Natural Alignment',
+        currentOrbit: 'Current Orbit Phase',
+        alignmentRate: 'Natural Alignment Rate',
+        orbitNotice: 'Trajectory map updated based on annual rotational vector.',
+      }
+    },
     
     // Legal Pages (Terms & Privacy)
     termsTitle: 'Terms of Service',
@@ -147,6 +195,54 @@ export const dictionaries = {
     card3Title: '双方共振',
     card3SubTitle: '',
     card3Desc: '双人时空共振与摩擦点图谱。',
+
+    // ----------------------------------------------------
+    // 【时空场域模块】Chrono-Field Dashboard 学术字典
+    // ----------------------------------------------------
+    chronoField: {
+      title: '个人时空场域',
+      subtitle: '时空状态与内稳态解析控制台',
+      
+      header: {
+        fieldStatus: '场域状态',
+        statusCalibrated: '已校准',
+        statusDistorted: '偏折中',
+        calibrateAction: '场域重校准',
+        modeForm: '实态模式',
+        modeVoid: '虚态模式',
+      },
+
+      dailyPulse: {
+        tag: '今日重力波脉搏',
+        title: '重力波与实时频率校准',
+        frictionIndex: '场域环境阻力指数',
+        resistanceLow: '低阻力 / 顺流状态',
+        resistanceHigh: '高阻力 / 干涉对抗',
+        directiveLabel: '场域避险指令',
+        directiveText: '检测到外界环境噪音较高。建议在日落前延缓重大结构性决策。',
+        anchorLabel: '内稳态锚点',
+        anchorText: '保持内在沉静，避免无谓的反应式内耗。',
+      },
+
+      fourPillars: {
+        tag: '时空存在结构',
+        title: '四柱结构与系统内稳态',
+        yearPillar: '年柱 Vector',
+        monthPillar: '月柱 Vector',
+        dayPillar: '日柱 Vector',
+        hourPillar: '时柱 Vector',
+        homeostasisFactor: '内稳态因子',
+        vectorBalance: '矢量平衡度解析',
+      },
+
+      annualOrbit: {
+        tag: '宏观轨道痕迹',
+        title: '52周重力痕迹与自然周期对齐',
+        currentOrbit: '当前轨道相位',
+        alignmentRate: '自然对齐率',
+        orbitNotice: '轨迹图谱已根据年度自转矢量完成实时映射。',
+      }
+    },
     
     // Legal Pages (Terms & Privacy)
     termsTitle: '服务条款',
@@ -239,6 +335,54 @@ export const dictionaries = {
     card3Title: '雙方共振',
     card3SubTitle: '',
     card3Desc: '雙人時空共振與摩擦點圖譜。',
+
+    // ----------------------------------------------------
+    // 【時空場域模組】Chrono-Field Dashboard 學術字典
+    // ----------------------------------------------------
+    chronoField: {
+      title: '個人時空場域',
+      subtitle: '時空狀態與內穩態解析控制台',
+      
+      header: {
+        fieldStatus: '場域狀態',
+        statusCalibrated: '已校準',
+        statusDistorted: '偏折中',
+        calibrateAction: '場域重校準',
+        modeForm: '實態模式',
+        modeVoid: '虛態模式',
+      },
+
+      dailyPulse: {
+        tag: '今日重力波脈搏',
+        title: '重力波與實時頻率校準',
+        frictionIndex: '場域環境阻力指數',
+        resistanceLow: '低阻力 / 順流狀態',
+        resistanceHigh: '高阻力 / 干涉對抗',
+        directiveLabel: '場域避險指令',
+        directiveText: '檢測到外界環境噪音較高。建議在日落前延緩重大結構性決策。',
+        anchorLabel: '內穩態錨點',
+        anchorText: '保持內在沉靜，避免無謂的反應式內耗。',
+      },
+
+      fourPillars: {
+        tag: '時空存在結構',
+        title: '四柱結構與系統內穩態',
+        yearPillar: '年柱 Vector',
+        monthPillar: '月柱 Vector',
+        dayPillar: '日柱 Vector',
+        hourPillar: '時柱 Vector',
+        homeostasisFactor: '內穩態因子',
+        vectorBalance: '矢量平衡度解析',
+      },
+
+      annualOrbit: {
+        tag: '宏觀軌道痕跡',
+        title: '52週重力痕跡與自然週期對齊',
+        currentOrbit: '當前軌道相位',
+        alignmentRate: '自然對齊率',
+        orbitNotice: '軌跡圖譜已根據年度自轉矢量完成實時映射。',
+      }
+    },
     
     // Legal Pages (Terms & Privacy)
     termsTitle: '服務條款',
