@@ -7,11 +7,13 @@ import Header from '@/components/Header';
 import InkBackground from '@/components/InkBackground';
 import { Locale, dictionaries } from '@/lib/dictionary';
 
-// 1. 创建全局语言 Context (补齐 lang 别名属性)
+// 1. 全局 Context 接口定义 (包含 Locale 与 Theme 虚实状态)
 interface LanguageContextType {
   locale: Locale;
   lang: 'en' | 'zh';
+  theme: 'dark' | 'light';
   setLocale: (locale: Locale) => void;
+  toggleTheme: () => void;
   dict: typeof dictionaries['en'];
 }
 
@@ -27,13 +29,16 @@ export function useLanguage() {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>('en');
+  const [theme, setThemeState] = useState<'dark' | 'light'>('dark');
 
-  // 读取本地存储的语言偏好
+  // 读取本地存储的语言与主题偏好
   useEffect(() => {
     const savedLocale = localStorage.getItem('chrono_locale') as Locale;
     if (savedLocale && ['en', 'zh-CN', 'zh-TW'].includes(savedLocale)) {
       setLocaleState(savedLocale);
     }
+    const currentTheme = (document.documentElement.getAttribute('data-theme') as 'dark' | 'light') || 'dark';
+    setThemeState(currentTheme);
   }, []);
 
   const setLocale = (newLocale: Locale) => {
@@ -41,12 +46,17 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     localStorage.setItem('chrono_locale', newLocale);
   };
 
-  const dict = dictionaries[locale];
-  // 计算出简化的 lang 别名，供后续逻辑精确识别 en / zh
+  const toggleTheme = () => {
+    const nextTheme = theme === 'dark' ? 'light' : 'dark';
+    setThemeState(nextTheme);
+    document.documentElement.setAttribute('data-theme', nextTheme);
+  };
+
+  const dict = dictionaries[locale] || dictionaries['en'];
   const lang: 'en' | 'zh' = locale === 'en' ? 'en' : 'zh';
 
   return (
-    <html lang={locale} data-theme="dark">
+    <html lang={locale} data-theme={theme}>
       <head>
         <title>CHRONO–FLOW | Space, Time & The Unseen Self</title>
         <meta
@@ -55,11 +65,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         />
       </head>
       <body className="min-h-screen flex flex-col justify-between selection:bg-[var(--cinnabar)] selection:text-white relative bg-[var(--bg-primary)] text-[var(--text-primary)] transition-colors duration-300">
-        <LanguageContext.Provider value={{ locale, lang, setLocale, dict }}>
-          {/* 全局 Canvas 动态背景 (1px 几何爻线 + 向心漩涡水墨) */}
+        <LanguageContext.Provider value={{ locale, lang, theme, setLocale, toggleTheme, dict }}>
+          {/* 全局 Canvas 动态背景 */}
           <InkBackground />
 
-          {/* 顶部统一 Header (包含 Void/Form 阴阳切换与 EN / 繁 / 简 多语言 Popover) */}
+          {/* 顶部统一 Header */}
           <Header />
 
           {/* 页面主内容区域 */}
@@ -71,7 +81,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <footer className="border-t border-[var(--border-line)] py-8 text-center text-[10px] text-[var(--text-muted)] uppercase tracking-widest bg-[var(--bg-card)] backdrop-blur-md relative z-10 transition-colors duration-300">
             <div className="max-w-md mx-auto mb-6 yao-yang opacity-40"></div>
 
-            {/* 概念与合规导航入口 */}
             <div className="flex justify-center items-center space-x-6 mb-6 text-[var(--text-secondary)] text-[11px]">
               <Link href="/dictionary" className="hover:text-[var(--text-primary)] transition-colors">
                 {dict.dictionary}
