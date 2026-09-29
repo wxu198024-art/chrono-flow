@@ -23,12 +23,11 @@ export default function FieldHeader() {
   const chronoDict = dict?.chronoField?.header || {
     fieldStatus: isEn ? 'FIELD STATUS' : isTW ? '場域狀態' : '场域状态',
     statusCalibrated: isEn ? 'CALIBRATED' : isTW ? '已校準' : '已校准',
-    recalibrateAction: isEn ? 'RE-CALIBRATE' : isTW ? '重校準坐標' : '重校准坐标',
+    calibrateAction: isEn ? 'RE-CALIBRATE' : isTW ? '重校準坐標' : '重校准坐标',
   };
 
   const [origin, setOrigin] = useState<OriginCoordinates | null>(null);
 
-  // 1. 从 localStorage 动态读取真实的生辰原点数据
   useEffect(() => {
     try {
       const stored = localStorage.getItem('chrono_origin_coordinates');
@@ -40,19 +39,19 @@ export default function FieldHeader() {
     }
   }, []);
 
-  // 2. 重新校准：平滑跳转回首页
   const handleRecalibrate = () => {
     router.push('/');
   };
 
-  // 格式化展示日期与时间
   const displayDate = origin?.birthDate ? origin.birthDate.replace(/-/g, '.') : '1995.11.03';
   const displayTime = origin?.birthTime || '12:00';
   const displayName = origin?.name || (isEn ? 'SEEKER' : '探索者');
 
+  // 使用 (chronoDict as any).calibrateAction || (chronoDict as any).recalibrateAction 确保兼容
+  const actionText = (chronoDict as any).calibrateAction || (chronoDict as any).recalibrateAction || (isEn ? 'RE-CALIBRATE' : '重校准坐标');
+
   return (
     <section className="p-6 border border-[var(--border-line)] bg-[var(--bg-card)] backdrop-blur-md rounded-lg flex flex-col md:flex-row justify-between items-start md:items-center gap-4 transition-all duration-300 relative overflow-hidden">
-      {/* 顶部极细爻线装饰 */}
       <div className="absolute top-0 left-0 right-0 yao-yang"></div>
 
       <div>
@@ -74,7 +73,6 @@ export default function FieldHeader() {
         </p>
       </div>
 
-      {/* 右侧：动态生辰原点坐标与重校准操作 */}
       <div className="flex flex-col md:items-end gap-2">
         <div className="text-xs text-[var(--text-secondary)] border-l-2 md:border-l-0 md:border-r-2 border-[var(--cinnabar)] pl-3 md:pl-0 md:pr-3 space-y-1 md:text-right">
           <p className="text-[10px] uppercase tracking-wider text-[var(--text-muted)] font-mono">
@@ -90,7 +88,7 @@ export default function FieldHeader() {
           onClick={handleRecalibrate}
           className="text-[10px] font-mono text-[var(--text-muted)] hover:text-[var(--cinnabar)] transition-colors uppercase tracking-widest underline underline-offset-4 self-start md:self-end mt-1"
         >
-          &gt; {chronoDict.recalibrateAction}
+          &gt; {actionText}
         </button>
       </div>
     </section>
