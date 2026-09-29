@@ -75,7 +75,6 @@ export default function PillarsStructure() {
   ];
 
   // Level 5: 五维动态均衡因子 (The Five Dynamic Equilibrium Factors)
-  // 彻底剔除五行词汇，换用科学化张力代码与力学因子名称
   const factorsData = [
     {
       name: isEn ? 'Expansion' : isTW ? '蔓延因子' : '蔓延因子',
@@ -131,7 +130,7 @@ export default function PillarsStructure() {
             <div className="inline-flex items-center gap-2 text-[10px] font-mono text-[var(--cinnabar)] uppercase tracking-widest mb-1">
               <span>[ LEVEL 4 ]</span>
               <span>•</span>
-              <span>THE FOUR PILLARS OF EXISTENCE</span>
+              <span>{isEn ? 'THE FOUR PILLARS OF EXISTENCE' : isTW ? '四柱存在結構' : '四柱存在结构'}</span>
             </div>
             <h2 className="font-serif-title text-lg md:text-xl text-[var(--text-primary)] uppercase tracking-wide">
               {isEn ? 'THE FOUR PILLARS OF EXISTENCE' : isTW ? '四柱存在結構' : '四柱存在结构'}
@@ -184,7 +183,7 @@ export default function PillarsStructure() {
             <div className="inline-flex items-center gap-2 text-[10px] font-mono text-[var(--cinnabar)] uppercase tracking-widest mb-1">
               <span>[ LEVEL 5 ]</span>
               <span>•</span>
-              <span>THE FIVE DYNAMIC EQUILIBRIUM FACTORS</span>
+              <span>{isEn ? 'THE FIVE DYNAMIC EQUILIBRIUM FACTORS' : isTW ? '五維動態均衡因子' : '五维动态均衡因子'}</span>
             </div>
             <h2 className="font-serif-title text-lg md:text-xl text-[var(--text-primary)] uppercase tracking-wide">
               {isEn ? 'THE FIVE DYNAMIC EQUILIBRIUM FACTORS' : isTW ? '五維動態均衡因子' : '五维动态均衡因子'}
