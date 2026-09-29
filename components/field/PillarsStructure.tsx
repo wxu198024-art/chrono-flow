@@ -1,14 +1,231 @@
 'use client';
 
+import React, { useEffect, useState } from 'react';
+import { useLanguage } from '@/app/layout';
+
+interface OriginCoordinates {
+  name?: string;
+  gender?: string;
+  birthDate?: string;
+  birthTime?: string;
+}
+
 export default function PillarsStructure() {
+  const { dict, lang } = useLanguage?.() || { dict: {}, lang: 'zh' };
+
+  const currentLang = (lang as string) || 'zh';
+  const isEn = currentLang === 'en';
+  const isTW = currentLang === 'zh-TW' || currentLang === 'zh-HK' || currentLang === 'tw';
+
+  const [origin, setOrigin] = useState<OriginCoordinates | null>(null);
+
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem('chrono_origin_coordinates');
+      if (stored) {
+        setOrigin(JSON.parse(stored));
+      }
+    } catch (e) {
+      console.error('Failed to parse chrono origin coordinates:', e);
+    }
+  }, []);
+
+  // Level 4: 四柱存在结构 (The Four Pillars of Existence)
+  const pillarsData = [
+    {
+      code: 'L4-1',
+      title: isEn ? 'The Origin Pillar' : isTW ? '原點之柱' : '原点之柱',
+      sub: isEn ? 'TIMELINE ORIGIN' : '时空印记 / 原生重力',
+      stem: '壬申',
+      tag: isEn ? 'Adaptation / Water' : '潜流因子 (水)',
+      desc: isEn
+        ? 'Defines early homeostatic environment & innate gravity.'
+        : '定义个体降落时自带的底层防御机制与原生环境重力。',
+    },
+    {
+      code: 'L4-2',
+      title: isEn ? 'The Social Mask' : isTW ? '社會投影之柱' : '社会投影之柱',
+      sub: isEn ? 'EXTERNAL ARMOR' : '社会假面 / 期望压强',
+      stem: '丁未',
+      tag: isEn ? 'Visibility / Fire' : '显化因子 (火)',
+      desc: isEn
+        ? 'Defines social expectations, protective mask & tension.'
+        : '定义社会期望施加的外在面具，展现给世界的精密防御。',
+    },
+    {
+      code: 'L4-3',
+      title: isEn ? 'The Core Ego' : isTW ? '內核原點之柱' : '内核原点之柱',
+      sub: isEn ? 'SOVEREIGN IDENTITY' : '主权自我 / 真实内核',
+      stem: '戊子',
+      tag: isEn ? 'Anchoring / Earth' : '锚定因子 (土)',
+      desc: isEn
+        ? 'The true self-regulating observer under quiet moments.'
+        : '卸下重力与假面后的主权自我，静夜中的真实觉知。',
+    },
+    {
+      code: 'L4-4',
+      title: isEn ? 'The Hidden Horizon' : isTW ? '潛匿地平線之柱' : '潜匿地平线之柱',
+      sub: isEn ? 'FUTURE INTENTION' : '潜意识归宿 / 终极张力',
+      stem: '己未',
+      tag: isEn ? 'Expansion / Wood' : '蔓延因子 (木)',
+      desc: isEn
+        ? 'Unconscious drives, deep desires & late-life trajectory.'
+        : '未被言说的潜在野心与晚期轨迹演化的归宿。',
+    },
+  ];
+
+  // Level 5: 五维动态均衡因子 (The Five Dynamic Equilibrium Factors)
+  const factorsData = [
+    {
+      name: isEn ? 'Expansion' : isTW ? '蔓延因子' : '蔓延因子',
+      element: isEn ? 'Wood' : '木',
+      value: 85,
+      status: isEn ? 'OVERLOAD' : '极度强盛',
+      color: 'bg-[var(--cinnabar)]',
+      desc: isEn ? 'High initiative, risk of lack of focus.' : '野心与拓展欲极强，但容易贪多求全、缺乏收尾斩断力。',
+    },
+    {
+      name: isEn ? 'Visibility' : isTW ? '顯化因子' : '显化因子',
+      element: isEn ? 'Fire' : '火',
+      value: 45,
+      status: isEn ? 'BALANCED' : '内稳态',
+      color: 'bg-amber-500',
+      desc: isEn ? 'Moderate emotional expression & presence.' : '表达与外露适度，具备良好的环境共振能力。',
+    },
+    {
+      name: isEn ? 'Anchoring' : isTW ? '錨定因子' : '锚定因子',
+      element: isEn ? 'Earth' : '土',
+      value: 60,
+      status: isEn ? 'STABLE' : '稳固',
+      color: 'bg-emerald-500',
+      desc: isEn ? 'Provides psychological safety & focus.' : '内心秩序锚定尚可，不易完全被外部混乱带偏。',
+    },
+    {
+      name: isEn ? 'Precision' : isTW ? '裁決因子' : '裁决因子',
+      element: isEn ? 'Metal' : '金',
+      value: 15,
+      status: isEn ? 'CRITICAL DEFICIT' : '极度匮乏',
+      color: 'bg-rose-500',
+      desc: isEn ? 'Difficulty saying No, indecisiveness.' : '不敢冷酷割舍，容易妥协与拖延决断，缺乏冷酷界限。',
+    },
+    {
+      name: isEn ? 'Adaptation' : isTW ? '潛流因子' : '潜流因子',
+      element: isEn ? 'Water' : '水',
+      value: 30,
+      status: isEn ? 'LOW' : '偏低',
+      color: 'bg-sky-500',
+      desc: isEn ? 'Suppressed emotions, hard to empathize.' : '情感自我封闭，沟通偶尔生硬，防御机制偏强。',
+    },
+  ];
+
   return (
-    <section className="p-6 rounded-2xl bg-[#161920] border border-[#262b36]">
-      <h2 className="text-lg font-light text-[#f8fafc] mb-2">
-        The Four Pillars & Equilibrium Factors / 四柱存在结构与五行均衡因子
-      </h2>
-      <p className="text-sm text-[#94a3b8]">
-        Archetype lexicon loading... / 存在结构与均衡因子解析中...
-      </p>
+    <section className="p-6 border border-[var(--border-line)] bg-[var(--bg-card)] backdrop-blur-md rounded-lg space-y-8 transition-all duration-300 relative overflow-hidden">
+      {/* 顶部极细爻线 */}
+      <div className="absolute top-0 left-0 right-0 yao-yang"></div>
+
+      {/* 1. LEVEL 4: 四柱存在结构 Header & Cards */}
+      <div className="space-y-6">
+        <div className="flex flex-col md:flex-row md:items-center justify-between border-b border-[var(--border-line)] pb-4 gap-2">
+          <div>
+            <div className="inline-flex items-center gap-2 text-[10px] font-mono text-[var(--cinnabar)] uppercase tracking-widest mb-1">
+              <span>[ LEVEL 4 ]</span>
+              <span>•</span>
+              <span>THE FOUR PILLARS OF EXISTENCE</span>
+            </div>
+            <h2 className="font-serif-title text-lg md:text-xl text-[var(--text-primary)] uppercase tracking-wide">
+              {isEn ? 'THE FOUR PILLARS OF EXISTENCE' : isTW ? '四柱存在結構' : '四柱存在结构'}
+            </h2>
+          </div>
+          <p className="text-xs text-[var(--text-muted)] font-mono">
+            {isEn ? 'ARCHETYPE MATRIX CALIBRATED' : '四座时空骨架与底层防御机制'}
+          </p>
+        </div>
+
+        {/* 4 柱卡片网格 */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {pillarsData.map((item, idx) => (
+            <div
+              key={idx}
+              className="p-4 border border-[var(--border-line)] bg-[var(--bg-card-hover)]/50 rounded-sm space-y-3 hover:border-[var(--border-line-hover)] transition-all duration-300 group"
+            >
+              <div className="flex items-center justify-between text-[10px] font-mono text-[var(--text-muted)]">
+                <span>{item.code}</span>
+                <span className="text-[var(--cinnabar)] group-hover:translate-x-0.5 transition-transform">
+                  [{item.stem}]
+                </span>
+              </div>
+
+              <div>
+                <h3 className="font-serif-title text-sm text-[var(--text-primary)] font-medium">
+                  {item.title}
+                </h3>
+                <p className="text-[10px] font-mono text-[var(--text-muted)] uppercase tracking-wider">
+                  {item.sub}
+                </p>
+              </div>
+
+              <div className="text-[10px] font-mono px-2 py-0.5 rounded border border-[var(--border-line)] bg-[var(--bg-card)] text-[var(--text-secondary)] inline-block">
+                {item.tag}
+              </div>
+
+              <p className="text-xs text-[var(--text-secondary)] leading-relaxed font-sans pt-1">
+                {item.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* 2. LEVEL 5: 五维动态均衡因子 Header & Progress Bars */}
+      <div className="space-y-6 pt-4 border-t border-[var(--border-line)]">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
+          <div>
+            <div className="inline-flex items-center gap-2 text-[10px] font-mono text-[var(--cinnabar)] uppercase tracking-widest mb-1">
+              <span>[ LEVEL 5 ]</span>
+              <span>•</span>
+              <span>THE FIVE DYNAMIC EQUILIBRIUM FACTORS</span>
+            </div>
+            <h2 className="font-serif-title text-lg md:text-xl text-[var(--text-primary)] uppercase tracking-wide">
+              {isEn ? 'THE FIVE DYNAMIC EQUILIBRIUM FACTORS' : isTW ? '五維動態均衡因子' : '五维动态均衡因子'}
+            </h2>
+          </div>
+          <div className="text-[10px] font-mono text-[var(--text-muted)]">
+            {isEn ? 'CRITICAL DEFICIT: PRECISION (15%)' : '诊断提示：裁决因子极度匮乏 (15%)'}
+          </div>
+        </div>
+
+        {/* 5 因子能量占比条 */}
+        <div className="space-y-4">
+          {factorsData.map((factor, idx) => (
+            <div key={idx} className="space-y-1.5 p-3 rounded-sm border border-[var(--border-line)]/50 bg-[var(--bg-card-hover)]/30">
+              <div className="flex items-center justify-between text-xs font-mono">
+                <span className="text-[var(--text-primary)] font-medium flex items-center gap-2">
+                  <span>{factor.name}</span>
+                  <span className="text-[10px] text-[var(--text-muted)]">({factor.element})</span>
+                </span>
+                <div className="flex items-center gap-3">
+                  <span className={`text-[9px] px-1.5 py-0.2 rounded font-mono ${factor.value <= 15 ? 'text-rose-400 border border-rose-500/30 bg-rose-500/10' : 'text-[var(--text-muted)]'}`}>
+                    {factor.status}
+                  </span>
+                  <span className="text-[var(--text-primary)] font-bold">{factor.value}%</span>
+                </div>
+              </div>
+
+              {/* 能量条背景与填充 */}
+              <div className="w-full h-1.5 bg-[var(--border-line)]/60 rounded-full overflow-hidden">
+                <div
+                  className={`h-full transition-all duration-1000 ease-out ${factor.color}`}
+                  style={{ width: `${factor.value}%` }}
+                />
+              </div>
+
+              <p className="text-[11px] text-[var(--text-secondary)] font-sans pt-0.5">
+                {factor.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }
