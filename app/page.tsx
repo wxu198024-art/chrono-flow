@@ -6,7 +6,7 @@ import BirthForm from '@/components/BirthForm';
 import { useLanguage } from '@/context/LanguageContext';
 
 export default function HomePage() {
-  const { dict, lang } = useLanguage?.() || { dict: {}, lang: 'zh' };
+  const { dict, lang } = useLanguage?.() || { dict: {}as Record<string, any>, lang: 'zh' };
 
   const currentLang = (lang as string) || 'zh';
   const isEn = currentLang === 'en';
