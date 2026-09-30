@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useLanguage } from '@/app/layout';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface PillarsStructureProps {
   userRole: 'guest' | 'registered' | 'subscribed';
@@ -10,8 +10,8 @@ interface PillarsStructureProps {
 }
 
 export default function PillarsStructure({ userRole, onTriggerRegister, onTriggerSubscribe }: PillarsStructureProps) {
-  const { lang } = useLanguage?.() || { lang: 'zh' };
-  const currentLang = (lang as string) || 'zh';
+  const { locale } = useLanguage?.() || { locale: 'zh-CN' };
+  const currentLang = (locale as string) || 'zh-CN';
   const isEn = currentLang === 'en';
   const isTW = currentLang === 'zh-TW' || currentLang === 'zh-HK' || currentLang === 'tw';
 
@@ -153,7 +153,7 @@ export default function PillarsStructure({ userRole, onTriggerRegister, onTrigge
         <div className="p-6 rounded border border-[var(--border-line)] bg-[var(--bg-card)] relative overflow-hidden space-y-6">
           <div className={`space-y-6 transition-all ${!isEquilibriumUnlocked ? 'filter blur-md select-none opacity-20' : ''}`}>
             
-            {/* 5 个维度重力因子占比：顶端仅保留序号 [01]~[05]，消除任何名称重复 */}
+            {/* 5 个维度重力因子占比 */}
             <div className="grid grid-cols-1 md:grid-cols-5 gap-4 font-mono text-xs">
               <div className="p-3 bg-[var(--bg-card-hover)] rounded border border-[var(--border-line)]">
                 <div className="text-[var(--text-muted)] text-[10px]">[01]</div>
@@ -230,7 +230,7 @@ export default function PillarsStructure({ userRole, onTriggerRegister, onTrigge
             </div>
           </div>
 
-          {/* 未注册锁定遮罩（仅游客显示，通过全局传递的 isEquilibriumUnlocked 控制） */}
+          {/* 未注册锁定遮罩 */}
           {!isEquilibriumUnlocked && (
             <div className="absolute inset-0 bg-[var(--bg-card)]/90 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center space-y-3 z-20">
               <span className="px-2.5 py-1 rounded bg-amber-500/10 border border-amber-500/30 text-amber-400 font-mono text-[10px]">
