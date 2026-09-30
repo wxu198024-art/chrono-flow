@@ -11,7 +11,7 @@ interface OriginCoordinates {
 }
 
 interface FieldHeaderProps {
-  userRole?: 'guest' | 'member' | string;
+  userRole?: 'guest' | 'free' | 'subscribed' | string;
   onReCalibrate?: () => void;
 }
 
@@ -39,12 +39,12 @@ export default function FieldHeader({ userRole = 'guest', onReCalibrate }: Field
   const displayDate = origin?.birthDate || '1995-08-18';
   const displayTime = origin?.birthTime || '14:30';
 
-  // 根据用户角色定义重新校准的权限/提示
+  const isGuest = userRole === 'guest';
+
   const handleRecalibrateClick = () => {
     if (onReCalibrate) {
       onReCalibrate();
     } else {
-      // 默认清除坐标并触发重填或提示
       if (confirm(isEn ? 'Recalibrate origin coordinates?' : '是否重新输入并校准您的时空原点坐标？')) {
         localStorage.removeItem('chrono_origin_coordinates');
         window.location.reload();
@@ -59,8 +59,15 @@ export default function FieldHeader({ userRole = 'guest', onReCalibrate }: Field
 
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <div className="text-[10px] font-mono text-[var(--cinnabar)] uppercase tracking-widest mb-1">
-            {isEn ? 'CHRONO COORDINATES' : isTW ? '時空坐標' : '时空坐标'}
+          <div className="flex items-center gap-2 mb-1">
+            <span className="text-[10px] font-mono text-[var(--cinnabar)] uppercase tracking-widest">
+              {isEn ? 'CHRONO COORDINATES' : isTW ? '時空坐標' : '时空坐标'}
+            </span>
+            <span className="text-[9px] font-mono px-1.5 py-0.2 rounded border border-[var(--border-line)] bg-[var(--bg-card-hover)] text-[var(--text-muted)]">
+              {isGuest 
+                ? (isEn ? 'STATIC ANCHOR' : '静态原点') 
+                : (isEn ? 'DOJO ANCHORED' : '已沉淀至道场')}
+            </span>
           </div>
           <h1 className="font-serif-title text-xl md:text-2xl text-[var(--text-primary)] font-semibold tracking-wide">
             {displayName}
@@ -77,11 +84,10 @@ export default function FieldHeader({ userRole = 'guest', onReCalibrate }: Field
             <span className="text-[var(--text-primary)]">{displayTime}</span>
           </div>
 
-          {/* 重新校准/重置按钮 */}
           <button
             onClick={handleRecalibrateClick}
             className="px-3 py-1.5 rounded border border-[var(--border-line-hover)] bg-[var(--bg-primary)] hover:border-[var(--cinnabar)] hover:text-[var(--cinnabar)] text-[var(--text-secondary)] transition-all duration-200 text-xs font-mono flex items-center gap-1 cursor-pointer"
-            title={userRole === 'guest' ? '访客用户支持重新输入' : '正式用户校准'}
+            title={isGuest ? '游客用户可重新输入' : '重新校准时空坐标'}
           >
             <span>{isEn ? 'RECALIBRATE' : isTW ? '重新校準' : '重新校准'}</span>
           </button>
