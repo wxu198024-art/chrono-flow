@@ -14,10 +14,12 @@ export function normalizeLocale(lang: string): Locale {
   return 'zh-CN';
 }
 
+// 扩展接口：向下兼容旧组件依赖的 lang 属性以及任意字典 Key 访问
 interface LanguageContextType {
   locale: Locale;
+  lang: string; // 向下兼容旧组件的 lang 判断
   setLocale: (locale: Locale) => void;
-  dict: Record<string, any>;
+  dict: Record<string, any>; // 允许任意动态属性访问，消除 TS2339 报错
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
@@ -54,8 +56,11 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     loadDictionary(normalized);
   };
 
+  // 实时推导旧组件需要的 lang 简写（'en', 'zh', 等）
+  const lang = locale.startsWith('en') ? 'en' : locale.startsWith('ja') ? 'ja' : 'zh';
+
   return (
-    <LanguageContext.Provider value={{ locale, setLocale, dict }}>
+    <LanguageContext.Provider value={{ locale, lang, setLocale, dict }}>
       {children}
     </LanguageContext.Provider>
   );
