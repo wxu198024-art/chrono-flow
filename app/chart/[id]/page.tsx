@@ -7,7 +7,7 @@ import { MOCK_REPORTS } from '@/lib/mockData';
 import PaywallOverlay from '@/components/PaywallOverlay';
 import PillarsUnlocked from '@/components/PillarsUnlocked';
 import SubscriptionCard from '@/components/SubscriptionCard';
-import { useLanguage } from '@/app/layout';
+import { useLanguage } from '@/context/LanguageContext';
 import { isLevelUnlocked } from '@/lib/lexicon';
 
 export default function ChartResultPage() {
