@@ -1,4 +1,4 @@
-export type Locale = 'en' | 'zh-CN' | 'zh-TW';
+export type Locale = 'en' | 'ja' | 'zh-CN' | 'zh-TW';
 
 export const dictionaries = {
   'en': {
@@ -139,6 +139,146 @@ export const dictionaries = {
     terms: 'Terms of Service',
     privacy: 'Privacy Policy',
     copyright: '© 2026 CHRONO–FLOW. SPACE, TIME & THE UNSEEN SELF.',
+  },
+
+  'ja': {
+    brand: 'CHRONO–FLOW',
+    subtitle: '時空と未顕の己',
+    
+    // Header Rhythm & Clock
+    todayRhythm: '2026年9月26日 • 丙午年 丁酉月',
+    
+    // Theme Switch
+    themeLight: '実',
+    themeDark: '虚',
+
+    // Section 1: Daily Rhythm Card
+    dailyRhythmTag: '本日の時空バイオリズム',
+    dailyRhythmQuote: '「 静寂こそが、本日のエネルギーアンカーである。」',
+    dailyRhythmDetail: '本日の方針：蓄積と静観 / 禁忌：軽率な行動',
+    dailyRhythmSubQuote: '「 水のエネルギーが支配的です。絶え間ない動きを進展と混同しないでください。」',
+
+    // Section 2: Spatiotemporal Coordinates Title
+    spatiotemporalTitle: '生年月日時空パラメータの入力',
+    spatiotemporalNotice: '出生パラメータを入力すると、真太陽時に基づいて四柱エネルギー構造が自動的に変換されます。',
+
+    // Form Section Title & Notice
+    formTitle: '出生情報の入力',
+    formNotice: '真太阳時に基づき、データを四柱エネルギー構造図へ自動変換します。',
+    
+    // Form Inputs
+    identifierLabel: '氏名',
+    identifierPlaceholder: '例：斉淵 / Orion',
+    
+    polarityLabel: '性別',
+    polarityMale: '男性',
+    polarityFemale: '女性',
+    
+    birthDateLabel: '生年月日',
+    birthTimeLabel: '出生時刻',
+    
+    locationLabel: '出生地',
+    locationPlaceholder: '例：東京',
+    locationHint: '真太陽時偏角校正',
+    
+    submitButton: '時空場域の周波数アライメントを開始',
+
+    // Bottom Three Feature Cards
+    card1Title: '性格原型',
+    card1SubTitle: '原型解析',
+    card1Desc: '四柱エネルギー構造と体内恒常性因子の解析。',
+    
+    card2Title: '周期進化',
+    card2SubTitle: 'パターン推移',
+    card2Desc: '10年単位のマクロトレンドと年間環境抵抗係数。',
+    
+    card3Title: '相互共振',
+    card3SubTitle: '関係性同期',
+    card3Desc: '二者間の時空共振と摩擦点マッピング。',
+
+    // ----------------------------------------------------
+    // 【时空场域模块】The Chrono-Field Dashboard Academic Dictionary
+    // ----------------------------------------------------
+    chronoField: {
+      title: '個人時空場域',
+      subtitle: '時空状態とホームオスタシス解析コンソール',
+      
+      header: {
+        fieldStatus: '場域ステータス',
+        statusCalibrated: '校正完了',
+        statusDistorted: '偏折中',
+        calibrateAction: '場域再校正',
+        modeForm: '実態モード',
+        modeVoid: '虚態モード',
+      },
+
+      dailyPulse: {
+        tag: '本日の重力波パルス',
+        title: '重力波とリアルタイム周波数調整',
+        frictionIndex: '場域環境抵抗指数',
+        resistanceLow: '低抵抗 / フロー状態',
+        resistanceHigh: '高抵抗 / 干渉対立',
+        directiveLabel: '場域回避指令',
+        directiveText: '外部環境ノイズを検知しました。日没まで重大な構造的意思決定を延期してください。',
+        anchorLabel: 'ホームオスタシス・アンカー',
+        anchorText: '内なる静寂を保ち、無用な反応的内耗を避けてください。',
+      },
+
+      fourPillars: {
+        tag: '時空存在構造',
+        title: '四柱構造とシステム内恒常性',
+        yearPillar: '年柱 Vector',
+        monthPillar: '月柱 Vector',
+        dayPillar: '日柱 Vector',
+        hourPillar: '時柱 Vector',
+        homeostasisFactor: '恒常性因子',
+        vectorBalance: 'ベクトルバランス解析',
+      },
+
+      annualOrbit: {
+        tag: 'マクロ軌道痕跡',
+        title: '52週間重力軌跡と自然周期のアライメント',
+        currentOrbit: '現在の軌道フェーズ',
+        alignmentRate: '自然同調率',
+        orbitNotice: '軌跡マップは年間自転ベクトルに基づきリアルタイム更新されています。',
+      }
+    },
+    
+    // Legal Pages (Terms & Privacy)
+    termsTitle: '利用規約',
+    privacyTitle: 'プライバシーポリシー',
+    
+    termsContent: [
+      {
+        section: '1. 非医療・非心理カウンセリングに関する案内',
+        body: 'CHRONO–FLOW は、独自のマトリクス演算モデル ChronoEngine™ と非線形エネルギー場マッピングアルゴリズムに基づき、原型および場域の共振解析を提供します。提示されるインサイトは、個人の内省、哲学的な探求、およびエネルギー調整を目的としたものであり、専門的な心理カウンセリング、医療診断、または財務助言を構成するものではありません。'
+      },
+      {
+        section: '2. 認定販売代理店 (Merchant of Record)',
+        body: '当サービスの決済手続きは、オンライン販売代理店である Paddle.com によって処理されます。Paddle.com はすべての注文における Merchant of Record（公式販売元）であり、カスタマーサポートおよび返金対応を行います。'
+      },
+      {
+        section: '3. 知的財産権およびセキュリティ',
+        body: 'CHRONO–FLOW 内で生成されるすべてのエネルギーマトリクスレポート、視覚的デザイン、幾何学シンボル、および独自演算コードは、国際知的財産法によって保護されています。ユーザーには、時空共振結果を閲覧および共有するための個人用非独占的ライセンスが受与されます。'
+      }
+    ],
+
+    privacyContent: [
+      {
+        section: '1. 収集する情報',
+        body: '真太陽時座標の計算、四柱エネルギーマトリクスの構築、およびパーソナライズされた共振レポートの生成のみを目的として、生年月日、出生時刻、性別、および任意で出生地情報を収集します。お客様の個人の時空メタデータを販売または収益化することは一切ありません。'
+      },
+      {
+        section: '2. ChronoEngine™ ノードによる演算処理',
+        body: '計算された生年月日時空パラメータは、暗号化されて分離された ChronoEngine™ 演算ノードへ安全に送信され、エネルギーマトリクスのアライメントとレポート作成を実行します。プライマリサーバーに政府発行の身分証明書、財務情報、または機密性の高的個人データが保存されることはありません。'
+      }
+    ],
+
+    // Footer Navigation
+    dictionary: '概念辞典',
+    terms: '利用規約',
+    privacy: 'プライバシーポリシー',
+    copyright: '© 2026 CHRONO–FLOW. 時空と未顕の己.',
   },
 
   'zh-CN': {
