@@ -1,57 +1,62 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import FieldHeader from '@/components/field/FieldHeader';
 import DailyPulse from '@/components/field/DailyPulse';
 import PillarsStructure from '@/components/field/PillarsStructure';
 import OrbitSubscription from '@/components/field/OrbitSubscription';
 
 export default function DashboardPage() {
-  const router = useRouter();
-  const [isReady, setIsReady] = useState(false);
-  const [userRole, setUserRole] = useState<'guest' | 'member'>('guest');
+  const [userRole, setUserRole] = useState<'guest' | 'free' | 'subscribed'>('guest');
+  const [subPlan, setSubPlan] = useState<'none' | 'monthly' | 'quarterly' | 'annual'>('none');
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     try {
-      const hasTested = localStorage.getItem('chrono_has_tested');
-      const role = (localStorage.getItem('chrono_user_role') as 'guest' | 'member') || 'guest';
-
-      // 若未建立生辰原点，重定向回首页
-      if (hasTested !== 'true') {
-        router.replace('/');
-        return;
+      // 1. 读取用户角色
+      const storedRole = localStorage.getItem('chrono_user_role') as 'guest' | 'free' | 'subscribed' | null;
+      if (storedRole) {
+        setUserRole(storedRole);
+      } else {
+        // 默认游客态
+        setUserRole('guest');
       }
 
-      setUserRole(role);
-      setIsReady(true);
+      // 2. 读取订阅方案
+      const storedPlan = localStorage.getItem('chrono_sub_plan') as 'none' | 'monthly' | 'quarterly' | 'annual' | null;
+      if (storedPlan) {
+        setSubPlan(storedPlan);
+      }
     } catch (e) {
-      console.error('Failed to read spatiotemporal origin:', e);
-      setIsReady(true);
+      console.error('Failed to parse user role/plan:', e);
+    } finally {
+      setIsLoading(false);
     }
-  }, [router]);
+  }, []);
 
-  if (!isReady) {
+  if (isLoading) {
     return (
-      <div className="min-h-screen bg-[#0d0f12] text-[#e2e8f0] flex items-center justify-center font-mono text-xs tracking-widest">
-        <span className="animate-pulse">LOADING SPATIOTEMPORAL FIELD...</span>
+      <div className="min-h-screen bg-transparent flex items-center justify-center text-xs font-mono text-[var(--text-muted)]">
+        CALIBRATING GRAVITY FIELD...
       </div>
     );
   }
 
   return (
-    <main className="min-h-screen bg-[#0d0f12] text-[#e2e8f0] px-4 py-8 md:px-12 max-w-7xl mx-auto space-y-8 animate-fade-in">
-      {/* 1. 时空原点锚点区 */}
-      <FieldHeader />
+    <main className="min-h-screen bg-transparent text-[var(--text-primary)] transition-colors duration-300">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+        {/* 顶部时空坐标头栏 */}
+        <FieldHeader userRole={userRole} />
 
-      {/* 2. 今日动态脉搏 */}
-      <DailyPulse />
+        {/* 今日重力波脉搏 */}
+        <DailyPulse userRole={userRole} />
 
-      {/* 3. 四柱存在结构 */}
-      <PillarsStructure />
+        {/* 四柱存在结构与五维因子 */}
+        <PillarsStructure userRole={userRole} />
 
-      {/* 4. 52周重力痕迹与解锁订阅 */}
-      <OrbitSubscription userRole={userRole} />
+        {/* 52周重力痕迹与订阅对齐 */}
+        <OrbitSubscription userRole={userRole} subPlan={subPlan} />
+      </div>
     </main>
   );
 }
