@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useLanguage } from '@/app/layout';
+import { useLanguage } from '@/context/LanguageContext';
 import FieldHeader from '@/components/field/FieldHeader';
 import DailyPulse from '@/components/field/DailyPulse';
 import PillarsStructure from '@/components/field/PillarsStructure';
