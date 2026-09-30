@@ -13,19 +13,19 @@ export function normalizeLocale(lang: string): Locale {
   return 'zh-CN';
 }
 
-// 优化：为 dict 显式声明 [key: string]: any，允许任意属性安全访问
 interface LanguageContextType {
   locale: Locale;
   lang: string;
   setLocale: (locale: Locale) => void;
-  dict: Record<string, any> & { [key: string]: any }; 
+  dict: Record<string, any>;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>('zh-CN');
-  const [dict, setDict] = useState<Record<string, any>>({});
+  // 关键修复：显式断言为 Record<string, any>，防止被推断为字面量空对象 {}
+  const [dict, setDict] = useState<Record<string, any>>({} as Record<string, any>);
 
   const loadDictionary = async (targetLocale: Locale) => {
     try {
