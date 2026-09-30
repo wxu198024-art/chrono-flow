@@ -6,12 +6,10 @@ import { useLanguage } from '@/context/LanguageContext';
 
 export default function BirthForm() {
   const router = useRouter();
-  // 修改 components/BirthForm.tsx 第 9-11 行：
-export default function BirthForm() {
-  const router = useRouter();
   const { dict, lang } = useLanguage();
 
-  // ... 后续代码完全保持不变
+  // 1. 原始表单状态
+  // ... 后续代码不变
 
   // 1. 原始表单状态
   const [formData, setFormData] = useState({
