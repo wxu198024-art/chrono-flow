@@ -28,17 +28,17 @@ export default function DashboardPage() {
   });
 
   useEffect(() => {
-    // 优先从本地缓存读取主页用户输入的真实原点数据
+    // 从本地缓存读取主页用户输入的真实原点数据
     const storedName = localStorage.getItem('user_origin_name') || sessionStorage.getItem('user_origin_name') || '';
     const storedDate = localStorage.getItem('user_origin_date') || sessionStorage.getItem('user_origin_date') || '';
     const storedTime = localStorage.getItem('user_origin_time') || sessionStorage.getItem('user_origin_time') || '';
 
     setUserData({
-      name: storedName || (isEn ? 'Unbound Origin' : '未绑定原点'),
+      name: storedName || (isEn ? 'Unbound Origin' : isTW ? '未綁定原點' : '未绑定原点'),
       birthDate: storedDate || '--',
       birthTime: storedTime || '--',
     });
-  }, [isEn]);
+  }, [isEn, isTW]);
 
   // 4. 注册/登录弹窗控制
   const [showAuthModal, setShowAuthModal] = useState(false);
@@ -69,7 +69,7 @@ export default function DashboardPage() {
           <div className="flex items-center gap-2.5">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
             <span className="text-[var(--text-muted)] uppercase tracking-wider">
-              {isEn ? 'ORIGIN ANCHOR:' : '场域原点依据:'}
+              {isEn ? 'ORIGIN ANCHOR:' : isTW ? '場域原點依據:' : '场域原点依据:'}
             </span>
             <div className="flex items-center gap-2 bg-[var(--bg-card-hover)] px-3 py-1 rounded border border-[var(--border-line)]">
               <span className="text-[var(--text-primary)] font-bold">
@@ -82,39 +82,39 @@ export default function DashboardPage() {
             </div>
           </div>
 
-          {/* 右侧：状态指示与快捷调试面板 */}
+          {/* 右侧：状态指示与快捷调试面板（修正语言翻译） */}
           <div className="flex items-center gap-3">
             <div className="text-[10px] font-mono px-2 py-0.5 rounded border border-[var(--border-line)] bg-[var(--bg-card)]">
               {userState === 'guest' && (
-                <span className="text-amber-400">{isEn ? 'GUEST FIELD' : '游客场域'}</span>
+                <span className="text-amber-400">{isEn ? 'GUEST FIELD' : isTW ? '遊客場域' : '游客场域'}</span>
               )}
               {userState === 'registered' && (
-                <span className="text-blue-400">{isEn ? 'REGISTERED ANCHOR' : '已注册原点'}</span>
+                <span className="text-blue-400">{isEn ? 'REGISTERED ANCHOR' : isTW ? '已註冊原點' : '已注册原点'}</span>
               )}
               {userState === 'subscribed' && (
-                <span className="text-emerald-400">{isEn ? 'FULL ORBIT UNLOCKED' : '已解锁 52 周全景'}</span>
+                <span className="text-emerald-400">{isEn ? 'FULL ORBIT UNLOCKED' : isTW ? '已解鎖 52 週全景' : '已解锁 52 周全景'}</span>
               )}
             </div>
 
-            {/* 测试切换状态 */}
+            {/* 测试切换状态按键（修正语言翻译） */}
             <div className="flex items-center gap-1 bg-[var(--bg-card-hover)] p-1 rounded border border-[var(--border-line)] text-[10px]">
               <button
                 onClick={() => setUserState('guest')}
                 className={`px-2 py-0.5 rounded ${userState === 'guest' ? 'bg-[var(--cinnabar)] text-white' : 'text-[var(--text-muted)]'}`}
               >
-                游客
+                {isEn ? 'Guest' : isTW ? '遊客' : '游客'}
               </button>
               <button
                 onClick={() => setUserState('registered')}
                 className={`px-2 py-0.5 rounded ${userState === 'registered' ? 'bg-[var(--text-primary)] text-[var(--bg-card)]' : 'text-[var(--text-muted)]'}`}
               >
-                已注册
+                {isEn ? 'Registered' : isTW ? '已註冊' : '已注册'}
               </button>
               <button
                 onClick={() => setUserState('subscribed')}
                 className={`px-2 py-0.5 rounded ${userState === 'subscribed' ? 'bg-amber-500 text-black font-bold' : 'text-[var(--text-muted)]'}`}
               >
-                付费解锁
+                {isEn ? 'Unlocked' : isTW ? '付費解鎖' : '付费解锁'}
               </button>
             </div>
           </div>
@@ -150,7 +150,7 @@ export default function DashboardPage() {
           </div>
 
           <div className="text-[11px] font-mono text-[var(--text-muted)]">
-            {isEn ? `CURRENT FIELD: ${userData.name}` : `当前场域归属：${userData.name}`}
+            {isEn ? `CURRENT FIELD: ${userData.name}` : isTW ? `當前場域歸屬：${userData.name}` : `当前场域归属：${userData.name}`}
           </div>
         </div>
 
@@ -177,15 +177,21 @@ export default function DashboardPage() {
                       {isEn ? 'ORBITAL TEMPORAL SUBSCRIPTION' : isTW ? '軌道時空訂閱' : '轨道时空订阅'}
                     </h2>
                     <p className="text-xs text-[var(--text-muted)] font-mono mt-0.5">
-                      {isEn ? 'UNLOCK CONTINUOUS FIELD TRAJECTORY & RESISTANCE UNPACKING' : '解锁 52 周连续场域重力轨迹与周度阻力解包'}
+                      {isEn
+                        ? 'UNLOCK 52-WEEK CONTINUOUS FIELD TRAJECTORY & RESISTANCE UNPACKING'
+                        : isTW
+                        ? '解鎖 52 週連續場域重力軌跡與週度阻力解包'
+                        : '解锁 52 周连续场域重力轨迹与周度阻力解包'}
                     </p>
                   </div>
                   <div className="text-[10px] font-mono px-2.5 py-1 rounded border border-[var(--border-line)] bg-[var(--bg-card-hover)] text-[var(--text-secondary)]">
-                    {userState === 'registered' ? '原点已绑定 · 选方案解锁' : '游客状态 · 订阅后自动绑定'}
+                    {userState === 'registered'
+                      ? isEn ? 'Origin Anchored · Select Plan' : isTW ? '原點已綁定 · 選方案解鎖' : '原点已绑定 · 选方案解锁'
+                      : isEn ? 'Guest Mode · Auto-bind on Sub' : isTW ? '遊客狀態 · 訂閱後自動綁定' : '游客状态 · 订阅后自动绑定'}
                   </div>
                 </div>
 
-                {/* 月 / 季 / 年 三组方案卡片 */}
+                {/* 月 / 季 / 年 三组方案卡片（全量英文适配） */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
                   
                   {/* 月度方案 */}
@@ -199,18 +205,26 @@ export default function DashboardPage() {
                   >
                     <div className="flex justify-between items-center">
                       <span className="text-xs font-mono text-[var(--text-muted)] uppercase">
-                        {isEn ? 'MONTHLY' : '月度轨道'}
+                        {isEn ? 'MONTHLY ORBIT' : isTW ? '月度軌道' : '月度轨道'}
                       </span>
                       {selectedPlan === 'month' && (
                         <span className="w-2 h-2 rounded-full bg-[var(--cinnabar)]"></span>
                       )}
                     </div>
                     <div>
-                      <span className="text-2xl font-serif-title font-bold text-[var(--text-primary)]">￥19</span>
-                      <span className="text-xs font-mono text-[var(--text-muted)]"> / 月</span>
+                      <span className="text-2xl font-serif-title font-bold text-[var(--text-primary)]">
+                        {isEn ? '$3.00' : '￥19'}
+                      </span>
+                      <span className="text-xs font-mono text-[var(--text-muted)]">
+                        {isEn ? ' / month' : isTW ? ' / 月' : ' / 月'}
+                      </span>
                     </div>
                     <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
-                      适合短期场域重力波动探测，解锁未来 4 周阻力诊断。
+                      {isEn
+                        ? 'Ideal for short-term field friction detection; unlocks the next 4 weeks of resistance diagnosis.'
+                        : isTW
+                        ? '適合短期場域重力波動探測，解鎖未來 4 週阻力診斷。'
+                        : '适合短期场域重力波动探测，解锁未来 4 周阻力诊断。'}
                     </p>
                   </div>
 
@@ -225,21 +239,29 @@ export default function DashboardPage() {
                   >
                     <div className="flex justify-between items-center">
                       <span className="text-xs font-mono text-[var(--text-muted)] uppercase">
-                        {isEn ? 'QUARTERLY' : '季度轨道'}
+                        {isEn ? 'QUARTERLY ORBIT' : isTW ? '季度軌道' : '季度轨道'}
                       </span>
                       {selectedPlan === 'quarter' && (
                         <span className="w-2 h-2 rounded-full bg-[var(--cinnabar)]"></span>
                       )}
                     </div>
                     <div>
-                      <span className="text-2xl font-serif-title font-bold text-[var(--text-primary)]">￥48</span>
-                      <span className="text-xs font-mono text-[var(--text-muted)]"> / 季</span>
+                      <span className="text-2xl font-serif-title font-bold text-[var(--text-primary)]">
+                        {isEn ? '$7.50' : '￥48'}
+                      </span>
+                      <span className="text-xs font-mono text-[var(--text-muted)]">
+                        {isEn ? ' / quarter' : isTW ? ' / 季' : ' / 季'}
+                      </span>
                       <span className="ml-2 text-[10px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-1.5 py-0.5 rounded">
-                        省 15%
+                        {isEn ? 'SAVE 15%' : isTW ? '省 15%' : '省 15%'}
                       </span>
                     </div>
                     <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
-                      季度内稳态调谐，包含 12 周阻力解包与中枢复盘。
+                      {isEn
+                        ? 'Quarterly homeostatic alignment, including 12 weeks of unpacking and control review.'
+                        : isTW
+                        ? '季度內穩態調諧，包含 12 週阻力解包與中樞複盤。'
+                        : '季度内稳态调谐，包含 12 周阻力解包与中枢复盘。'}
                     </p>
                   </div>
 
@@ -253,25 +275,33 @@ export default function DashboardPage() {
                     }`}
                   >
                     <div className="absolute -top-2.5 right-3 bg-[var(--cinnabar)] text-white text-[9px] font-mono px-2 py-0.5 rounded uppercase">
-                      推荐方案
+                      {isEn ? 'RECOMMENDED' : isTW ? '推薦方案' : '推荐方案'}
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-xs font-mono text-[var(--cinnabar)] font-bold uppercase">
-                        {isEn ? 'ANNUAL FULL ORBIT' : '年度全景轨道'}
+                        {isEn ? 'ANNUAL FULL ORBIT' : isTW ? '年度全景軌道' : '年度全景轨道'}
                       </span>
                       {selectedPlan === 'year' && (
                         <span className="w-2 h-2 rounded-full bg-[var(--cinnabar)]"></span>
                       )}
                     </div>
                     <div>
-                      <span className="text-2xl font-serif-title font-bold text-[var(--text-primary)]">￥198</span>
-                      <span className="text-xs font-mono text-[var(--text-muted)]"> / 年</span>
+                      <span className="text-2xl font-serif-title font-bold text-[var(--text-primary)]">
+                        {isEn ? '$29.00' : '￥198'}
+                      </span>
+                      <span className="text-xs font-mono text-[var(--text-muted)]">
+                        {isEn ? ' / year' : isTW ? ' / 年' : ' / 年'}
+                      </span>
                       <span className="ml-2 text-[10px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-1.5 py-0.5 rounded">
-                        省 15%
+                        {isEn ? 'BEST VALUE' : isTW ? '省 15%' : '省 15%'}
                       </span>
                     </div>
                     <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
-                      完整 52 周重力轨迹与黑历史归档，提供终极裁决指引。
+                      {isEn
+                        ? 'Full 52-week trajectory with complete historical logs and decisive guidance.'
+                        : isTW
+                        ? '完整 52 週重力軌跡與黑歷史歸檔，提供終極裁決指引。'
+                        : '完整 52 周重力轨迹与黑历史归档，提供终极裁决指引。'}
                     </p>
                   </div>
 
@@ -280,28 +310,36 @@ export default function DashboardPage() {
                 {/* 解锁行动按钮 */}
                 <div className="pt-4 border-t border-[var(--border-line)] flex flex-col sm:flex-row items-center justify-between gap-4">
                   <div className="text-xs font-mono text-[var(--text-muted)]">
-                    当前选择：{selectedPlan === 'month' ? '月度订阅 (￥19)' : selectedPlan === 'quarter' ? '季度订阅 (￥48)' : '年度全景订阅 (￥198)'}
+                    {isEn
+                      ? `Selected: ${selectedPlan === 'month' ? 'Monthly ($3.00)' : selectedPlan === 'quarter' ? 'Quarterly ($7.50)' : 'Annual ($29.00)'}`
+                      : isTW
+                      ? `當前選擇：${selectedPlan === 'month' ? '月度訂閱 (￥19)' : selectedPlan === 'quarter' ? '季度訂閱 (￥48)' : '年度全景訂閱 (￥198)'}`
+                      : `当前选择：${selectedPlan === 'month' ? '月度订阅 (￥19)' : selectedPlan === 'quarter' ? '季度订阅 (￥48)' : '年度全景订阅 (￥198)'}`}
                   </div>
 
                   <button
                     onClick={handlePaySuccess}
                     className="w-full sm:w-auto px-8 py-2.5 bg-[var(--cinnabar)] text-white text-xs font-mono font-bold rounded shadow hover:opacity-90 transition-all uppercase tracking-wider"
                   >
-                    {isEn ? 'CONFIRM & UNLOCK ORBIT' : '立即支付解锁场域轨道'}
+                    {isEn ? 'UNLOCK ORBIT NOW' : isTW ? '立即支付解鎖場域軌道' : '立即支付解锁场域轨道'}
                   </button>
                 </div>
               </section>
             ) : (
-              /* 付费完成后出现的“完事”全景视图模块 */
+              /* 付费完成后出现的全景视图模块 */
               <section className="p-8 border border-emerald-500/30 bg-emerald-500/5 rounded-lg space-y-4 text-center">
                 <div className="inline-block p-3 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs">
                   ✓ TEMPORAL ALIGNMENT ACTIVE
                 </div>
                 <h3 className="font-serif-title text-xl text-[var(--text-primary)]">
-                  {isEn ? 'FULL FIELD MATRIX UNLOCKED' : '场域重力轨迹已全量解锁'}
+                  {isEn ? 'FULL FIELD MATRIX UNLOCKED' : isTW ? '場域重力軌跡已全量解鎖' : '场域重力轨迹已全量解锁'}
                 </h3>
                 <p className="text-xs text-[var(--text-secondary)] max-w-xl mx-auto leading-relaxed">
-                  您的原点档案（{userData.name} / {userData.birthDate}）与场域已建立映射。订阅周期内所有每周阻力解包与历史存档已同步至【时空中枢】。
+                  {isEn
+                    ? `Your origin profile (${userData.name} / ${userData.birthDate}) is mapped to the field. All weekly resistance analyses and archives are synced.`
+                    : isTW
+                    ? `您的原點檔案（${userData.name} / ${userData.birthDate}）與場域已建立映射。訂閱週期內所有每週阻力解包與歷史存檔已同步。`
+                    : `您的原点档案（${userData.name} / ${userData.birthDate}）与场域已建立映射。订阅周期内所有每周阻力解包与历史存档已同步。`}
                 </p>
               </section>
             )}
@@ -326,10 +364,10 @@ export default function DashboardPage() {
             <div className="flex items-center justify-between border-b border-[var(--border-line)] pb-3">
               <div>
                 <h3 className="font-serif-title text-base text-[var(--text-primary)]">
-                  {isEn ? 'REGISTER ORIGIN ANCHOR' : '保存场域原点档案'}
+                  {isEn ? 'REGISTER ORIGIN ANCHOR' : isTW ? '保存場域原點檔案' : '保存场域原点档案'}
                 </h3>
                 <p className="text-[10px] font-mono text-[var(--text-muted)] mt-0.5">
-                  绑定原点：{userData.name} ({userData.birthDate} {userData.birthTime})
+                  {isEn ? 'Anchor:' : '绑定原点：'} {userData.name} ({userData.birthDate} {userData.birthTime})
                 </p>
               </div>
               <button
@@ -343,7 +381,7 @@ export default function DashboardPage() {
             <form onSubmit={handleRegisterSuccess} className="space-y-4">
               <div>
                 <label className="block text-xs font-mono text-[var(--text-muted)] mb-1">
-                  {isEn ? 'Email / Account' : '通信邮箱 / 账号'}
+                  {isEn ? 'Email / Account' : isTW ? '通信郵箱 / 賬號' : '通信邮箱 / 账号'}
                 </label>
                 <input
                   type="email"
@@ -357,7 +395,7 @@ export default function DashboardPage() {
 
               <div>
                 <label className="block text-xs font-mono text-[var(--text-muted)] mb-1">
-                  {isEn ? 'Origin Key (Password)' : '原点加密密钥 (密码)'}
+                  {isEn ? 'Origin Key (Password)' : isTW ? '原點加密密鑰 (密碼)' : '原点加密密钥 (密码)'}
                 </label>
                 <input
                   type="password"
@@ -370,14 +408,18 @@ export default function DashboardPage() {
               </div>
 
               <p className="text-[11px] text-[var(--text-muted)] font-sans leading-normal">
-                注册后将锁定该原点参数。订阅后可解锁 52 周周期溯源。
+                {isEn
+                  ? 'Registration locks your origin parameters. Subscribe to unlock 52-week trajectory tracking.'
+                  : isTW
+                  ? '註冊後將鎖定該原點參數。訂閱後可解鎖 52 週週期溯源。'
+                  : '注册后将锁定该原点参数。订阅后可解锁 52 周周期溯源。'}
               </p>
 
               <button
                 type="submit"
                 className="w-full py-2.5 bg-[var(--cinnabar)] text-white text-xs font-mono font-bold rounded hover:opacity-90 transition-all uppercase tracking-wider"
               >
-                {isEn ? 'CONFIRM & ANCHOR' : '确认注册并绑定原点'}
+                {isEn ? 'CONFIRM & ANCHOR' : isTW ? '確認註冊並綁定原點' : '确认注册并绑定原点'}
               </button>
             </form>
           </div>
