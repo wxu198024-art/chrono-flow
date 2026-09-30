@@ -2,12 +2,13 @@
 
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '@/app/layout';
+import FieldHeader from '@/components/field/FieldHeader';
 import DailyPulse from '@/components/field/DailyPulse';
 import PillarsStructure from '@/components/field/PillarsStructure';
 import ChronoControlCenter from '@/components/field/ChronoControlCenter';
 
 export default function DashboardPage() {
-  const { dict, lang } = useLanguage?.() || { dict: {}, lang: 'zh' };
+  const { lang } = useLanguage?.() || { lang: 'zh' };
 
   const currentLang = (lang as string) || 'zh';
   const isEn = currentLang === 'en';
@@ -20,7 +21,7 @@ export default function DashboardPage() {
   // 2. 选中的订阅周期：month(月) | quarter(季) | year(年)
   const [selectedPlan, setSelectedPlan] = useState<'month' | 'quarter' | 'year'>('year');
 
-  // 3. 读取主页输入的真实原点资料（绝不硬编码）
+  // 3. 读取主页输入的真实原点资料
   const [userData, setUserData] = useState({
     name: '',
     birthDate: '',
@@ -28,19 +29,29 @@ export default function DashboardPage() {
   });
 
   useEffect(() => {
-    // 从本地缓存读取主页用户输入的真实原点数据
-    const storedName = localStorage.getItem('user_origin_name') || sessionStorage.getItem('user_origin_name') || '';
-    const storedDate = localStorage.getItem('user_origin_date') || sessionStorage.getItem('user_origin_date') || '';
-    const storedTime = localStorage.getItem('user_origin_time') || sessionStorage.getItem('user_origin_time') || '';
+    try {
+      const stored = localStorage.getItem('chrono_origin_coordinates');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        setUserData({
+          name: parsed.name || (isEn ? 'Seeker' : '探索者'),
+          birthDate: parsed.birthDate || '--',
+          birthTime: parsed.birthTime || '--',
+        });
+        return;
+      }
+    } catch (e) {
+      console.error('Failed to parse origin data in Dashboard:', e);
+    }
 
     setUserData({
-      name: storedName || (isEn ? 'Unbound Origin' : isTW ? '未綁定原點' : '未绑定原点'),
-      birthDate: storedDate || '--',
-      birthTime: storedTime || '--',
+      name: isEn ? 'Unbound Origin' : isTW ? '未綁定原點' : '未绑定原点',
+      birthDate: '--',
+      birthTime: '--',
     });
   }, [isEn, isTW]);
 
-  // 4. 注册/登录弹窗控制
+  // 4. 注册 / 登录 Modal 弹窗控制
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [authEmail, setAuthEmail] = useState('');
   const [authPassword, setAuthPassword] = useState('');
@@ -55,71 +66,18 @@ export default function DashboardPage() {
 
   // 模拟付费逻辑
   const handlePaySuccess = () => {
-    setUserState('subscribed'); // 变为已订阅，订阅栏消失，显示完事页面
+    setUserState('subscribed'); // 变为已订阅，订阅栏消失，显示全量页面
   };
 
   return (
     <div className="min-h-screen bg-[var(--bg-main)] text-[var(--text-primary)] font-sans antialiased transition-colors duration-300 pb-20">
       
-      {/* 1. 顶部常驻区域：完全展现主页输入的真实原点资料 */}
-      <header className="sticky top-0 z-40 bg-[var(--bg-card)]/90 backdrop-blur-md border-b border-[var(--border-line)] px-4 py-3">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3 text-xs font-mono">
-          
-          {/* 左侧：常驻原点资料卡片 */}
-          <div className="flex items-center gap-2.5">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span className="text-[var(--text-muted)] uppercase tracking-wider">
-              {isEn ? 'ORIGIN ANCHOR:' : isTW ? '場域原點依據:' : '场域原点依据:'}
-            </span>
-            <div className="flex items-center gap-2 bg-[var(--bg-card-hover)] px-3 py-1 rounded border border-[var(--border-line)]">
-              <span className="text-[var(--text-primary)] font-bold">
-                {userData.name}
-              </span>
-              <span className="text-[var(--text-muted)]">|</span>
-              <span className="text-[var(--text-secondary)]">
-                {userData.birthDate} {userData.birthTime}
-              </span>
-            </div>
-          </div>
-
-          {/* 右侧：状态指示与快捷调试面板（修正语言翻译） */}
-          <div className="flex items-center gap-3">
-            <div className="text-[10px] font-mono px-2 py-0.5 rounded border border-[var(--border-line)] bg-[var(--bg-card)]">
-              {userState === 'guest' && (
-                <span className="text-amber-400">{isEn ? 'GUEST FIELD' : isTW ? '遊客場域' : '游客场域'}</span>
-              )}
-              {userState === 'registered' && (
-                <span className="text-blue-400">{isEn ? 'REGISTERED ANCHOR' : isTW ? '已註冊原點' : '已注册原点'}</span>
-              )}
-              {userState === 'subscribed' && (
-                <span className="text-emerald-400">{isEn ? 'FULL ORBIT UNLOCKED' : isTW ? '已解鎖 52 週全景' : '已解锁 52 周全景'}</span>
-              )}
-            </div>
-
-            {/* 测试切换状态按键（修正语言翻译） */}
-            <div className="flex items-center gap-1 bg-[var(--bg-card-hover)] p-1 rounded border border-[var(--border-line)] text-[10px]">
-              <button
-                onClick={() => setUserState('guest')}
-                className={`px-2 py-0.5 rounded ${userState === 'guest' ? 'bg-[var(--cinnabar)] text-white' : 'text-[var(--text-muted)]'}`}
-              >
-                {isEn ? 'Guest' : isTW ? '遊客' : '游客'}
-              </button>
-              <button
-                onClick={() => setUserState('registered')}
-                className={`px-2 py-0.5 rounded ${userState === 'registered' ? 'bg-[var(--text-primary)] text-[var(--bg-card)]' : 'text-[var(--text-muted)]'}`}
-              >
-                {isEn ? 'Registered' : isTW ? '已註冊' : '已注册'}
-              </button>
-              <button
-                onClick={() => setUserState('subscribed')}
-                className={`px-2 py-0.5 rounded ${userState === 'subscribed' ? 'bg-amber-500 text-black font-bold' : 'text-[var(--text-muted)]'}`}
-              >
-                {isEn ? 'Unlocked' : isTW ? '付費解鎖' : '付费解锁'}
-              </button>
-            </div>
-          </div>
-        </div>
-      </header>
+      {/* 1. 顶部常驻区域：场域原点依据与碰撞 HEADER */}
+      <FieldHeader
+        userRole={userState}
+        onRoleChange={(role) => setUserState(role)}
+        onTriggerRegister={() => setShowAuthModal(true)}
+      />
 
       {/* 2. 主场域内容区 */}
       <main className="max-w-6xl mx-auto px-4 pt-8 space-y-8">
@@ -150,25 +108,32 @@ export default function DashboardPage() {
           </div>
 
           <div className="text-[11px] font-mono text-[var(--text-muted)]">
-            {isEn ? `CURRENT FIELD: ${userData.name}` : isTW ? `當前場域歸屬：${userData.name}` : `当前场域归属：${userData.name}`}
+            {isEn ? `FIELD: ${userData.name}` : isTW ? `當前場域：${userData.name}` : `当前场域：${userData.name}`}
           </div>
         </div>
 
         {/* Tab A: 场域矩阵 */}
         {activeTab === 'field' && (
           <div className="space-y-8">
-            {/* 今日脉搏 */}
-            <DailyPulse userRole={userState} />
+            {/* 今日重力波脉搏 */}
+            <DailyPulse
+              userRole={userState}
+              onTriggerRegister={() => setShowAuthModal(true)}
+              onTriggerSubscribe={() => {
+                const el = document.getElementById('subscription-section');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }}
+            />
 
-            {/* 四柱与五维动态均衡（传入唤起注册弹窗） */}
+            {/* 四柱与五维动态均衡 */}
             <PillarsStructure 
               userRole={userState} 
               onTriggerRegister={() => setShowAuthModal(true)} 
             />
 
-            {/* 3. 时空订阅栏（三组：月 / 季 / 年），未付费时展示，付费后隐藏 */}
+            {/* 3. 时空订阅栏（月 / 季 / 年），未付费时展示，付费后隐藏 */}
             {userState !== 'subscribed' ? (
-              <section className="p-6 border border-[var(--border-line)] bg-[var(--bg-card)] backdrop-blur-md rounded-lg space-y-6 relative overflow-hidden">
+              <section id="subscription-section" className="p-6 border border-[var(--border-line)] bg-[var(--bg-card)] backdrop-blur-md rounded-lg space-y-6 relative overflow-hidden">
                 <div className="absolute top-0 left-0 right-0 yao-yang"></div>
 
                 <div className="flex flex-col md:flex-row md:items-center justify-between border-b border-[var(--border-line)] pb-4 gap-2">
@@ -191,10 +156,10 @@ export default function DashboardPage() {
                   </div>
                 </div>
 
-                {/* 月 / 季 / 年 三组方案卡片（全量英文适配） */}
+                {/* 月 / 季 / 年 卡片 */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
                   
-                  {/* 月度方案 */}
+                  {/* 月度 */}
                   <div 
                     onClick={() => setSelectedPlan('month')}
                     className={`p-5 rounded border transition-all cursor-pointer space-y-3 relative ${
@@ -228,7 +193,7 @@ export default function DashboardPage() {
                     </p>
                   </div>
 
-                  {/* 季度方案 */}
+                  {/* 季度 */}
                   <div 
                     onClick={() => setSelectedPlan('quarter')}
                     className={`p-5 rounded border transition-all cursor-pointer space-y-3 relative ${
@@ -265,7 +230,7 @@ export default function DashboardPage() {
                     </p>
                   </div>
 
-                  {/* 年度方案 */}
+                  {/* 年度 */}
                   <div 
                     onClick={() => setSelectedPlan('year')}
                     className={`p-5 rounded border transition-all cursor-pointer space-y-3 relative ${
