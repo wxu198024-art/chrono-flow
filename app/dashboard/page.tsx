@@ -77,12 +77,17 @@ export default function DashboardPage() {
 
   const isSubscribed = userState.startsWith('subscribed');
 
+  // 将扩充的 UserRoleState 归一化为组件期待的基础角色类型 ('guest' | 'registered' | 'subscribed')
+  const baseUserRole: 'guest' | 'registered' | 'subscribed' = isSubscribed
+    ? 'subscribed'
+    : (userState as 'guest' | 'registered');
+
   return (
     <div className="min-h-screen bg-[var(--bg-main)] text-[var(--text-primary)] font-sans antialiased transition-colors duration-300 pb-20">
       
       {/* 1. 顶部常驻区域：场域原点依据与碰撞 HEADER */}
       <FieldHeader
-        userRole={isSubscribed ? 'subscribed' : (userState as 'guest' | 'registered')}
+        userRole={baseUserRole}
         onRoleChange={(role) => setUserState(role as UserRoleState)}
         onTriggerRegister={() => setShowAuthModal(true)}
       />
@@ -135,7 +140,7 @@ export default function DashboardPage() {
           <div className="space-y-8">
             {/* 今日重力波脉搏 */}
             <DailyPulse
-              userRole={isSubscribed ? 'subscribed' : (userState as 'guest' | 'registered')}
+              userRole={baseUserRole}
               onTriggerRegister={() => setShowAuthModal(true)}
               onTriggerSubscribe={() => {
                 const el = document.getElementById('subscription-section');
@@ -143,9 +148,9 @@ export default function DashboardPage() {
               }}
             />
 
-            {/* 四柱与【者·局·域】五维动态均衡 */}
+            {/* 四柱与【者·局·域】五维动态均衡 - 传入经过归一化的 baseUserRole */}
             <PillarsStructure 
-              userRole={userState} 
+              userRole={baseUserRole} 
               onTriggerRegister={() => setShowAuthModal(true)} 
             />
 
@@ -336,7 +341,7 @@ export default function DashboardPage() {
         {activeTab === 'control' && (
           <ChronoControlCenter
             userEmail={authEmail || `${userData.name || 'user'}@field.io`}
-            userRole={isSubscribed ? 'subscribed' : (userState as 'guest' | 'registered')}
+            userRole={baseUserRole}
             subPlan={isSubscribed ? selectedPlan : 'none'}
           />
         )}
