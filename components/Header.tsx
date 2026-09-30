@@ -2,11 +2,12 @@
 
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
-import { useLanguage } from '@/app/layout';
-import { Locale } from '@/lib/dictionary';
+import { useTheme } from '@/context/ThemeContext';
+import { useLanguage, Locale } from '@/context/LanguageContext';
 
 export default function Header() {
-  const { locale, theme, toggleTheme, setLocale, dict } = useLanguage();
+  const { theme, toggleTheme } = useTheme();
+  const { locale, setLocale, dict } = useLanguage();
   const [isLangOpen, setIsLangOpen] = useState(false);
   const langDropdownRef = useRef<HTMLDivElement>(null);
 
@@ -20,7 +21,7 @@ export default function Header() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // 语言选项清单：按要求将 日本语 (ja) 放在 English (en) 的下方
+  // 语言选项清单
   const languages: { code: Locale; label: string }[] = [
     { code: 'en', label: 'English (EN)' },
     { code: 'ja', label: '日本語' },
@@ -34,7 +35,7 @@ export default function Header() {
       {/* 1. Logo 区域 */}
       <Link href="/" className="flex items-center space-x-3 font-serif-title font-bold text-sm text-[var(--text-primary)] hover:opacity-80 transition-opacity">
         <span className="cinnabar-dot"></span>
-        <span>{dict.brand}</span>
+        <span>{dict.brand || 'CHRONO–FLOW'}</span>
         {dict.subtitle && (
           <span className="text-[var(--text-muted)] font-normal text-[11px] hidden sm:inline">
             / {dict.subtitle}
@@ -44,13 +45,13 @@ export default function Header() {
 
       {/* 2. 今日时空节律 */}
       <div className="hidden md:flex items-center space-x-2 stems-matrix text-[11px]">
-        <span>{dict.todayRhythm}</span>
+        <span>{dict.todayRhythm || 'Temporal Rhythm'}</span>
       </div>
 
-      {/* 3. 右侧控制区：虚/实 场域切换 + LOCALE 语言切换 */}
+      {/* 3. 右侧控制区：主题切换 + LOCALE 语言切换 */}
       <div className="flex items-center space-x-6 text-[var(--text-secondary)]">
         
-        {/* 【虚 / 实】场域切换按钮 */}
+        {/* 主题切换按钮（青黑 / 暖沙） */}
         <button
           onClick={toggleTheme}
           className="flex items-center space-x-2 hover:text-[var(--text-primary)] transition-colors text-[11px] font-medium"
@@ -61,7 +62,7 @@ export default function Header() {
           }`}>
             {theme === 'dark' && <span className="w-1.5 h-1.5 rounded-full bg-[var(--cinnabar)]"></span>}
           </span>
-          <span>{theme === 'dark' ? dict.themeDark : dict.themeLight}</span>
+          <span>{theme === 'dark' ? (dict.themeDark || '青黑') : (dict.themeLight || '暖沙')}</span>
         </button>
 
         <span className="text-[var(--border-line)]">•</span>
