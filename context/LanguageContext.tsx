@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { Locale, Dictionary } from '@/types/i18n';
+import zhCN from '@/locales/zh-CN.json';
 
 export { type Locale };
 
@@ -21,49 +22,20 @@ interface LanguageContextType {
   dict: Dictionary;
 }
 
-// 核心：创建防崩溃 Proxy，当读取的 Key 不存在时，返回既是数组又是对象的空值，防止 .map() 或属性读取崩溃
-function createSafeDictionary(rawDict: Record<string, any> = {}): Dictionary {
-  return new Proxy(rawDict, {
-    get(target, prop: string | symbol) {
-      if (typeof prop === 'symbol') return Reflect.get(target, prop);
-      
-      // 如果 JSON 中已定义该属性，直接返回
-      if (prop in target && target[prop] !== undefined) {
-        return target[prop];
-      }
-
-      // 如果未定义（如 SSG 预渲染阶段或 JSON 尚未加载完成）：
-      // 创建一个既能当作空数组 .map()，又能当作空对象/字符串调用的 Safe Standard Array
-      const safeFallback: any = [];
-      safeFallback.toString = () => '';
-      safeFallback.valueOf = () => '';
-      
-      return safeFallback;
-    },
-  });
-}
-
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>('zh-CN');
-  // 初始即挂载带 Proxy 保护的安全字典
-  const [dict, setDict] = useState<Dictionary>(() => createSafeDictionary());
+  // 默认使用同步导入的 zhCN 数据作为初始保障，确保文字第一瞬间全部可见！
+  const [dict, setDict] = useState<Dictionary>(zhCN as Dictionary);
 
   const loadDictionary = async (targetLocale: Locale) => {
     try {
       const dictionary = await import(`@/locales/${targetLocale}.json`);
-      setDict(createSafeDictionary(dictionary.default || dictionary));
+      setDict((dictionary.default || dictionary) as Dictionary);
     } catch (error) {
       console.warn(`Failed to load dictionary for locale: ${targetLocale}, falling back to zh-CN.`);
-      if (targetLocale !== 'zh-CN') {
-        try {
-          const fallbackDict = await import(`@/locales/zh-CN.json`);
-          setDict(createSafeDictionary(fallbackDict.default || fallbackDict));
-        } catch (e) {
-          setDict(createSafeDictionary());
-        }
-      }
+      setDict(zhCN as Dictionary);
     }
   };
 
@@ -71,7 +43,9 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     const savedLocale = localStorage.getItem('chrono_locale');
     const activeLocale = savedLocale ? normalizeLocale(savedLocale) : 'zh-CN';
     setLocaleState(activeLocale);
-    loadDictionary(activeLocale);
+    if (activeLocale !== 'zh-CN') {
+      loadDictionary(activeLocale);
+    }
   }, []);
 
   const setLocale = (newLocale: Locale) => {
