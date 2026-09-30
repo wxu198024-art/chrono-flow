@@ -9,9 +9,6 @@ export default function HomePage() {
   const { dict, lang } = useLanguage();
 
   const currentLang = (lang as string) || 'zh';
-  // ... 后续代码不变
-
-  const currentLang = (lang as string) || 'zh';
   const isEn = currentLang === 'en';
   const isTW = currentLang === 'zh-TW' || currentLang === 'zh-HK' || currentLang === 'tw';
 
