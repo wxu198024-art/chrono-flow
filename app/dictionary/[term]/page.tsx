@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import { useLanguage } from '@/app/layout';
+import { useLanguage } from '@/context/LanguageContext';
 import { LEXICON_DATA, LexiconLang, isLevelUnlocked } from '@/lib/lexicon';
 
 export default function DictionaryTermPage() {
