@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useLanguage } from '@/app/layout';
 
 interface PillarsStructureProps {
@@ -15,6 +15,8 @@ export default function PillarsStructure({ userRole = 'guest' }: PillarsStructur
   const isTW = currentLang === 'zh-TW' || currentLang === 'zh-HK' || currentLang === 'tw';
 
   const isGuest = userRole === 'guest';
+  // 测试阶段：允许点击遮罩临时解封预览
+  const [isTestUnlocked, setIsTestUnlocked] = useState(false);
 
   const pillarsData = [
     {
@@ -89,6 +91,8 @@ export default function PillarsStructure({ userRole = 'guest' }: PillarsStructur
     },
   ];
 
+  const showMask = isGuest && !isTestUnlocked;
+
   return (
     <section className="p-6 border border-[var(--border-line)] bg-[var(--bg-card)] backdrop-blur-md rounded-lg space-y-8 transition-colors duration-300 relative overflow-hidden">
       {/* 顶部极细爻线 */}
@@ -143,7 +147,7 @@ export default function PillarsStructure({ userRole = 'guest' }: PillarsStructur
           </div>
         </div>
 
-        <div className={`space-y-4 ${isGuest ? 'filter blur-[3px] select-none pointer-events-none' : ''}`}>
+        <div className={`space-y-4 transition-all duration-300 ${showMask ? 'filter blur-[3px] select-none' : ''}`}>
           {factorsData.map((factor, idx) => (
             <div key={idx} className="space-y-1.5 p-3 rounded-sm border border-[var(--border-line)]/50 bg-[var(--bg-card-hover)]/30">
               <div className="flex items-center justify-between text-xs font-mono">
@@ -172,9 +176,13 @@ export default function PillarsStructure({ userRole = 'guest' }: PillarsStructur
           ))}
         </div>
 
-        {/* 游客限制遮罩 */}
-        {isGuest && (
-          <div className="absolute inset-0 bg-[var(--bg-card)]/75 backdrop-blur-sm flex items-center justify-center p-4 rounded">
+        {/* 游客限制遮罩（支持点击穿透预览） */}
+        {showMask && (
+          <div 
+            onClick={() => setIsTestUnlocked(true)}
+            className="absolute inset-0 bg-[var(--bg-card)]/75 backdrop-blur-sm flex items-center justify-center p-4 rounded cursor-pointer group transition-all"
+            title="测试阶段：点击直接查看内容"
+          >
             <div className="text-center space-y-3 max-w-md">
               <h3 className="font-serif-title text-sm text-[var(--text-primary)]">
                 {isEn ? 'Five Dynamic Factors Locked' : '五维动态均衡因子未解锁'}
@@ -184,9 +192,17 @@ export default function PillarsStructure({ userRole = 'guest' }: PillarsStructur
                   ? 'Save coordinates to your Dojo to unlock your real-time equilibrium vector diagnosis.'
                   : '保存生辰坐标至个人道场，免费解锁五维动态均衡因子诊断与冷酷裁决建议。'}
               </p>
-              <button className="px-5 py-2 border border-[var(--cinnabar)] text-[var(--cinnabar)] hover:bg-[var(--cinnabar)] hover:text-white transition-all duration-300 text-xs font-mono rounded-sm">
-                {isEn ? 'CREATE DOJO ACCOUNT' : '免费存入道场并解锁'}
-              </button>
+              <div className="flex justify-center gap-2 pt-1">
+                <button 
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setIsTestUnlocked(true);
+                  }}
+                  className="px-4 py-1.5 bg-[var(--cinnabar)] text-white text-xs font-mono rounded-sm shadow-sm hover:opacity-90 transition-all"
+                >
+                  {isEn ? 'PREVIEW (TEST MODE)' : isTW ? '點擊預覽內容 (測試模式)' : '点击预览内容 (测试模式)'}
+                </button>
+              </div>
             </div>
           </div>
         )}
