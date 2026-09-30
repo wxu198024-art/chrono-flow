@@ -5,9 +5,13 @@ import { useLanguage } from '@/app/layout';
 
 interface PillarsStructureProps {
   userRole?: 'guest' | 'free' | 'subscribed' | string;
+  onTriggerRegister?: () => void;
 }
 
-export default function PillarsStructure({ userRole = 'guest' }: PillarsStructureProps) {
+export default function PillarsStructure({ 
+  userRole = 'guest',
+  onTriggerRegister 
+}: PillarsStructureProps) {
   const { dict, lang } = useLanguage?.() || { dict: {}, lang: 'zh' };
 
   const currentLang = (lang as string) || 'zh';
@@ -176,12 +180,12 @@ export default function PillarsStructure({ userRole = 'guest' }: PillarsStructur
           ))}
         </div>
 
-        {/* 游客限制遮罩（支持点击穿透预览） */}
+        {/* 游客限制遮罩（支持点击唤起注册弹窗与预览） */}
         {showMask && (
           <div 
             onClick={() => setIsTestUnlocked(true)}
             className="absolute inset-0 bg-[var(--bg-card)]/75 backdrop-blur-sm flex items-center justify-center p-4 rounded cursor-pointer group transition-all"
-            title="测试阶段：点击直接查看内容"
+            title="点击直接预览内容"
           >
             <div className="text-center space-y-3 max-w-md">
               <h3 className="font-serif-title text-sm text-[var(--text-primary)]">
@@ -189,18 +193,29 @@ export default function PillarsStructure({ userRole = 'guest' }: PillarsStructur
               </h3>
               <p className="text-xs text-[var(--text-secondary)] font-sans leading-relaxed">
                 {isEn
-                  ? 'Save coordinates to your Dojo to unlock your real-time equilibrium vector diagnosis.'
-                  : '保存生辰坐标至个人道场，免费解锁五维动态均衡因子诊断与冷酷裁决建议。'}
+                  ? 'Save coordinates to your field to unlock your real-time equilibrium vector diagnosis.'
+                  : '保存生辰坐标至个人场域，解锁五维动态均衡因子诊断与裁决建议。'}
               </p>
-              <div className="flex justify-center gap-2 pt-1">
+              <div className="flex flex-wrap justify-center gap-2 pt-1">
+                {onTriggerRegister && (
+                  <button 
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onTriggerRegister();
+                    }}
+                    className="px-4 py-1.5 bg-[var(--cinnabar)] text-white text-xs font-mono rounded-sm shadow-sm hover:opacity-90 transition-all font-bold"
+                  >
+                    {isEn ? 'REGISTER ORIGIN' : isTW ? '注冊並鎖定場域原點' : '注册并锁定场域原点'}
+                  </button>
+                )}
                 <button 
                   onClick={(e) => {
                     e.stopPropagation();
                     setIsTestUnlocked(true);
                   }}
-                  className="px-4 py-1.5 bg-[var(--cinnabar)] text-white text-xs font-mono rounded-sm shadow-sm hover:opacity-90 transition-all"
+                  className="px-3 py-1.5 border border-[var(--border-line)] bg-[var(--bg-card)] text-[var(--text-secondary)] text-xs font-mono rounded-sm hover:text-[var(--text-primary)] transition-all"
                 >
-                  {isEn ? 'PREVIEW (TEST MODE)' : isTW ? '點擊預覽內容 (測試模式)' : '点击预览内容 (测试模式)'}
+                  {isEn ? 'PREVIEW (TEST MODE)' : isTW ? '點擊預覽 (測試模式)' : '点击预览 (测试模式)'}
                 </button>
               </div>
             </div>
