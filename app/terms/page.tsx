@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useLanguage } from '@/app/layout';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function TermsPage() {
   const { dict } = useLanguage();
