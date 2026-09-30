@@ -1,3 +1,5 @@
+import { ZE_ARCHETYPES, JU_ARCHETYPES, YU_ARCHETYPES } from './archetypeLexicon';
+
 export type LexiconLang = 'zh' | 'en';
 
 export interface SubLexiconEntry {
@@ -6,6 +8,7 @@ export interface SubLexiconEntry {
   title: Record<LexiconLang, string>;
   definition: Record<LexiconLang, string>;
   visceralHook: Record<LexiconLang, string>;
+  archetypeId?: string; // 可选：关联到 archetypeLexicon 中的 ze_xx / ju_xx / yu_xx
 }
 
 export interface LexiconEntry {
@@ -55,7 +58,7 @@ export function getRequiredUnlockLevel(level: number): number {
 
 /**
  * ============================================================================
- * Lexicon Data 数据定义
+ * Lexicon Data 数据定义 (L0 - L9 纵向认知字典)
  * ============================================================================
  */
 export const LEXICON_DATA: Record<string, LexiconEntry> = {
@@ -63,14 +66,8 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
     id: 'primordial-anchor',
     level: 1,
     codeName: 'THE PRIMORDIAL ANCHOR',
-    title: {
-      zh: '时空原点锚块',
-      en: 'The Primordial Anchor',
-    },
-    mapping: {
-      zh: '底层映射：出生时刻与空间初始重力刻度',
-      en: 'Core Mapping: Baseline Spatiotemporal Coordinates',
-    },
+    title: { zh: '时空原点锚块', en: 'The Primordial Anchor' },
+    mapping: { zh: '底层映射：出生时刻与空间初始重力刻度', en: 'Core Mapping: Baseline Spatiotemporal Coordinates' },
     definition: {
       zh: '你落入这个时空连续体瞬间，被宇宙第一道引力波割裂并定格的初始重力坐标。它不是你的性格，而是你生命系统启动时自带的底层环境底色。它决定了你初始的情绪质量密度与终生隐性焦虑的频段。',
       en: 'The fundamental gravity coordinates locked at the precise millisecond of your entry into the spatiotemporal continuum. It is not your personality, but the immutable background field that dictates your default emotional mass and baseline anxieties.',
@@ -85,14 +82,8 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
     id: 'dual-vector',
     level: 2,
     codeName: 'THE DUAL VECTOR FIELD',
-    title: {
-      zh: '双向向量场',
-      en: 'The Dual Vector Field',
-    },
-    mapping: {
-      zh: '底层映射：显性自我与隐性内耗的极性对抗',
-      en: 'Core Mapping: Explicit Self vs. Implicit Self Polarity',
-    },
+    title: { zh: '双向向量场', en: 'The Dual Vector Field' },
+    mapping: { zh: '底层映射：显性自我与隐性内耗的极性对抗', en: 'Core Mapping: Explicit Self vs. Implicit Self Polarity' },
     definition: {
       zh: '你体内永远处于拉扯状态的双向力学向量场。涵盖为了在社会规则中高精密度生存而锻造的防御外壳，与极度压抑下随时可能引发自我毁灭的本能底色。',
       en: 'The perpetual structural tension generated between your outward defensive shell built for societal survival and your collapsed instinctual core under pressure.',
@@ -105,10 +96,7 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
       {
         id: 'exo-structural-vector',
         codeName: 'EXO-STRUCTURAL VECTOR',
-        title: {
-          zh: '外核显性向量',
-          en: 'Exo-Structural Vector',
-        },
+        title: { zh: '外核显性向量', en: 'Exo-Structural Vector' },
         definition: {
           zh: '为了在社会规则中生存，你为自己精细锻造的无缝盔甲。它是你在职场、社交与外人面前展示的精密镜子与理性防御机制。',
           en: 'The highly optimized armor engineered for societal survival. The precise mask and rational defense mechanism you present to the world.',
@@ -121,10 +109,7 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
       {
         id: 'collapsed-endo-vector',
         codeName: 'COLLAPSED ENDO-VECTOR',
-        title: {
-          zh: '坍缩内核向量',
-          en: 'Collapsed Endo-Vector',
-        },
+        title: { zh: '坍缩内核向量', en: 'Collapsed Endo-Vector' },
         definition: {
           zh: '当夜深人静、所有名片与防御都被撕下时，那个在黑暗中与你自己对视的纯粹本能。它隐藏着你最底层的安全感来源与压抑下的毁灭倾向。',
           en: 'The suppressed instinctual core that triggers unprovoked self-sabotage under extreme environmental stress.',
@@ -141,14 +126,8 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
     id: 'tri-axial-strain',
     level: 3,
     codeName: 'THE TRI-AXIAL STRAIN',
-    title: {
-      zh: '三轴应力交叠',
-      en: 'The Tri-Axial Strain',
-    },
-    mapping: {
-      zh: '底层映射：时间、空间与社会关系的三维立体剪切力',
-      en: 'Core Mapping: 3D Structural Stress of Time, Space, and Social Relations',
-    },
+    title: { zh: '三轴应力交叠', en: 'The Tri-Axial Strain' },
+    mapping: { zh: '底层映射：时间、空间与社会关系的三维立体剪切力', en: 'Core Mapping: 3D Structural Stress of Time, Space, and Social Relations' },
     definition: {
       zh: '作用于个体的三维现代空间力学挤压：涵盖时间重力轴（出生刻度）、空间漂移轴（现居 IP 地理坐标）以及社会关系应力轴（他人期望形成的挤压感）。当三轴交叠时，系统内部便会产生严重的应力集中。',
       en: 'The three-dimensional mechanical compression you endure: Temporal Gravity Axis, Spatial Drift Axis, and Social Relation Stress Axis. When they intersect, severe stress concentrations occur.',
@@ -161,10 +140,7 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
       {
         id: 'temporal-shear-axis',
         codeName: 'TEMPORAL GRAVITY AXIS',
-        title: {
-          zh: '时间重力轴',
-          en: 'Temporal Gravity Axis',
-        },
+        title: { zh: '时间重力轴', en: 'Temporal Gravity Axis' },
         definition: {
           zh: '由出生时间刻度与年龄增长带来的生命时间重力，注意力在未来的失控恐惧与过去的无法改写之间被双向拉扯撕裂。',
           en: 'The strain axis anchored to your birth timestamp and aging, torn between future loss of control and unalterable past regret.',
@@ -177,10 +153,7 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
       {
         id: 'spatial-drift-axis',
         codeName: 'SPATIAL DRIFT AXIS',
-        title: {
-          zh: '空间漂移轴',
-          en: 'Spatial Drift Axis',
-        },
+        title: { zh: '空间漂移轴', en: 'Spatial Drift Axis' },
         definition: {
           zh: '由现居 IP 地理坐标与出生原点之间的公里数差值所形成的地理引力差与环境水土磨削。',
           en: 'The spatial strain formed by the distance between your current geographical coordinates and your birthplace.',
@@ -193,10 +166,7 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
       {
         id: 'social-relation-axis',
         codeName: 'SOCIAL RELATION STRESS AXIS',
-        title: {
-          zh: '社会关系应力轴',
-          en: 'Social Relation Stress Axis',
-        },
+        title: { zh: '社会关系应力轴', en: 'Social Relation Stress Axis' },
         definition: {
           zh: '外界与他人赋予你的角色期待（子女/职员/伴侣）与你内心真实主体意识之间的错位剪切带。',
           en: 'The fault line between external role expectations and your core, unadorned sense of self.',
@@ -213,14 +183,8 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
     id: 'four-pillars',
     level: 4,
     codeName: 'THE FOUR PILLARS OF EXISTENCE',
-    title: {
-      zh: '四柱存在结构',
-      en: 'The Four Pillars of Existence',
-    },
-    mapping: {
-      zh: '底层映射：承载个体生命张力的四座现代心理与时空支柱',
-      en: 'Core Mapping: Four Load-Bearing Pillars of Individual Life Tension',
-    },
+    title: { zh: '四柱存在结构', en: 'The Four Pillars of Existence' },
+    mapping: { zh: '底层映射：承载个体生命张力的四座现代心理与时空支柱', en: 'Core Mapping: Four Load-Bearing Pillars of Individual Life Tension' },
     definition: {
       zh: '承载个体生命张力的四座现代心理与时空骨架。从基因遗产与环境磨削，到核心自我与潜匿地平线，四柱共同构成了你抗击现实重力的力学拓扑结构。',
       en: 'The four structural pillars supporting your entire psychological and spatiotemporal framework against the gravitational forces of reality.',
@@ -233,10 +197,7 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
       {
         id: 'origin-pillar',
         codeName: 'THE ORIGIN PILLAR',
-        title: {
-          zh: '原点之柱',
-          en: 'The Origin Pillar',
-        },
+        title: { zh: '原点之柱', en: 'The Origin Pillar' },
         definition: {
           zh: '印刻在基因与骨髓里的时代底色与家族遗产。你无法选择的先天重力环境与幼年无意识吸收的防御机制。',
           en: 'The ancestral lineage and origin baseline imprinted upon your genetics. The immutable gravitational field of your origin.',
@@ -249,10 +210,7 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
       {
         id: 'social-mask-pillar',
         codeName: 'THE SOCIAL MASK',
-        title: {
-          zh: '社会投影之柱',
-          en: 'The Social Mask',
-        },
+        title: { zh: '社会投影之柱', en: 'The Social Mask' },
         definition: {
           zh: '青年与中年期所遭遇的现实磨削力。涵盖职场生存、社会规训以及外部环境对你个人意愿的持续挤压。',
           en: 'The continuous friction and environmental shear forces exerted by societal training and professional survival.',
@@ -265,10 +223,7 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
       {
         id: 'core-ego-pillar',
         codeName: 'THE CORE EGO',
-        title: {
-          zh: '内核原点之柱',
-          en: 'The Core Ego',
-        },
+        title: { zh: '内核原点之柱', en: 'The Core Ego' },
         definition: {
           zh: '除去所有社会名片与外部角色后，纯粹的自我意识与主体内核。是你抵抗全宇宙熵增的最后阵地。',
           en: 'The unadorned core ego and ultimate locus of consciousness once all outer roles and social masks are stripped away.',
@@ -281,10 +236,7 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
       {
         id: 'hidden-horizon-pillar',
         codeName: 'THE HIDDEN HORIZON',
-        title: {
-          zh: '潜匿地平线之柱',
-          en: 'The Hidden Horizon',
-        },
+        title: { zh: '潜匿地平线之柱', en: 'The Hidden Horizon' },
         definition: {
           zh: '生命系统向未来延伸的归宿与潜伏地平线。涵盖晚年状态、潜意识信仰以及你留给时空连续体的精神残影。',
           en: 'The vector describing the ultimate convergence, terminal trajectory, and lingering footprint of your life system.',
@@ -301,14 +253,8 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
     id: 'wuxing-factors',
     level: 5,
     codeName: 'THE FIVE DYNAMIC EQUILIBRIUM FACTORS',
-    title: {
-      zh: '五行均衡因子',
-      en: 'The Five Dynamic Equilibrium Factors',
-    },
-    mapping: {
-      zh: '底层映射：维持个体心理系统内部稳态的 5 种环境力学因子',
-      en: 'Core Mapping: Five Environmental Mechanics Factors Maintaining Psychological Homeostasis',
-    },
+    title: { zh: '五行均衡因子', en: 'The Five Dynamic Equilibrium Factors' },
+    mapping: { zh: '底层映射：维持个体心理系统内部稳态的 5 种环境力学因子', en: 'Core Mapping: Five Environmental Mechanics Factors Maintaining Psychological Homeostasis' },
     definition: {
       zh: '维持个体心理系统内部稳态（Homeostasis）的 5 种环境力学因子。脱离传统概念表象，化为扩张蔓延、显化张力、重力锚定、裁决边界与潜流直觉 5 种平衡能量。',
       en: 'The five dynamic mechanics governing your psychological homeostasis—Expansion, Visibility, Anchoring, Precision, and Adaptation.',
@@ -321,10 +267,7 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
       {
         id: 'expansion-factor',
         codeName: 'EXPANSION',
-        title: {
-          zh: '蔓延因子',
-          en: 'Expansion Factor',
-        },
+        title: { zh: '蔓延因子', en: 'Expansion Factor' },
         definition: {
           zh: '破土而出、向外拓展边界的本能欲望。代表创生力与生命张力，但在失去抑制时会演变为没有边际的内耗与贪婪。',
           en: 'The primal instinct to breach limits and expand outward. It fuels raw creativity, yet risks reckless boundary-pushing when unchecked.',
@@ -337,10 +280,7 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
       {
         id: 'visibility-factor',
         codeName: 'VISIBILITY',
-        title: {
-          zh: '显化因子',
-          en: 'Visibility Factor',
-        },
+        title: { zh: '显化因子', en: 'Visibility Factor' },
         definition: {
           zh: '渴望被看见、被赞美、将内心激情向外辐射的能量。它是你独特魅力的源泉，也是你最容易被他人利用和灼伤的脆弱弱点。',
           en: 'The urge to project passion, be recognized, and radiate presence. It is your ultimate charisma, but also your most vulnerable exposure.',
@@ -353,10 +293,7 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
       {
         id: 'anchoring-factor',
         codeName: 'ANCHORING',
-        title: {
-          zh: '锚定因子',
-          en: 'Anchoring Factor',
-        },
+        title: { zh: '锚定因子', en: 'Anchoring Factor' },
         definition: {
           zh: '在动荡现实中承载万物与自我消化的重力场。缺乏它会让你像无根之草般漂泊失控，过强则会让你陷入顽固沉闷的泥潭。',
           en: 'The heavy grounding mass that digests reality. Deficits leave you floating like seaweed; excess traps you in unyielding stagnation.',
@@ -369,10 +306,7 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
       {
         id: 'precision-factor',
         codeName: 'PRECISION',
-        title: {
-          zh: '裁决因子',
-          en: 'Precision Factor',
-        },
+        title: { zh: '裁决因子', en: 'Precision Factor' },
         definition: {
           zh: '划定绝对边界、做出果断割舍的冷酷理性。它是帮你的生命斩断有毒伤害的利刃，但也极易成为刺伤最亲密关系的凶器。',
           en: 'The razor-sharp boundary-setting force. A indispensable scalpel that severs toxicity, yet turns lethal in intimate spheres.',
@@ -385,10 +319,7 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
       {
         id: 'adaptation-factor',
         codeName: 'ADAPTATION',
-        title: {
-          zh: '潜流因子',
-          en: 'Adaptation Factor',
-        },
+        title: { zh: '潜流因子', en: 'Adaptation Factor' },
         definition: {
           zh: '如水般渗透、感知与情绪流动的深层直觉力。它是极度敏锐的同理心，但也极易让你在别人的情绪狂浪中彻底淹没自我。',
           en: 'The fluid, subterranean current of empathy and intuition. It provides deep absorption, but risks drowning your core self in outer tides.',
@@ -405,14 +336,8 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
     id: 'six-stage-flow',
     level: 6,
     codeName: 'THE 6-STAGE FLOW CYCLE',
-    title: {
-      zh: '六维状态流',
-      en: 'The 6-Stage Flow Cycle',
-    },
-    mapping: {
-      zh: '底层映射：个体面对外部环境冲击时心理能量必经的 6 段状态相态跃迁',
-      en: 'Core Mapping: Six Continuous Phase Transitions Under Environmental Stress',
-    },
+    title: { zh: '六维状态流', en: 'The 6-Stage Flow Cycle' },
+    mapping: { zh: '底层映射：个体面对外部环境冲击时心理能量必经的 6 段状态相态跃迁', en: 'Core Mapping: Six Continuous Phase Transitions Under Environmental Stress' },
     definition: {
       zh: '描述你的生命系统在外部环境挤压与内部张力拉扯下，心理能量必经的 6 个连续状态相态（Inception 潜藏 → Emergence 显露 → Consolidation 警惕 → Transition 跃迁 → Apex 巅峰 → Recession 收敛）。',
       en: 'The continuous six-stage phase transition cycle governing your energy state: Inception → Emergence → Consolidation → Transition → Apex → Recession.',
@@ -471,14 +396,8 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
     id: 'chrono-pulse',
     level: 7,
     codeName: 'THE SEPTENARY CHRONO-PULSE',
-    title: {
-      zh: '七代时空脉搏',
-      en: 'The Septenary Chrono-Pulse',
-    },
-    mapping: {
-      zh: '底层映射：以 7 天为周期的环境高频微波与日常高频行为校准',
-      en: 'Core Mapping: High-Frequency 7-Day Micro-Wave Environmental Friction & Behavior Calibration',
-    },
+    title: { zh: '七代时空脉搏', en: 'The Septenary Chrono-Pulse' },
+    mapping: { zh: '底层映射：以 7 天为周期的环境高频微波与日常高频行为校准', en: 'Core Mapping: High-Frequency 7-Day Micro-Wave Environmental Friction & Behavior Calibration' },
     definition: {
       zh: '以 7 天为微观周期的环境高频重力脉搏。它并非宏观运势，而是你日常生活中面临的即时摩擦点与能量锚点，为你提供高冷、精准且具极强执行力的日常行为校准。',
       en: 'The 7-day micro-gravitational pulse providing daily tactical adjustments, pinpointing friction vectors, and grounding anchors for execution.',
@@ -516,14 +435,8 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
     id: 'octal-resonance',
     level: 8,
     codeName: 'THE OCTAL RESONANCE MATRIX',
-    title: {
-      zh: '八维共振矩阵',
-      en: 'The Octal Resonance Matrix',
-    },
-    mapping: {
-      zh: '底层映射：两个四柱存在结构相撞时在 8 个维度上的系统碰撞与能量重组',
-      en: 'Core Mapping: Eight-Dimensional Collision of Two Four Pillars Structures & Relational Re-organization',
-    },
+    title: { zh: '八维共振矩阵', en: 'The Octal Resonance Matrix' },
+    mapping: { zh: '底层映射：两个四柱存在结构相撞时在 8 个维度上的系统碰撞与能量重组', en: 'Core Mapping: Eight-Dimensional Collision of Two Four Pillars Structures & Relational Re-organization' },
     definition: {
       zh: '当两个独立的“四柱存在结构”（L4）互相靠近并发生碰撞时，在 8 个维度上激发的系统共振矩阵。它彻底解构了传统合盘，精准计算出双方之间的相位摩擦系数、能量互补锚点与暗面互动模式。',
       en: 'The eight-dimensional collision array generated when two discrete Four Pillars structures intersect. It computes friction indices, complementary anchors, and shadow interactions.',
@@ -561,14 +474,8 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
     id: 'ennead-trajectory',
     level: 9,
     codeName: 'THE ENNEAD TRAJECTORY CYCLES',
-    title: {
-      zh: '九重轨道宏观周期',
-      en: 'The Ennead Trajectory Cycles',
-    },
-    mapping: {
-      zh: '底层映射：个体运行在宇宙长程重力轨道上的动态偏转图谱与 Stripe 订阅载体',
-      en: 'Core Mapping: Macro Orbital Gravity Trajectories & Subscription Cycles Delivery Vehicle',
-    },
+    title: { zh: '九重轨道宏观周期', en: 'The Ennead Trajectory Cycles' },
+    mapping: { zh: '底层映射：个体运行在宇宙长程重力轨道上的动态偏转图谱与 Stripe 订阅载体', en: 'Core Mapping: Macro Orbital Gravity Trajectories & Subscription Cycles Delivery Vehicle' },
     definition: {
       zh: '描述你的生命系统在长程时空重力场中运行的宏观偏转图谱。涵盖月相盈亏周期（30天）、地轴倾角周期（90天）、轨道连续图谱（365天）以及地理坐标引力差（空间漂移），是 Stripe 付费订阅的核心交付载体。',
       en: 'The macro-orbital path mapping your system\'s long-term gravity deflections across monthly, quarterly, annual, and geodynamic dimensions. Core delivery vehicle for subscriptions.',
@@ -613,14 +520,8 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
     id: 'unbound-void',
     level: 0,
     codeName: 'THE UNBOUND VOID',
-    title: {
-      zh: '归零·无极',
-      en: 'The Unbound Void',
-    },
-    mapping: {
-      zh: '底层映射：全系统的隐藏元节点，跳出外部时空重力场的主权自我',
-      en: 'Core Mapping: Meta-Node Beyond Spatiotemporal Gravity; Sovereign Ego Unbound',
-    },
+    title: { zh: '归零·无极', en: 'The Unbound Void' },
+    mapping: { zh: '底层映射：全系统的隐藏元节点，跳出外部时空重力场的主权自我', en: 'Core Mapping: Meta-Node Beyond Spatiotemporal Gravity; Sovereign Ego Unbound' },
     definition: {
       zh: '隐藏于系统最深处的元节点（Meta-Node）。前九级展示了你如何在重力场内被撕扯与影响；而 Level 0 则是当你看清前九级的全貌后，卸载所有重力与心理面具，回归绝对的主权自我（The Sovereign Ego）。',
       en: 'The meta-node hovering outside the gravitational matrix. Having deconstructed Levels 1-9, you strip away armor and environmental force to reclaim the Sovereign Ego.',
@@ -630,7 +531,7 @@ export const LEXICON_DATA: Record<string, LexiconEntry> = {
       en: 'Triggers ultimate release—transitioning from a passive entity in the force field to the sovereign architect of your reality.',
     },
   },
-}; // <-- LEXICON_DATA 对象在此处闭合！
+};
 
 /**
  * ============================================================================
@@ -653,7 +554,23 @@ export function getLexiconLevelsArray(lang: LexiconLang = 'zh') {
         title: child.title[lang] || child.title.zh,
         definition: child.definition[lang] || child.definition.zh,
         visceralHook: child.visceralHook[lang] || child.visceralHook.zh,
+        archetypeId: child.archetypeId,
       })),
     };
   });
+}
+
+/**
+ * ============================================================================
+ * 导出 Archetype (者·局·域) 模块与联立查询函数
+ * ============================================================================
+ */
+export * from './archetypeLexicon';
+
+export function getFullArchetypeCombo(zeId: string, juId?: string, yuId?: string) {
+  return {
+    ze: ZE_ARCHETYPES[zeId] || null,
+    ju: juId ? JU_ARCHETYPES[juId] || null : null,
+    yu: yuId ? YU_ARCHETYPES[yuId] || null : null,
+  };
 }
