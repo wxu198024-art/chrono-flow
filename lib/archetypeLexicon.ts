@@ -50,7 +50,7 @@ export const ZE_ARCHETYPES: Record<string, ArchetypeNode> = {
     definition: {
       zh: '你置身于局中，但灵魂始终悬浮于高维轨道，以冷酷的精度记录着场域内一切相位的起伏。',
       en: 'You exist within the field, yet your consciousness remains outside it, observing every phase shift.',
-      ja: '場の中に存在しながらも、意識は高次元に浮游し、すべての位相変化を冷徹に記録します。',
+      ja: '場の中に存在しながらも、意識は高次元に浮遊し、すべての位相変化を冷徹に記録します。',
     },
     vectorCommand: {
       zh: '保持坍缩悬停，切忌过早入局交织。',
@@ -95,6 +95,7 @@ export const JU_ARCHETYPES: Record<string, ArchetypeNode> = {
     name: {
       zh: '禁入局',
       en: 'Restricted Bound',
+      ja: '進入禁止局',
     },
     definition: {
       zh: '当前时空切片呈现极高应力集聚，外部阻力高于系统推动力，强行破局必遭高频能量反噬。',
