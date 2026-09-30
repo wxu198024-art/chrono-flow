@@ -14,9 +14,9 @@ export default function ChartResultPage() {
   const params = useParams();
   const searchParams = useSearchParams();
 
-  // 1. 全局语言 Provider 获取
-  const { lang: globalLang } = useLanguage?.() || { lang: 'zh' };
-  const currentLang = globalLang || 'zh';
+  // 1. 全局语言 Provider 获取 (将 currentLang 显式标注为 string，解决 TS2367 类型判定重合报错)
+  const langContext = useLanguage?.();
+  const currentLang: string = langContext?.lang || 'zh';
   const isEn = currentLang === 'en';
   const isJa = currentLang === 'ja';
   const isTW = currentLang === 'zh-TW' || currentLang === 'zh-HK' || currentLang === 'tw';
