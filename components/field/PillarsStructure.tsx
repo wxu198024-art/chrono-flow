@@ -153,7 +153,7 @@ export default function PillarsStructure({ userRole, onTriggerRegister, onTrigge
         <div className="p-6 rounded border border-[var(--border-line)] bg-[var(--bg-card)] relative overflow-hidden space-y-6">
           <div className={`space-y-6 transition-all ${!isEquilibriumUnlocked ? 'filter blur-md select-none opacity-20' : ''}`}>
             
-            {/* 5 个维度重力因子占比：顶端仅保留序号 [01]~[05] */}
+            {/* 5 个维度重力因子占比：顶端仅保留序号 [01]~[05]，消除任何名称重复 */}
             <div className="grid grid-cols-1 md:grid-cols-5 gap-4 font-mono text-xs">
               <div className="p-3 bg-[var(--bg-card-hover)] rounded border border-[var(--border-line)]">
                 <div className="text-[var(--text-muted)] text-[10px]">[01]</div>
@@ -215,10 +215,10 @@ export default function PillarsStructure({ userRole, onTriggerRegister, onTrigge
             <div className="p-4 rounded border border-[var(--border-line)] bg-[var(--bg-card-hover)]/50 space-y-2">
               <h4 className="font-serif-title text-sm text-[var(--text-primary)] font-bold">
                 {isEn
-                  ? 'L5 - CHRONO PULSE STRAIN ANALYSIS: ADAPTATION (88%) VS PRECISION (32%)'
+                  ? 'DYNAMIC STRAIN ANALYSIS: ADAPTATION (88%) VS PRECISION (32%)'
                   : isTW
-                  ? 'LEVEL 5 | 時空脈沖撕裂比分析：潛流因子 (88%) 比 裁決因子 (32%)'
-                  : 'LEVEL 5 | 时空脉冲撕裂比分析：潜流因子 (88%) 比 裁决因子 (32%)'}
+                  ? '重力張力撕裂比分析：潛流因子 (88%) 比 裁決因子 (32%)'
+                  : '重力张力撕裂比分析：潜流因子 (88%) 比 裁决因子 (32%)'}
               </h4>
               <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
                 {isEn
