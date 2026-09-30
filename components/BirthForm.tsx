@@ -8,7 +8,6 @@ export default function BirthForm() {
   const router = useRouter();
   const { dict, lang } = useLanguage();
 
-  // 1. 原始表单状态
   // ... 后续代码不变
 
   // 1. 原始表单状态
