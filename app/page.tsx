@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import BirthForm from '@/components/BirthForm';
-import { useLanguage } from '@/app/layout';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function HomePage() {
   const { dict, lang } = useLanguage?.() || { dict: {}, lang: 'zh' };
