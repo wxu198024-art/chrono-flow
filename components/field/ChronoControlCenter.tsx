@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useLanguage } from '@/app/layout';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface ChronoControlCenterProps {
   userEmail?: string;
