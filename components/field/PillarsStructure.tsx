@@ -3,14 +3,19 @@
 import React from 'react';
 import { useLanguage } from '@/app/layout';
 
-export default function PillarsStructure() {
+interface PillarsStructureProps {
+  userRole?: 'guest' | 'free' | 'subscribed' | string;
+}
+
+export default function PillarsStructure({ userRole = 'guest' }: PillarsStructureProps) {
   const { dict, lang } = useLanguage?.() || { dict: {}, lang: 'zh' };
 
   const currentLang = (lang as string) || 'zh';
   const isEn = currentLang === 'en';
   const isTW = currentLang === 'zh-TW' || currentLang === 'zh-HK' || currentLang === 'tw';
 
-  // 四柱存在结构 (纯净版，无机械编号)
+  const isGuest = userRole === 'guest';
+
   const pillarsData = [
     {
       title: isEn ? 'The Origin Pillar' : isTW ? '原點之柱' : '原点之柱',
@@ -46,7 +51,6 @@ export default function PillarsStructure() {
     },
   ];
 
-  // 五维动态均衡因子 (纯净版，无英文编码)
   const factorsData = [
     {
       name: isEn ? 'Expansion' : isTW ? '蔓延因子' : '蔓延因子',
@@ -90,7 +94,7 @@ export default function PillarsStructure() {
       {/* 顶部极细爻线 */}
       <div className="absolute top-0 left-0 right-0 yao-yang"></div>
 
-      {/* 1. 四柱存在结构 */}
+      {/* 1. 四柱存在结构 (Level 1) */}
       <div className="space-y-6">
         <div className="flex flex-col md:flex-row md:items-center justify-between border-b border-[var(--border-line)] pb-4 gap-2">
           <h2 className="font-serif-title text-lg md:text-xl text-[var(--text-primary)] uppercase tracking-wide">
@@ -128,8 +132,8 @@ export default function PillarsStructure() {
         </div>
       </div>
 
-      {/* 2. 五维动态均衡因子 */}
-      <div className="space-y-6 pt-4 border-t border-[var(--border-line)]">
+      {/* 2. 五维动态均衡因子 (Level 2) */}
+      <div className="space-y-6 pt-4 border-t border-[var(--border-line)] relative">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
           <h2 className="font-serif-title text-lg md:text-xl text-[var(--text-primary)] uppercase tracking-wide">
             {isEn ? 'THE FIVE DYNAMIC EQUILIBRIUM FACTORS' : isTW ? '五維動態均衡因子' : '五维动态均衡因子'}
@@ -139,7 +143,7 @@ export default function PillarsStructure() {
           </div>
         </div>
 
-        <div className="space-y-4">
+        <div className={`space-y-4 ${isGuest ? 'filter blur-[3px] select-none pointer-events-none' : ''}`}>
           {factorsData.map((factor, idx) => (
             <div key={idx} className="space-y-1.5 p-3 rounded-sm border border-[var(--border-line)]/50 bg-[var(--bg-card-hover)]/30">
               <div className="flex items-center justify-between text-xs font-mono">
@@ -167,6 +171,25 @@ export default function PillarsStructure() {
             </div>
           ))}
         </div>
+
+        {/* 游客限制遮罩 */}
+        {isGuest && (
+          <div className="absolute inset-0 bg-[var(--bg-card)]/75 backdrop-blur-sm flex items-center justify-center p-4 rounded">
+            <div className="text-center space-y-3 max-w-md">
+              <h3 className="font-serif-title text-sm text-[var(--text-primary)]">
+                {isEn ? 'Five Dynamic Factors Locked' : '五维动态均衡因子未解锁'}
+              </h3>
+              <p className="text-xs text-[var(--text-secondary)] font-sans leading-relaxed">
+                {isEn
+                  ? 'Save coordinates to your Dojo to unlock your real-time equilibrium vector diagnosis.'
+                  : '保存生辰坐标至个人道场，免费解锁五维动态均衡因子诊断与冷酷裁决建议。'}
+              </p>
+              <button className="px-5 py-2 border border-[var(--cinnabar)] text-[var(--cinnabar)] hover:bg-[var(--cinnabar)] hover:text-white transition-all duration-300 text-xs font-mono rounded-sm">
+                {isEn ? 'CREATE DOJO ACCOUNT' : '免费存入道场并解锁'}
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
