@@ -15,8 +15,8 @@ export default function DailyPulse({ userRole, onTriggerRegister, onTriggerSubsc
   const isEn = currentLang === 'en';
   const isTW = currentLang === 'zh-TW' || currentLang === 'zh-HK' || currentLang === 'tw';
 
-  // 只要是已注册或已付费，今日重力波 3 张卡片全开
-  const isPulseUnlocked = userRole === 'registered' || userRole === 'subscribed';
+  // 今日重力波 3 张卡片对所有用户（含游客）全量开放
+  const isPulseUnlocked = true;
 
   return (
     <section className="space-y-4">
@@ -29,7 +29,7 @@ export default function DailyPulse({ userRole, onTriggerRegister, onTriggerSubsc
           </h2>
         </div>
         <span className="text-[10px] font-mono text-[var(--text-muted)] uppercase">
-          L7 - MICRO CYCLE
+          L5 - CHRONO PULSE
         </span>
       </div>
 
@@ -65,18 +65,18 @@ export default function DailyPulse({ userRole, onTriggerRegister, onTriggerSubsc
           </div>
         </div>
 
-        {/* 卡片 2：锚定内稳态 (Homeostasis Anchor) - 注册后解锁 */}
+        {/* 卡片 2：锚定内稳态 (Homeostasis Anchor) - 全员开放 */}
         <div className="p-5 rounded border border-[var(--border-line)] bg-[var(--bg-card)] backdrop-blur-md space-y-3 relative overflow-hidden flex flex-col justify-between">
           <div>
             <div className="flex justify-between items-center text-[10px] font-mono text-[var(--text-muted)] mb-2">
               <span>[02] {isEn ? 'HOMEOSTASIS ANCHOR' : isTW ? '錨定內穩態與法則' : '锚定内稳态与法则'}</span>
-              {!isPulseUnlocked && (
-                <span className="text-[10px] font-mono text-amber-400">[REGISTER TO UNLOCK]</span>
-              )}
+              <span className="px-1.5 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[9px]">
+                {isEn ? 'UNLOCKED' : '已解锁'}
+              </span>
             </div>
 
             {/* 内容区 */}
-            <div className={`space-y-3 transition-all ${!isPulseUnlocked ? 'filter blur-sm select-none opacity-30' : ''}`}>
+            <div className="space-y-3">
               <h3 className="font-serif-title text-sm text-[var(--text-primary)] font-bold">
                 {isEn ? 'Silence & Boundary Enforcement' : '结构性沉默 / 裁决界限'}
               </h3>
@@ -90,41 +90,23 @@ export default function DailyPulse({ userRole, onTriggerRegister, onTriggerSubsc
             </div>
           </div>
 
-          <div className={`pt-2 border-t border-[var(--border-line)]/50 text-[10px] font-mono text-[var(--text-muted)] ${!isPulseUnlocked ? 'filter blur-sm' : ''}`}>
+          <div className="pt-2 border-t border-[var(--border-line)]/50 text-[10px] font-mono text-[var(--text-muted)]">
             {isEn ? 'CORE PROTOCOL: ENFORCE PRECISION' : '核心法则：激活裁决因子 (Precision)'}
           </div>
-
-          {/* 未解锁遮罩 (仅游客显示) */}
-          {!isPulseUnlocked && (
-            <div className="absolute inset-0 bg-[var(--bg-card)]/85 backdrop-blur-[2px] flex flex-col items-center justify-center p-4 text-center space-y-2.5 z-10">
-              <p className="text-xs font-mono font-bold text-[var(--text-primary)]">
-                {isEn ? 'DAILY PROTOCOL LOCKED' : isTW ? '今日微觀法則已隱藏' : '今日微观法则已隐藏'}
-              </p>
-              <p className="text-[10px] font-mono text-[var(--text-muted)] max-w-[200px]">
-                {isEn ? 'Register account to reveal daily protocols & Four Pillars.' : '免费注册账号锁定坐标，解锁今日微观法则与四柱存在结构。'}
-              </p>
-              <button
-                onClick={onTriggerRegister}
-                className="px-3.5 py-1.5 bg-[var(--cinnabar)] text-white text-[10px] font-mono rounded hover:opacity-90 transition-all uppercase tracking-wider font-bold"
-              >
-                {isEn ? 'Register Free' : '免费注册解锁'}
-              </button>
-            </div>
-          )}
         </div>
 
-        {/* 卡片 3：界限张力 (Boundary Strain) - 注册后解锁 */}
+        {/* 卡片 3：界限张力 (Boundary Strain) - 全员开放 */}
         <div className="p-5 rounded border border-[var(--border-line)] bg-[var(--bg-card)] backdrop-blur-md space-y-3 relative overflow-hidden flex flex-col justify-between">
           <div>
             <div className="flex justify-between items-center text-[10px] font-mono text-[var(--text-muted)] mb-2">
               <span>[03] {isEn ? 'BOUNDARY STRAIN' : isTW ? '界限張力與割捨' : '界限张力与割舍'}</span>
-              {!isPulseUnlocked && (
-                <span className="text-[10px] font-mono text-amber-400">[REGISTER TO UNLOCK]</span>
-              )}
+              <span className="px-1.5 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[9px]">
+                {isEn ? 'UNLOCKED' : '已解锁'}
+              </span>
             </div>
 
             {/* 内容区 */}
-            <div className={`space-y-3 transition-all ${!isPulseUnlocked ? 'filter blur-sm select-none opacity-30' : ''}`}>
+            <div className="space-y-3">
               <h3 className="font-serif-title text-sm text-[var(--text-primary)] font-bold">
                 {isEn ? 'Relinquishing Projection Traps' : '切断情绪垃圾桶与投射陷阱'}
               </h3>
@@ -138,24 +120,9 @@ export default function DailyPulse({ userRole, onTriggerRegister, onTriggerSubsc
             </div>
           </div>
 
-          <div className={`pt-2 border-t border-[var(--border-line)]/50 text-[10px] font-mono text-[var(--text-muted)] ${!isPulseUnlocked ? 'filter blur-sm' : ''}`}>
+          <div className="pt-2 border-t border-[var(--border-line)]/50 text-[10px] font-mono text-[var(--text-muted)]">
             {isEn ? 'STRAIN INDEX: BOUNDARY BREACH RISK' : '张力预警：界限侵蚀风险'}
           </div>
-
-          {/* 未解锁遮罩 (仅游客显示) */}
-          {!isPulseUnlocked && (
-            <div className="absolute inset-0 bg-[var(--bg-card)]/85 backdrop-blur-[2px] flex flex-col items-center justify-center p-4 text-center space-y-2.5 z-10">
-              <p className="text-xs font-mono font-bold text-[var(--text-primary)]">
-                {isEn ? 'BOUNDARY DIAGNOSIS LOCKED' : isTW ? '界限張力診斷未解鎖' : '界限张力诊断未解锁'}
-              </p>
-              <button
-                onClick={onTriggerRegister}
-                className="px-3.5 py-1.5 border border-[var(--border-line-hover)] bg-[var(--bg-card-hover)] hover:border-[var(--cinnabar)] text-[var(--text-primary)] text-[10px] font-mono rounded transition-all uppercase tracking-wider font-bold"
-              >
-                {isEn ? 'Unlock Free' : '免费解锁诊断'}
-              </button>
-            </div>
-          )}
         </div>
 
       </div>
