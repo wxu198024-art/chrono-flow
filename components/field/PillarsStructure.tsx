@@ -56,7 +56,7 @@ export default function PillarsStructure({ userRole, onTriggerRegister, onTrigge
                 : '你的底层安全感锚定在“高期待与隐秘焦虑”中。原点重力让你天然带着一种必须靠“秩序与听话”来换取生存许可的潜意识。'}
             </p>
             <div className="text-[10px] font-mono text-[var(--cinnabar)]">
-              {isEn ? 'VECTOR: Adaptation Overload' : isTW ? '繼承因子：潛流過載 (Adaptation)' : '继承因子：潜流过载 (Adaptation)'}
+              {isEn ? 'VECTOR: Adaptation Overload' : isTW ? '繼承因子：潛流過載' : '继承因子：潜流过载'}
             </div>
           </div>
 
@@ -76,7 +76,7 @@ export default function PillarsStructure({ userRole, onTriggerRegister, onTrigge
                 : '你在职场与社交中塑造了“极其有涵养、体面、懂事”的配合者形象。大家习惯了你的妥协，以为那是你的涵养，实际上是你的防御机制。'}
             </p>
             <div className="text-[10px] font-mono text-[var(--cinnabar)]">
-              {isEn ? 'VECTOR: Visibility Compensation' : isTW ? '面具因子：顯化代償 (Visibility)' : '面具因子：显化代偿 (Visibility)'}
+              {isEn ? 'VECTOR: Visibility Compensation' : isTW ? '面具因子：顯化代償' : '面具因子：显化代偿'}
             </div>
           </div>
 
@@ -96,7 +96,7 @@ export default function PillarsStructure({ userRole, onTriggerRegister, onTrigge
                 : '卸下所有面具后，你的内核早已对拖沓与烂摊子厌烦至极。你并非缺乏刀刃向内的勇气，你只是习惯了用“再忍忍”逃避冲突。'}
             </p>
             <div className="text-[10px] font-mono text-[var(--cinnabar)]">
-              {isEn ? 'VECTOR: Precision Locked' : isTW ? '內核因子：裁決被鎖 (Precision)' : '内核因子：裁决被锁 (Precision)'}
+              {isEn ? 'VECTOR: Precision Locked' : isTW ? '內核因子：裁決被鎖' : '内核因子：裁决被锁'}
             </div>
           </div>
 
@@ -116,7 +116,7 @@ export default function PillarsStructure({ userRole, onTriggerRegister, onTrigge
                 : '你从未对任何人提及的终极渴望，是彻底摆脱他人的负能量绑架。11 天内，积压的忍耐将强制转化为划定边界的裁决力。'}
             </p>
             <div className="text-[10px] font-mono text-[var(--cinnabar)]">
-              {isEn ? 'VECTOR: Anchoring Seeking' : isTW ? '渴望因子：重力再置 (Anchoring)' : '渴望因子：重力再置 (Anchoring)'}
+              {isEn ? 'VECTOR: Anchoring Seeking' : isTW ? '渴望因子：重力再置' : '渴望因子：重力再置'}
             </div>
           </div>
         </div>
@@ -153,10 +153,10 @@ export default function PillarsStructure({ userRole, onTriggerRegister, onTrigge
         <div className="p-6 rounded border border-[var(--border-line)] bg-[var(--bg-card)] relative overflow-hidden space-y-6">
           <div className={`space-y-6 transition-all ${!isEquilibriumUnlocked ? 'filter blur-md select-none opacity-20' : ''}`}>
             
-            {/* 5 个维度重力因子占比 */}
+            {/* 5 个维度重力因子占比：顶端仅保留序号 [01]~[05]，消除任何名称重复 */}
             <div className="grid grid-cols-1 md:grid-cols-5 gap-4 font-mono text-xs">
               <div className="p-3 bg-[var(--bg-card-hover)] rounded border border-[var(--border-line)]">
-                <div className="text-[var(--text-muted)] text-[10px]">[01] PRECISION</div>
+                <div className="text-[var(--text-muted)] text-[10px]">[01]</div>
                 <div className="font-bold text-sm text-[var(--text-primary)]">
                   {isEn ? 'Precision' : isTW ? '裁決因子' : '裁决因子'}
                 </div>
@@ -167,7 +167,7 @@ export default function PillarsStructure({ userRole, onTriggerRegister, onTrigge
               </div>
 
               <div className="p-3 bg-[var(--bg-card-hover)] rounded border border-[var(--border-line)]">
-                <div className="text-[var(--text-muted)] text-[10px]">[02] EXPANSION</div>
+                <div className="text-[var(--text-muted)] text-[10px]">[02]</div>
                 <div className="font-bold text-sm text-[var(--text-primary)]">
                   {isEn ? 'Expansion' : isTW ? '蔓延因子' : '蔓延因子'}
                 </div>
@@ -178,7 +178,7 @@ export default function PillarsStructure({ userRole, onTriggerRegister, onTrigge
               </div>
 
               <div className="p-3 bg-[var(--bg-card-hover)] rounded border border-[var(--border-line)]">
-                <div className="text-[var(--text-muted)] text-[10px]">[03] ADAPTATION</div>
+                <div className="text-[var(--text-muted)] text-[10px]">[03]</div>
                 <div className="font-bold text-sm text-[var(--text-primary)]">
                   {isEn ? 'Adaptation' : isTW ? '潛流因子' : '潜流因子'}
                 </div>
@@ -189,7 +189,7 @@ export default function PillarsStructure({ userRole, onTriggerRegister, onTrigge
               </div>
 
               <div className="p-3 bg-[var(--bg-card-hover)] rounded border border-[var(--border-line)]">
-                <div className="text-[var(--text-muted)] text-[10px]">[04] VISIBILITY</div>
+                <div className="text-[var(--text-muted)] text-[10px]">[04]</div>
                 <div className="font-bold text-sm text-[var(--text-primary)]">
                   {isEn ? 'Visibility' : isTW ? '顯化因子' : '显化因子'}
                 </div>
@@ -200,7 +200,7 @@ export default function PillarsStructure({ userRole, onTriggerRegister, onTrigge
               </div>
 
               <div className="p-3 bg-[var(--bg-card-hover)] rounded border border-[var(--border-line)]">
-                <div className="text-[var(--text-muted)] text-[10px]">[05] ANCHORING</div>
+                <div className="text-[var(--text-muted)] text-[10px]">[05]</div>
                 <div className="font-bold text-sm text-[var(--text-primary)]">
                   {isEn ? 'Anchoring' : isTW ? '錨定因子' : '锚定因子'}
                 </div>
@@ -217,15 +217,15 @@ export default function PillarsStructure({ userRole, onTriggerRegister, onTrigge
                 {isEn
                   ? 'DYNAMIC STRAIN ANALYSIS: ADAPTATION (88%) VS PRECISION (32%)'
                   : isTW
-                  ? '重力張力撕裂比分析：潛流因子 (88%) VS 裁決因子 (32%)'
-                  : '重力张力撕裂比分析：潜流因子 (88%) VS 裁决因子 (32%)'}
+                  ? '重力張力撕裂比分析：潛流因子 (88%) 比 裁決因子 (32%)'
+                  : '重力张力撕裂比分析：潜流因子 (88%) 比 裁决因子 (32%)'}
               </h4>
               <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
                 {isEn
                   ? 'Your Adaptation factor is operating in severe overload, causing you to absorb ambient stress. Meanwhile, your Precision factor is suppressed, leaving you unable to enforce boundaries. This 56% strain gap is the direct driver of your inner friction.'
                   : isTW
-                  ? '你的「潛流因子」（Adaptation / 同理與吸收力）處於 88% 的極度過載狀態，而你的「裁決因子」（Precision / 劃界與斬斷力）僅為 32%。高達 56% 的張力差，是你內在內耗与不敢說 No 的根本病灶。'
-                  : '你的“潜流因子”（Adaptation / 同理与吸收力）处于 88% 的极度过载状态，而你的“裁决因子”（Precision / 划界与斩断力）仅为 32%。高达 56% 的张力差，是你内部内耗与不敢说 No 的根本病灶。'}
+                  ? '你的「潛流因子」（同理與吸收力）處於 88% 的極度過載狀態，而你的「裁決因子」（劃界與斬斷力）僅為 32%。高達 56% 的張力差，是你內在內耗與不敢說 No 的根本病灶。'
+                  : '你的“潜流因子”（同理与吸收力）处于 88% 的极度过载状态，而你的“裁决因子”（划界与斩断力）仅为 32%。高达 56% 的张力差，是你内部内耗与不敢说 No 的根本病灶。'}
               </p>
             </div>
           </div>
