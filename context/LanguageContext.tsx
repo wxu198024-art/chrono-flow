@@ -4,7 +4,6 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 
 export type Locale = 'zh-CN' | 'zh-TW' | 'ja' | 'en';
 
-// 标准化语言 Code 方法（支持根据浏览器或传入字符串自动匹配）
 export function normalizeLocale(lang: string): Locale {
   if (!lang) return 'zh-CN';
   const l = lang.toLowerCase();
@@ -14,12 +13,12 @@ export function normalizeLocale(lang: string): Locale {
   return 'zh-CN';
 }
 
-// 扩展接口：向下兼容旧组件依赖的 lang 属性以及任意字典 Key 访问
+// 优化：为 dict 显式声明 [key: string]: any，允许任意属性安全访问
 interface LanguageContextType {
   locale: Locale;
-  lang: string; // 向下兼容旧组件的 lang 判断
+  lang: string;
   setLocale: (locale: Locale) => void;
-  dict: Record<string, any>; // 允许任意动态属性访问，消除 TS2339 报错
+  dict: Record<string, any> & { [key: string]: any }; 
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
@@ -28,7 +27,6 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>('zh-CN');
   const [dict, setDict] = useState<Record<string, any>>({});
 
-  // 动态读取 JSON 字典
   const loadDictionary = async (targetLocale: Locale) => {
     try {
       const dictionary = await import(`@/locales/${targetLocale}.json`);
@@ -56,7 +54,6 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     loadDictionary(normalized);
   };
 
-  // 实时推导旧组件需要的 lang 简写（'en', 'zh', 等）
   const lang = locale.startsWith('en') ? 'en' : locale.startsWith('ja') ? 'ja' : 'zh';
 
   return (
