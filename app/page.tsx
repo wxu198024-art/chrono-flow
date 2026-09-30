@@ -6,7 +6,12 @@ import BirthForm from '@/components/BirthForm';
 import { useLanguage } from '@/context/LanguageContext';
 
 export default function HomePage() {
-  const { dict, lang } = useLanguage?.() || { dict: {}as Record<string, any>, lang: 'zh' };
+ // 修改 app/page.tsx 第 8-10 行：
+export default function HomePage() {
+  const { dict, lang } = useLanguage();
+
+  const currentLang = (lang as string) || 'zh';
+  // ... 后续代码完全保持不变
 
   const currentLang = (lang as string) || 'zh';
   const isEn = currentLang === 'en';
