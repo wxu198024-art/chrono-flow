@@ -15,25 +15,25 @@ export default function PillarsStructure({ userRole, onTriggerRegister, onTrigge
   const isEn = currentLang === 'en';
   const isTW = currentLang === 'zh-TW' || currentLang === 'zh-HK' || currentLang === 'tw';
 
-  // 1. 注册解锁：注册用户与订阅用户均可查看四柱结构
-  const isPillarsUnlocked = userRole === 'registered' || userRole === 'subscribed';
+  // 1. 四柱存在结构 (Level 4)：全员（含游客）开放
+  const isPillarsUnlocked = true;
   
-  // 2. 付费解锁：仅订阅用户可解锁五维动态均衡矩阵
-  const isEquilibriumUnlocked = userRole === 'subscribed';
+  // 2. 五行均衡因子 (Level 5)：已注册或已订阅均解锁（游客状态锁定）
+  const isFiveElementsUnlocked = userRole === 'registered' || userRole === 'subscribed';
 
   return (
     <div className="space-y-8">
-      {/* SECTION 1: 四柱存在结构 (The Four Pillars of Existence) */}
+      {/* SECTION 1: 四柱存在结构 (Level 4: The Four Pillars of Existence) */}
       <section className="space-y-4">
         <div className="flex items-center justify-between border-b border-[var(--border-line)] pb-2">
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-[var(--text-primary)]"></span>
             <h2 className="font-serif-title text-base md:text-lg text-[var(--text-primary)] tracking-wide uppercase">
-              {isEn ? 'THE FOUR PILLARS OF EXISTENCE' : isTW ? '四柱存在結構與解構' : '四柱存在结构与解构'}
+              {isEn ? 'LEVEL 4 | THE FOUR PILLARS OF EXISTENCE' : isTW ? 'LEVEL 4 | 四柱存在結構與解構' : 'LEVEL 4 | 四柱存在结构与解构'}
             </h2>
           </div>
-          <span className="text-[10px] font-mono text-[var(--text-muted)] uppercase">
-            {isPillarsUnlocked ? (isEn ? 'STATUS: UNLOCKED' : '状态：已解锁') : (isEn ? 'REQUIRES REGISTRATION' : '需要注册解锁')}
+          <span className="text-[10px] font-mono text-emerald-400 uppercase">
+            {isEn ? 'STATUS: UNLOCKED' : '状态：免费体验/已解锁'}
           </span>
         </div>
 
@@ -41,9 +41,9 @@ export default function PillarsStructure({ userRole, onTriggerRegister, onTrigge
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 relative">
           
           {/* Pillar 1: 原点之柱 (The Origin) */}
-          <div className={`p-5 rounded border border-[var(--border-line)] bg-[var(--bg-card)] space-y-3 relative overflow-hidden transition-all ${!isPillarsUnlocked ? 'filter blur-sm select-none opacity-30' : ''}`}>
+          <div className="p-5 rounded border border-[var(--border-line)] bg-[var(--bg-card)] space-y-3 relative overflow-hidden transition-all">
             <div className="text-[10px] font-mono text-[var(--text-muted)] uppercase border-b border-[var(--border-line)]/50 pb-1">
-              [PILLAR I] {isEn ? 'THE ORIGIN' : '原点之柱 (年)'}
+              [PILLAR I] {isEn ? 'THE ORIGIN PILLAR' : '原点之柱 (年)'}
             </div>
             <h3 className="font-serif-title text-sm font-bold text-[var(--text-primary)]">
               {isEn ? 'Inherited Gravity' : '隐秘继承重力场'}
@@ -59,9 +59,9 @@ export default function PillarsStructure({ userRole, onTriggerRegister, onTrigge
           </div>
 
           {/* Pillar 2: 社会投影之柱 (The Social Armor) */}
-          <div className={`p-5 rounded border border-[var(--border-line)] bg-[var(--bg-card)] space-y-3 relative overflow-hidden transition-all ${!isPillarsUnlocked ? 'filter blur-sm select-none opacity-30' : ''}`}>
+          <div className="p-5 rounded border border-[var(--border-line)] bg-[var(--bg-card)] space-y-3 relative overflow-hidden transition-all">
             <div className="text-[10px] font-mono text-[var(--text-muted)] uppercase border-b border-[var(--border-line)]/50 pb-1">
-              [PILLAR II] {isEn ? 'THE SOCIAL ARMOR' : '社会投影之柱 (月)'}
+              [PILLAR II] {isEn ? 'THE SOCIAL MASK' : '社会投影之柱 (月)'}
             </div>
             <h3 className="font-serif-title text-sm font-bold text-[var(--text-primary)]">
               {isEn ? 'The Habitual Accommodator' : '习惯性妥协面具'}
@@ -77,9 +77,9 @@ export default function PillarsStructure({ userRole, onTriggerRegister, onTrigge
           </div>
 
           {/* Pillar 3: 内核原点之柱 (The True Ego) */}
-          <div className={`p-5 rounded border border-[var(--border-line)] bg-[var(--bg-card)] space-y-3 relative overflow-hidden transition-all ${!isPillarsUnlocked ? 'filter blur-sm select-none opacity-30' : ''}`}>
+          <div className="p-5 rounded border border-[var(--border-line)] bg-[var(--bg-card)] space-y-3 relative overflow-hidden transition-all">
             <div className="text-[10px] font-mono text-[var(--text-muted)] uppercase border-b border-[var(--border-line)]/50 pb-1">
-              [PILLAR III] {isEn ? 'THE TRUE EGO' : '内核原点之柱 (日)'}
+              [PILLAR III] {isEn ? 'THE CORE EGO' : '内核原点之柱 (日)'}
             </div>
             <h3 className="font-serif-title text-sm font-bold text-[var(--text-primary)]">
               {isEn ? 'Suppressed Decision Engine' : '被封印的裁决内核'}
@@ -95,9 +95,9 @@ export default function PillarsStructure({ userRole, onTriggerRegister, onTrigge
           </div>
 
           {/* Pillar 4: 潜匿地平线之柱 (The Unseen Horizon) */}
-          <div className={`p-5 rounded border border-[var(--border-line)] bg-[var(--bg-card)] space-y-3 relative overflow-hidden transition-all ${!isPillarsUnlocked ? 'filter blur-sm select-none opacity-30' : ''}`}>
+          <div className="p-5 rounded border border-[var(--border-line)] bg-[var(--bg-card)] space-y-3 relative overflow-hidden transition-all">
             <div className="text-[10px] font-mono text-[var(--text-muted)] uppercase border-b border-[var(--border-line)]/50 pb-1">
-              [PILLAR IV] {isEn ? 'THE UNSEEN HORIZON' : '潜匿地平线之柱 (时)'}
+              [PILLAR IV] {isEn ? 'THE HIDDEN HORIZON' : '潜匿地平线之柱 (时)'}
             </div>
             <h3 className="font-serif-title text-sm font-bold text-[var(--text-primary)]">
               {isEn ? 'Unspoken Breakout Drive' : '终极彻底破局渴望'}
@@ -111,116 +111,96 @@ export default function PillarsStructure({ userRole, onTriggerRegister, onTrigge
               {isEn ? 'VECTOR: Anchoring Seeking' : '渴望因子：重力再置 (Anchoring)'}
             </div>
           </div>
-
-          {/* 游客注册引导层 */}
-          {!isPillarsUnlocked && (
-            <div className="absolute inset-0 bg-[var(--bg-card)]/90 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center space-y-3 z-20 rounded border border-[var(--border-line)]">
-              <h3 className="font-serif-title text-base md:text-lg text-[var(--text-primary)]">
-                {isEn ? 'UNLOCK YOUR FOUR PILLARS OF EXISTENCE' : isTW ? '解鎖您的四柱存在結構' : '解锁您的四柱存在结构'}
-              </h3>
-              <p className="text-xs text-[var(--text-secondary)] max-w-md leading-relaxed">
-                {isEn
-                  ? 'Enter your email to reveal your Inherited Gravity, Social Armor, True Ego, and Unspoken Desires for free.'
-                  : '免费注册账号锁定生辰坐标，全量解剖你的原点重力、社会盔甲、纯粹内核与终极潜匿欲望。'}
-              </p>
-              <button
-                onClick={onTriggerRegister}
-                className="px-6 py-2.5 bg-[var(--cinnabar)] text-white text-xs font-mono font-bold rounded hover:opacity-90 transition-all uppercase tracking-wider shadow-lg"
-              >
-                {isEn ? 'Register Free to Unlock' : '免费注册并解锁四柱'}
-              </button>
-            </div>
-          )}
         </div>
       </section>
 
-      {/* SECTION 2: 五维动态均衡矩阵 (The Five Dynamic Equilibrium Factors) - 付费解锁 */}
+      {/* SECTION 2: 五行均衡因子 (Level 5: The Five Dynamic Equilibrium Factors) - 注册解锁 */}
       <section className="space-y-4 pt-4 border-t border-[var(--border-line)]">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-amber-500"></span>
             <h2 className="font-serif-title text-base md:text-lg text-[var(--text-primary)] tracking-wide uppercase">
-              {isEn ? 'THE FIVE DYNAMIC EQUILIBRIUM FACTORS' : isTW ? '五維重力因子動態均衡矩陣' : '五维重力因子动态均衡矩阵'}
+              {isEn ? 'LEVEL 5 | THE FIVE DYNAMIC EQUILIBRIUM FACTORS' : isTW ? 'LEVEL 5 | 五行均衡因子動態矩陣' : 'LEVEL 5 | 五行均衡因子动态矩阵'}
             </h2>
           </div>
-          <span className="text-[10px] font-mono text-amber-400 uppercase">
-            {isEquilibriumUnlocked ? (isEn ? 'FULL ORBIT ACTIVE' : '全景已激活') : (isEn ? 'PAID SUBSCRIBERS ONLY' : '仅限付费订阅解锁')}
+          <span className="text-[10px] font-mono uppercase text-amber-400">
+            {isFiveElementsUnlocked ? (isEn ? 'STATUS: UNLOCKED' : '状态：已解锁') : (isEn ? 'REQUIRES REGISTRATION' : '需要注册解锁')}
           </span>
         </div>
 
         <div className="p-6 rounded border border-[var(--border-line)] bg-[var(--bg-card)] relative overflow-hidden space-y-6">
-          <div className={`space-y-6 transition-all ${!isEquilibriumUnlocked ? 'filter blur-md select-none opacity-20' : ''}`}>
+          <div className={`space-y-6 transition-all ${!isFiveElementsUnlocked ? 'filter blur-md select-none opacity-20' : ''}`}>
             
-            {/* 5 个因子进度条 */}
+            {/* 5 个五行因子进度与定义 */}
             <div className="grid grid-cols-1 md:grid-cols-5 gap-4 font-mono text-xs">
               <div className="p-3 bg-[var(--bg-card-hover)] rounded border border-[var(--border-line)]">
-                <div className="text-[var(--text-muted)] text-[10px]">[01] PRECISION</div>
+                <div className="text-[var(--text-muted)] text-[10px]">[01] PRECISION (金)</div>
                 <div className="font-bold text-sm text-[var(--text-primary)]">裁决因子</div>
                 <div className="mt-2 text-lg font-serif-title text-[var(--cinnabar)]">32%</div>
                 <div className="text-[9px] text-[var(--text-muted)] mt-1">断裂危险 / 需补强</div>
               </div>
 
               <div className="p-3 bg-[var(--bg-card-hover)] rounded border border-[var(--border-line)]">
-                <div className="text-[var(--text-muted)] text-[10px]">[02] EXPANSION</div>
+                <div className="text-[var(--text-muted)] text-[10px]">[02] EXPANSION (木)</div>
                 <div className="font-bold text-sm text-[var(--text-primary)]">蔓延因子</div>
                 <div className="mt-2 text-lg font-serif-title text-blue-400">68%</div>
                 <div className="text-[9px] text-[var(--text-muted)] mt-1">野心散播 / 极度活跃</div>
               </div>
 
               <div className="p-3 bg-[var(--bg-card-hover)] rounded border border-[var(--border-line)]">
-                <div className="text-[var(--text-muted)] text-[10px]">[03] ADAPTATION</div>
+                <div className="text-[var(--text-muted)] text-[10px]">[03] ADAPTATION (水)</div>
                 <div className="font-bold text-sm text-[var(--text-primary)]">潜流因子</div>
-                <div className="mt-2 text-lg font-serif-title text-amber-400">88%</div>
+                <div className="mt-2 text-lg font-serif-title text-cyan-400">88%</div>
                 <div className="text-[9px] text-[var(--text-muted)] mt-1">严重过载 / 情绪吸耗</div>
               </div>
 
               <div className="p-3 bg-[var(--bg-card-hover)] rounded border border-[var(--border-line)]">
-                <div className="text-[var(--text-muted)] text-[10px]">[04] VISIBILITY</div>
+                <div className="text-[var(--text-muted)] text-[10px]">[04] VISIBILITY (火)</div>
                 <div className="font-bold text-sm text-[var(--text-primary)]">显化因子</div>
                 <div className="mt-2 text-lg font-serif-title text-purple-400">74%</div>
                 <div className="text-[9px] text-[var(--text-muted)] mt-1">过度防御性体面</div>
               </div>
 
               <div className="p-3 bg-[var(--bg-card-hover)] rounded border border-[var(--border-line)]">
-                <div className="text-[var(--text-muted)] text-[10px]">[05] ANCHORING</div>
+                <div className="text-[var(--text-muted)] text-[10px]">[05] ANCHORING (土)</div>
                 <div className="font-bold text-sm text-[var(--text-primary)]">锚定因子</div>
                 <div className="mt-2 text-lg font-serif-title text-emerald-400">41%</div>
                 <div className="text-[9px] text-[var(--text-muted)] mt-1">定力亏缺 / 寻找锚点</div>
               </div>
             </div>
 
-            {/* 深度冲突解读 */}
+            {/* 深度五行张力分析 */}
             <div className="p-4 rounded border border-[var(--border-line)] bg-[var(--bg-card-hover)]/50 space-y-2">
               <h4 className="font-serif-title text-sm text-[var(--text-primary)] font-bold">
-                {isEn ? 'DYNAMICAL TENSION ANALYSIS: ADAPTATION VS PRECISION' : '动态撕裂比分析：潜流因子 (88%) VS 裁决因子 (32%)'}
+                {isEn ? 'DYNAMICAL TENSION ANALYSIS: ADAPTATION VS PRECISION' : '五行动态撕裂比分析：潜流因子 (水 88%) VS 裁决因子 (金 32%)'}
               </h4>
               <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
                 {isEn
                   ? 'Your Adaptation factor is operating in severe over-capacity, causing you to absorb ambient stress. Meanwhile, your Precision factor is suppressed, leaving you unable to enforce boundaries. This 56% gap is the direct source of your inner friction.'
-                  : '你的“潜流因子”（同理与吸收力）处于 88% 的极度过载状态，而你的“裁决因子”（划界与斩断力）仅为 32%。高达 56% 的张力差，是你内部内耗与不敢说 No 的根本病灶。'}
+                  : '你的“潜流因子”（水/同理与吸收力）处于 88% 的极度过载状态，而你的“裁决因子”（金/划界与斩断力）仅为 32%。高达 56% 的张力差，是你内部内耗与不敢说 No 的根本病灶。'}
               </p>
             </div>
           </div>
 
-          {/* 未付费订阅遮罩 */}
-          {!isEquilibriumUnlocked && (
+          {/* 未注册锁定遮罩（仅游客显示） */}
+          {!isFiveElementsUnlocked && (
             <div className="absolute inset-0 bg-[var(--bg-card)]/90 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center space-y-3 z-20">
               <span className="px-2.5 py-1 rounded bg-amber-500/10 border border-amber-500/30 text-amber-400 font-mono text-[10px]">
-                {isEn ? 'ORBITAL SUBSCRIPTION REQUIRED' : '全景轨道订阅限定'}
+                {isEn ? 'FREE REGISTRATION REQUIRED' : '注册账号免费解锁'}
               </span>
               <h3 className="font-serif-title text-base md:text-lg text-[var(--text-primary)]">
-                {isEn ? 'UNLOCK 52-WEEK DYNAMIC EQUILIBRIUM MATRIX' : isTW ? '解鎖 52 週動態重力矩陣與週度解包' : '解锁 52 周动态重力矩阵与周度解包'}
+                {isEn ? 'UNLOCK LEVEL 5 | FIVE DYNAMIC EQUILIBRIUM FACTORS' : isTW ? '解鎖 LEVEL 5 | 五行均衡因子動態矩陣' : '解锁 LEVEL 5 | 五行均衡因子动态矩阵'}
               </h3>
               <p className="text-xs text-[var(--text-secondary)] max-w-md leading-relaxed">
                 {isEn
-                  ? 'Unlock full dynamic factor ratios, weekly friction unpacking, and 52-week trajectory tracking.'
-                  : '解锁 5 个重力因子实显比例、动态撕裂比计算、52 周连续轨迹追踪与黑历史中枢归档。'}
+                  ? 'Register a free account to calculate your 5 equilibrium factor ratios and inner dynamic strain analysis.'
+                  : '免费注册账号绑定生辰坐标，全量解剖你的金/木/水/火/土 5 维重力因子占比与内在撕裂比。'}
               </p>
               <button
-                onClick={onTriggerSubscribe || onTriggerRegister}
-                className="px-6 py-2.5 bg-amber-500 text-black font-mono font-bold text-xs rounded hover:opacity-90 transition-all uppercase tracking-wider shadow-lg"
+                onClick={onTriggerRegister}
+                className="px-6 py-2.5 bg-[var(--cinnabar)] text-white font-mono font-bold text-xs rounded hover:opacity-90 transition-all uppercase tracking-wider shadow-lg"
               >
-                {isEn ? 'Unlock Full Orbit ($29/yr)' : '解锁全景轨道 (￥198/年)'}
+                {isEn ? 'Register Free to Unlock' : '免费注册解锁五行矩阵'}
               </button>
             </div>
           )}
