@@ -20,8 +20,10 @@ export default function Header() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  // 语言选项清单：按要求将 日本语 (ja) 放在 English (en) 的下方
   const languages: { code: Locale; label: string }[] = [
     { code: 'en', label: 'English (EN)' },
+    { code: 'ja', label: '日本語' },
     { code: 'zh-TW', label: '繁體中文' },
     { code: 'zh-CN', label: '简体中文' },
   ];
@@ -73,7 +75,7 @@ export default function Header() {
             <span>LOCALE</span>
             <span className="text-[var(--text-muted)]">•</span>
             <span className="text-[var(--text-primary)]">
-              {locale === 'en' ? 'EN' : locale === 'zh-TW' ? '繁' : '简'}
+              {locale === 'en' ? 'EN' : locale === 'ja' ? '日' : locale === 'zh-TW' ? '繁' : '简'}
             </span>
             <svg
               className={`w-3 h-3 ml-0.5 transition-transform duration-200 ${isLangOpen ? 'rotate-180' : ''}`}
