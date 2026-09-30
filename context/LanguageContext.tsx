@@ -1,8 +1,9 @@
 'use client';
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
+import { Locale, Dictionary } from '@/types/i18n';
 
-export type Locale = 'zh-CN' | 'zh-TW' | 'ja' | 'en';
+export { type Locale };
 
 export function normalizeLocale(lang: string): Locale {
   if (!lang) return 'zh-CN';
@@ -17,25 +18,25 @@ interface LanguageContextType {
   locale: Locale;
   lang: string;
   setLocale: (locale: Locale) => void;
-  dict: Record<string, any>;
+  dict: Dictionary;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>('zh-CN');
-  // 关键修复：显式断言为 Record<string, any>，防止被推断为字面量空对象 {}
-  const [dict, setDict] = useState<Record<string, any>>({} as Record<string, any>);
+  // 强制初始化为 Dictionary，消除空对象类型推断
+  const [dict, setDict] = useState<Dictionary>({} as Dictionary);
 
   const loadDictionary = async (targetLocale: Locale) => {
     try {
       const dictionary = await import(`@/locales/${targetLocale}.json`);
-      setDict(dictionary.default || dictionary);
+      setDict((dictionary.default || dictionary) as Dictionary);
     } catch (error) {
       console.warn(`Failed to load dictionary for locale: ${targetLocale}, falling back to zh-CN.`);
       if (targetLocale !== 'zh-CN') {
         const fallbackDict = await import(`@/locales/zh-CN.json`);
-        setDict(fallbackDict.default || fallbackDict);
+        setDict((fallbackDict.default || fallbackDict) as Dictionary);
       }
     }
   };
