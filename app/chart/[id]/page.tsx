@@ -14,12 +14,15 @@ export default function ChartResultPage() {
   const params = useParams();
   const searchParams = useSearchParams();
 
-  // 1. 全局语言 Provider 获取 (将 currentLang 显式标注为 string，解决 TS2367 类型判定重合报错)
+  // 1. 全局语言 Provider 获取
   const langContext = useLanguage?.();
   const currentLang: string = langContext?.lang || 'zh';
   const isEn = currentLang === 'en';
   const isJa = currentLang === 'ja';
   const isTW = currentLang === 'zh-TW' || currentLang === 'zh-HK' || currentLang === 'tw';
+
+  // 针对期望接收 'zh' | 'en' (或指定语言类型) 的组件进行安全的类型收窄
+  const targetLang = (isEn ? 'en' : 'zh') as 'en' | 'zh';
 
   const rawScenarioId = (params?.id as string) || '';
 
@@ -175,14 +178,14 @@ export default function ChartResultPage() {
           <PaywallOverlay onUnlockSuccess={() => setIsPaid(true)} />
         ) : (
           <div className="space-y-6 animate-fade-in">
-            <PillarsUnlocked data={locked_tier} lang={currentLang} />
+            <PillarsUnlocked data={locked_tier} lang={targetLang} />
           </div>
         )}
 
         <div className="pt-6 border-t border-[var(--border-line)]">
           <SubscriptionCard
             data={subscription_tier}
-            lang={currentLang}
+            lang={targetLang}
             tier="T1"
             onSubscribe={handleSubscribe}
           />
@@ -249,7 +252,7 @@ export default function ChartResultPage() {
         </div>
       )}
 
-      {/* 4. 客户端海报 Modal 弹窗 (0 二维码，纯文本标识) */}
+      {/* 4. 客户端海报 Modal 弹窗 */}
       {showPosterModal && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
           <div className="bg-[var(--bg-card)] border border-[var(--border-line)] max-w-sm w-full p-6 rounded-lg space-y-6 relative shadow-2xl text-center">
