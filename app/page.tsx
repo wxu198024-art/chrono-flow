@@ -12,12 +12,14 @@ export default function HomePage() {
   const isEn = currentLang === 'en';
   const isTW = currentLang === 'zh-TW' || currentLang === 'zh-HK' || currentLang === 'tw';
 
-  // 本地存储校验
+  // 本地存储状态处理（包含 mounted 防止 Hydration 不匹配）
+  const [mounted, setMounted] = useState(false);
   const [hasTested, setHasTested] = useState(false);
   const [originInfo, setOriginInfo] = useState<{ name?: string; birthDate?: string } | null>(null);
   const [showFormAnyway, setShowFormAnyway] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     try {
       const tested = localStorage.getItem('chrono_has_tested');
       const origin = localStorage.getItem('chrono_origin_coordinates');
@@ -31,18 +33,18 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className="max-w-4xl mx-auto px-6 pt-24 pb-16 space-y-16 transition-colors duration-300">
+    <div className="w-full max-w-4xl mx-auto px-6 py-12 space-y-16 transition-colors duration-300">
       
       {/* 模块 1：今日时空节律 */}
       <section className="text-center space-y-6">
-        <div className="inline-flex items-center space-x-3 border border-[var(--border-line)] bg-[var(--bg-card)] px-4 py-1.5 rounded-full text-[12px] tracking-[0.2em] text-[var(--text-secondary)] uppercase backdrop-blur-md">
-          <span className="cinnabar-dot animate-pulse"></span>
+        <div className="inline-flex items-center space-x-2 border border-[var(--border-line)] bg-[var(--bg-card)] px-4 py-1.5 rounded-full text-[12px] tracking-[0.2em] text-[var(--text-secondary)] uppercase">
+          <span className="w-1.5 h-1.5 rounded-full bg-[var(--cinnabar)] animate-pulse" />
           <span>{dict?.dailyRhythmTag || '今日时空节律'}</span>
         </div>
 
-        {/* 极简深度提示卡片 */}
-        <div className="p-8 border border-[var(--border-line)] bg-[var(--bg-card)] backdrop-blur-md rounded-sm max-w-2xl mx-auto space-y-4 relative overflow-hidden transition-all duration-300 hover:border-[var(--border-line-hover)] shadow-sm">
-          <div className="absolute top-0 left-0 w-full yao-yang"></div>
+        {/* 节律卡片 */}
+        <div className="p-8 border border-[var(--border-line)] bg-[var(--bg-card)] rounded-sm max-w-2xl mx-auto space-y-4 relative overflow-hidden transition-all duration-300 hover:border-[var(--border-line-hover)] shadow-sm">
+          <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[var(--border-line-hover)] to-transparent" />
           
           <p className="font-serif-title text-xl md:text-2xl text-[var(--text-primary)] italic tracking-wide">
             {dict?.dailyRhythmQuote || '" Silence is your energy anchor today. "'}
@@ -57,10 +59,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 阴爻分隔线 */}
-      <div className="yao-yin max-w-xl mx-auto opacity-40"></div>
+      {/* 装饰分割线 */}
+      <div className="w-full max-w-xl mx-auto h-[1px] bg-[var(--border-line)] opacity-60" />
 
-      {/* 模块 2：生辰参数输入 / 锁定状态快捷通道 */}
+      {/* 模块 2：生辰参数输入 / 已锚定快捷通道 */}
       <section className="space-y-6 text-center">
         <div className="space-y-2">
           <h2 className="font-serif-title text-2xl md:text-3xl text-[var(--text-primary)] uppercase tracking-[0.15em]">
@@ -72,24 +74,24 @@ export default function HomePage() {
         </div>
 
         <div className="max-w-md mx-auto">
-          {hasTested && !showFormAnyway ? (
-            /* 锁定状态卡片 */
-            <div className="p-6 border border-[var(--border-line)] bg-[var(--bg-card)] backdrop-blur-xl rounded-sm space-y-5 text-center shadow-xl relative">
-              <div className="absolute top-0 left-0 right-0 yao-yang"></div>
+          {mounted && hasTested && !showFormAnyway ? (
+            /* 已锁定状态卡片 */
+            <div className="p-6 border border-[var(--border-line)] bg-[var(--bg-card)] rounded-sm space-y-5 text-center shadow-lg relative">
+              <div className="absolute top-0 left-0 right-0 h-[2px] bg-[var(--cinnabar)]" />
               
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[var(--cinnabar)]/40 bg-[var(--accent-glow)] text-[11px] font-mono text-[var(--cinnabar)] uppercase tracking-widest">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[var(--cinnabar)]/40 bg-[var(--cinnabar)]/10 text-[11px] font-mono text-[var(--cinnabar)] uppercase tracking-widest">
                 <span className="w-1.5 h-1.5 rounded-full bg-[var(--cinnabar)] animate-ping" />
-                <span>{isEn ? 'SPATIOTEMPORAL ORIGIN ANCHORED' : isTW ? '時空原點已錨定' : '时空原点已锚定'}</span>
+                <span>{isEn ? 'ORIGIN ANCHORED' : isTW ? '時空原點已錨定' : '时空原点已锚定'}</span>
               </div>
 
               <div className="text-xs text-[var(--text-secondary)] space-y-1 font-mono">
                 <p>
-                  {isEn ? 'SEEKER:' : isTW ? '探索者:' : '探索者:'}{' '}
+                  {isEn ? 'SEEKER:' : '探索者:'}{' '}
                   <span className="text-[var(--text-primary)] font-bold">{originInfo?.name || 'Seeker'}</span>
                 </p>
                 {originInfo?.birthDate && (
                   <p className="text-[11px] text-[var(--text-muted)]">
-                    {isEn ? 'COORDINATES:' : isTW ? '原點坐標:' : '原点坐标:'} {originInfo.birthDate}
+                    {isEn ? 'COORDINATES:' : '原点坐标:'} {originInfo.birthDate}
                   </p>
                 )}
               </div>
@@ -97,16 +99,15 @@ export default function HomePage() {
               <div className="pt-2 space-y-3">
                 <Link
                   href="/dashboard"
-                  className="w-full h-12 border border-[var(--border-line-hover)] bg-[var(--bg-card-hover)] hover:bg-[var(--cinnabar)] hover:text-white text-[var(--text-primary)] text-xs tracking-[0.2em] uppercase font-medium transition-all duration-300 rounded-sm shadow-md flex items-center justify-center space-x-2 group"
+                  className="w-full h-11 border border-[var(--border-line-hover)] bg-[var(--bg-card)] hover:bg-[var(--cinnabar)] hover:text-white text-[var(--text-primary)] text-xs tracking-[0.2em] uppercase font-medium transition-all duration-300 rounded-sm flex items-center justify-center space-x-2"
                 >
-                  <span className="cinnabar-dot group-hover:bg-white transition-colors"></span>
                   <span>{isEn ? 'ENTER PERSONAL FIELD CONTROL' : isTW ? '進入個人時空場域' : '进入个人时空场域'}</span>
                 </Link>
 
                 <button
                   type="button"
                   onClick={() => setShowFormAnyway(true)}
-                  className="text-[11px] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors underline underline-offset-4 font-mono"
+                  className="text-[11px] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors underline underline-offset-4 font-mono block mx-auto"
                 >
                   {isEn ? 'Re-align Spatiotemporal Coordinates' : isTW ? '重新對齊生辰坐標' : '重新对齐生辰坐标'}
                 </button>
@@ -118,8 +119,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 阳爻分隔线 */}
-      <div className="yao-yang max-w-xl mx-auto opacity-30"></div>
+      {/* 装饰分割线 */}
+      <div className="w-full max-w-xl mx-auto h-[1px] bg-[var(--border-line)] opacity-60" />
 
       {/* 模块 3：三大核心分析维度 */}
       <section className="space-y-6">
@@ -131,12 +132,12 @@ export default function HomePage() {
           ].map((item, idx) => (
             <div 
               key={idx} 
-              className="p-6 border border-[var(--border-line)] bg-[var(--bg-card)] backdrop-blur-md rounded-sm hover:border-[var(--border-line-hover)] hover:bg-[var(--bg-card-hover)] transition-all duration-300 group relative"
+              className="p-6 border border-[var(--border-line)] bg-[var(--bg-card)] rounded-sm hover:border-[var(--border-line-hover)] transition-all duration-300 group"
             >
-              <div className="text-[12px] stems-matrix mb-3 group-hover:text-[var(--cinnabar)] transition-colors">
+              <div className="text-[12px] font-mono text-[var(--text-muted)] mb-3 group-hover:text-[var(--cinnabar)] transition-colors">
                 [{item.num}]
               </div>
-              <h3 className="font-serif-title text-base text-[var(--text-primary)] mb-1">
+              <h3 className="font-serif-title text-base text-[var(--text-primary)] mb-2">
                 {item.title}
               </h3>
               <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
