@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-type Theme = 'dark' | 'sand';
+type Theme = 'dark' | 'light';
 
 interface ThemeContextType {
   theme: Theme;
@@ -16,9 +16,9 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setThemeState] = useState<Theme>('dark');
 
   useEffect(() => {
-    // 初始化时从 localStorage 读取主题，默认青黑 ('dark')
+    // 初始化时读取本地缓存，默认青黑 ('dark')
     const savedTheme = localStorage.getItem('chrono_theme') as Theme;
-    if (savedTheme === 'dark' || savedTheme === 'sand') {
+    if (savedTheme === 'dark' || savedTheme === 'light') {
       setThemeState(savedTheme);
       document.documentElement.setAttribute('data-theme', savedTheme);
     } else {
@@ -33,7 +33,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   };
 
   const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'sand' : 'dark');
+    setTheme(theme === 'dark' ? 'light' : 'dark');
   };
 
   return (
