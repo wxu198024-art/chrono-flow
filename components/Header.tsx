@@ -22,10 +22,11 @@ export default function Header() {
           {/* 风格切换（青黑/暖沙） */}
           <button
             onClick={toggleTheme}
-            className="px-3 py-1.5 rounded-full border border-[var(--border-line)] bg-[var(--bg-card)] text-[var(--text-primary)] hover:border-[var(--border-line-hover)] transition-all flex items-center space-x-1.5"
+            className="px-3 py-1.5 rounded-full border border-[var(--border-line)] bg-[var(--bg-card)] text-[var(--text-primary)] hover:border-[var(--border-line-hover)] transition-all flex items-center space-x-1.5 cursor-pointer"
             title="切换场域风格"
           >
             <span className="w-2 h-2 rounded-full bg-[var(--cinnabar)]"></span>
+            {/* 更加清晰的文字状态表达：显示当前风格类型 */}
             <span>{theme === 'dark' ? '青黑' : '暖沙'}</span>
           </button>
 
