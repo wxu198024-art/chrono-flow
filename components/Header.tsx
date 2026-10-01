@@ -6,7 +6,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { useTheme } from '@/context/ThemeContext';
 
 export default function Header() {
-  const { lang, setLang } = useLanguage();
+  const { locale, setLocale } = useLanguage();
   const { theme, toggleTheme } = useTheme();
 
   return (
@@ -17,9 +17,9 @@ export default function Header() {
           CHRONO <span className="text-xs text-[var(--cinnabar)]">矩阵</span>
         </Link>
 
-        {/* 全局唯一控制区：语言与风格 */}
+        {/* 全局唯一控制区：风格与语言 */}
         <div className="flex items-center space-x-4 text-xs font-mono">
-          {/* 风格切换 */}
+          {/* 风格切换（青黑/暖沙） */}
           <button
             onClick={toggleTheme}
             className="px-3 py-1.5 rounded-full border border-[var(--border-line)] bg-[var(--bg-card)] text-[var(--text-primary)] hover:border-[var(--border-line-hover)] transition-all flex items-center space-x-1.5"
@@ -29,17 +29,25 @@ export default function Header() {
             <span>{theme === 'dark' ? '青黑' : '暖沙'}</span>
           </button>
 
-          {/* 语言切换 */}
+          {/* 语言切换：对应你的 setLocale('zh-CN') 和 setLocale('en') */}
           <div className="flex items-center border border-[var(--border-line)] rounded-full overflow-hidden">
             <button
-              onClick={() => setLang && setLang('zh')}
-              className={`px-2.5 py-1 transition-colors ${lang === 'zh' ? 'bg-[var(--text-primary)] text-[var(--bg-card)] font-bold' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}
+              onClick={() => setLocale('zh-CN')}
+              className={`px-2.5 py-1 transition-colors ${
+                locale === 'zh-CN'
+                  ? 'bg-[var(--text-primary)] text-[var(--bg-card)] font-bold'
+                  : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+              }`}
             >
               中
             </button>
             <button
-              onClick={() => setLang && setLang('en')}
-              className={`px-2.5 py-1 transition-colors ${lang === 'en' ? 'bg-[var(--text-primary)] text-[var(--bg-card)] font-bold' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}
+              onClick={() => setLocale('en')}
+              className={`px-2.5 py-1 transition-colors ${
+                locale === 'en'
+                  ? 'bg-[var(--text-primary)] text-[var(--bg-card)] font-bold'
+                  : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+              }`}
             >
               EN
             </button>
