@@ -12,7 +12,7 @@ export default function HomePage() {
   const isEn = currentLang === 'en';
   const isTW = currentLang === 'zh-TW' || currentLang === 'zh-HK' || currentLang === 'tw';
 
-  // 1. 检查本地是否已有测试锁与生辰原点
+  // 本地存储校验
   const [hasTested, setHasTested] = useState(false);
   const [originInfo, setOriginInfo] = useState<{ name?: string; birthDate?: string } | null>(null);
   const [showFormAnyway, setShowFormAnyway] = useState(false);
@@ -21,7 +21,6 @@ export default function HomePage() {
     try {
       const tested = localStorage.getItem('chrono_has_tested');
       const origin = localStorage.getItem('chrono_origin_coordinates');
-
       if (tested === 'true' && origin) {
         setHasTested(true);
         setOriginInfo(JSON.parse(origin));
@@ -36,13 +35,13 @@ export default function HomePage() {
       
       {/* 模块 1：今日时空节律 */}
       <section className="text-center space-y-6">
-        <div className="inline-flex items-center space-x-2 border border-[var(--border-line)] bg-[var(--bg-card)] px-4 py-1.5 rounded-full text-[10px] tracking-[0.25em] text-[var(--text-secondary)] uppercase backdrop-blur-md">
+        <div className="inline-flex items-center space-x-3 border border-[var(--border-line)] bg-[var(--bg-card)] px-4 py-1.5 rounded-full text-[12px] tracking-[0.2em] text-[var(--text-secondary)] uppercase backdrop-blur-md">
           <span className="cinnabar-dot animate-pulse"></span>
           <span>{dict?.dailyRhythmTag || '今日时空节律'}</span>
         </div>
 
         {/* 极简深度提示卡片 */}
-        <div className="p-8 border border-[var(--border-line)] bg-[var(--bg-card)] backdrop-blur-md rounded-sm max-w-2xl mx-auto space-y-4 relative overflow-hidden transition-all duration-300 hover:border-[var(--border-line-hover)]">
+        <div className="p-8 border border-[var(--border-line)] bg-[var(--bg-card)] backdrop-blur-md rounded-sm max-w-2xl mx-auto space-y-4 relative overflow-hidden transition-all duration-300 hover:border-[var(--border-line-hover)] shadow-sm">
           <div className="absolute top-0 left-0 w-full yao-yang"></div>
           
           <p className="font-serif-title text-xl md:text-2xl text-[var(--text-primary)] italic tracking-wide">
@@ -58,10 +57,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 阴爻分割线 */}
+      {/* 阴爻分隔线 */}
       <div className="yao-yin max-w-xl mx-auto opacity-40"></div>
 
-      {/* 模块 2：输入生辰时空参数 / 已锁定时空原点快捷通道 */}
+      {/* 模块 2：生辰参数输入 / 锁定状态快捷通道 */}
       <section className="space-y-6 text-center">
         <div className="space-y-2">
           <h2 className="font-serif-title text-2xl md:text-3xl text-[var(--text-primary)] uppercase tracking-[0.15em]">
@@ -72,13 +71,13 @@ export default function HomePage() {
           </p>
         </div>
 
-        {/* 生辰表单挂载区 / 锁定状态卡片 */}
         <div className="max-w-md mx-auto">
           {hasTested && !showFormAnyway ? (
+            /* 锁定状态卡片 */
             <div className="p-6 border border-[var(--border-line)] bg-[var(--bg-card)] backdrop-blur-xl rounded-sm space-y-5 text-center shadow-xl relative">
               <div className="absolute top-0 left-0 right-0 yao-yang"></div>
               
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[var(--cinnabar)]/40 bg-[var(--accent-glow)] text-[10px] font-mono text-[var(--cinnabar)] uppercase tracking-widest">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[var(--cinnabar)]/40 bg-[var(--accent-glow)] text-[11px] font-mono text-[var(--cinnabar)] uppercase tracking-widest">
                 <span className="w-1.5 h-1.5 rounded-full bg-[var(--cinnabar)] animate-ping" />
                 <span>{isEn ? 'SPATIOTEMPORAL ORIGIN ANCHORED' : isTW ? '時空原點已錨定' : '时空原点已锚定'}</span>
               </div>
@@ -119,51 +118,33 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 阳爻分割线 */}
+      {/* 阳爻分隔线 */}
       <div className="yao-yang max-w-xl mx-auto opacity-30"></div>
 
-      {/* 模块 3：三大核心分析维度看板 */}
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {[
-          {
-            num: '01',
-            title: dict?.card1Title || '性格原型',
-            en: dict?.card1SubTitle || '',
-            desc: dict?.card1Desc || '四柱能量结构与系统内稳态因子解析。',
-          },
-          {
-            num: '02',
-            title: dict?.card2Title || '周程演化',
-            en: dict?.card2SubTitle || '',
-            desc: dict?.card2Desc || '十年宏观趋势与年度环境阻力系数。',
-          },
-          {
-            num: '03',
-            title: dict?.card3Title || '双方共振',
-            en: dict?.card3SubTitle || '',
-            desc: dict?.card3Desc || '双人时空共振与摩擦点图谱。',
-          },
-        ].map((item, idx) => (
-          <div 
-            key={idx} 
-            className="p-6 border border-[var(--border-line)] bg-[var(--bg-card)] backdrop-blur-md rounded-sm hover:border-[var(--border-line-hover)] hover:bg-[var(--bg-card-hover)] transition-all duration-300 group relative cursor-pointer"
-          >
-            <div className="text-[10px] stems-matrix mb-3 group-hover:text-[var(--cinnabar)] transition-colors">
-              [{item.num}]
-            </div>
-            <h3 className="font-serif-title text-base text-[var(--text-primary)] mb-1">
-              {item.title}
-            </h3>
-            {item.en && (
-              <div className="text-[11px] text-[var(--text-muted)] uppercase tracking-wider mb-3">
-                {item.en}
+      {/* 模块 3：三大核心分析维度 */}
+      <section className="space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {[
+            { num: '01', title: dict?.card1Title || '性格原型', desc: dict?.card1Desc || '四柱能量结构与系统内稳态因子解析。' },
+            { num: '02', title: dict?.card2Title || '周程演化', desc: dict?.card2Desc || '十年宏观趋势与年度环境阻力系数。' },
+            { num: '03', title: dict?.card3Title || '双方共振', desc: dict?.card3Desc || '双人时空共振与摩擦点图谱。' },
+          ].map((item, idx) => (
+            <div 
+              key={idx} 
+              className="p-6 border border-[var(--border-line)] bg-[var(--bg-card)] backdrop-blur-md rounded-sm hover:border-[var(--border-line-hover)] hover:bg-[var(--bg-card-hover)] transition-all duration-300 group relative"
+            >
+              <div className="text-[12px] stems-matrix mb-3 group-hover:text-[var(--cinnabar)] transition-colors">
+                [{item.num}]
               </div>
-            )}
-            <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
-              {item.desc}
-            </p>
-          </div>
-        ))}
+              <h3 className="font-serif-title text-base text-[var(--text-primary)] mb-1">
+                {item.title}
+              </h3>
+              <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
+                {item.desc}
+              </p>
+            </div>
+          ))}
+        </div>
       </section>
 
     </div>
