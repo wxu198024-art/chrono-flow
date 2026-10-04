@@ -3,7 +3,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
 import { LOCALES, LOCALE_META, type Locale } from '@/types/i18n'
 
-// 导入你的 locales JSON 配置文件
 import en from '@/locales/en.json'
 import ja from '@/locales/ja.json'
 import zhTW from '@/locales/zh-TW.json'
@@ -20,6 +19,10 @@ export type LanguageContextType = {
   language: Locale
   setLanguage: (lang: Locale) => void
   t: typeof en
+  // 增加向下兼容的别名导出
+  lang: Locale
+  locale: Locale
+  dict: typeof en
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
@@ -27,7 +30,6 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguage] = useState<Locale>('en')
 
-  // 读取本地存储的语言偏好，默认 fallback 到 en
   useEffect(() => {
     const saved = localStorage.getItem('chrono_locale') as Locale
     if (saved && LOCALES.includes(saved)) {
@@ -40,10 +42,16 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem('chrono_locale', lang)
   }
 
-  const value = {
+  const currentDict = translations[language] || en
+
+  const value: LanguageContextType = {
     language,
     setLanguage: handleSetLanguage,
-    t: translations[language] || en,
+    t: currentDict,
+    // 映射兼容别名：满足老代码对 lang, locale, dict 的读取
+    lang: language,
+    locale: language,
+    dict: currentDict,
   }
 
   return (
