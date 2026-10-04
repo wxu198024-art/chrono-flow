@@ -52,5 +52,16 @@
   "termsTitle": "服務條款",
   "termsContent": "接入 CHRONO–FLOW 時空場域即代表您同意本服務條款...",
   "formTitle": "時空矩陣輸入",
-  "formNotice": "請填寫準確的時間與地點坐標以精確對齊場域。"
+  "formNotice": "請填寫準確的時間與地點坐標以精確對齊場域。",
+  "identifierLabel": "姓名 / 識別符",
+  "identifierPlaceholder": "例如：林夕",
+  "polarityLabel": "極性（性別）",
+  "polarityMale": "男",
+  "polarityFemale": "女",
+  "birthDateLabel": "出生日期",
+  "birthTimeLabel": "出生時間",
+  "locationLabel": "出生地點",
+  "locationHint": "選填",
+  "locationPlaceholder": "例如：臺北 / 東京",
+  "submitButton": "接入場域控制"
 }
