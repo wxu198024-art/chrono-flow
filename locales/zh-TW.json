@@ -42,5 +42,15 @@
     "dict": "時空字典",
     "terms": "服務條款",
     "privacy": "隱私政策"
-  }
+  },
+  "dictionary": "時空字典",
+  "terms": "服務條款",
+  "privacy": "隱私政策",
+  "copyright": "© CHRONO–FLOW. 保留所有權利。",
+  "privacyTitle": "隱私政策",
+  "privacyContent": "CHRONO–FLOW 嚴格保護您的時空邊界與個人隱私數據...",
+  "termsTitle": "服務條款",
+  "termsContent": "接入 CHRONO–FLOW 時空場域即代表您同意本服務條款...",
+  "formTitle": "時空矩陣輸入",
+  "formNotice": "請填寫準確的時間與地點坐標以精確對齊場域。"
 }
