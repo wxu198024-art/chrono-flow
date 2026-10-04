@@ -52,5 +52,16 @@
   "termsTitle": "利用規約",
   "termsContent": "CHRONO–FLOW時空マトリックスを利用することにより、本規約に同意したものとみなされます...",
   "formTitle": "時空マトリックス入力",
-  "formNotice": "正確な出生時間と座標を入力してください。"
+  "formNotice": "正確な出生時間と座標を入力してください。",
+  "identifierLabel": "氏名 / 識別名",
+  "identifierPlaceholder": "例：林 夕",
+  "polarityLabel": "極性（性別）",
+  "polarityMale": "男性",
+  "polarityFemale": "女性",
+  "birthDateLabel": "生年月日",
+  "birthTimeLabel": "出生時間",
+  "locationLabel": "出生地",
+  "locationHint": "任意",
+  "locationPlaceholder": "例：東京 / 上海",
+  "submitButton": "フィールド制御を開始"
 }
