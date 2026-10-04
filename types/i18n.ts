@@ -1,11 +1,11 @@
-export const LOCALES = ['en', 'ja', 'tw', 'zh'] as const
+export const LOCALES = ['en', 'ja', 'zh-TW', 'zh-CN'] as const
 export type Locale = (typeof LOCALES)[number]
 
-export const LOCALE_META: Record<Locale, { code: string; label: string; htmlLang: string }> = {
-  en: { code: 'EN', label: 'English', htmlLang: 'en' },
-  ja: { code: 'JA', label: '日本語', htmlLang: 'ja' },
-  tw: { code: 'TW', label: '繁體中文', htmlLang: 'zh-TW' },
-  zh: { code: 'ZH', label: '简体中文', htmlLang: 'zh-CN' },
+export const LOCALE_META: Record<Locale, { code: string; label: string }> = {
+  'en': { code: 'EN', label: 'English' },
+  'ja': { code: 'JA', label: '日本語' },
+  'zh-TW': { code: 'TW', label: '繁體中文' },
+  'zh-CN': { code: 'ZH', label: '简体中文' },
 }
 
 export const DICTIONARY = {
