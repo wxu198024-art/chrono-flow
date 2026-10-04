@@ -52,5 +52,16 @@
   "termsTitle": "Terms of Service",
   "termsContent": "By accessing CHRONO–FLOW spatiotemporal matrix, you agree to these terms...",
   "formTitle": "Spatiotemporal Matrix Input",
-  "formNotice": "Please provide accurate temporal coordinates for field alignment."
+  "formNotice": "Please provide accurate temporal coordinates for field alignment.",
+  "identifierLabel": "Full Name / Identifier",
+  "identifierPlaceholder": "e.g., Lin Xi",
+  "polarityLabel": "Polarity (Gender)",
+  "polarityMale": "Male",
+  "polarityFemale": "Female",
+  "birthDateLabel": "Birth Date",
+  "birthTimeLabel": "Birth Time",
+  "locationLabel": "Birth Location",
+  "locationHint": "Optional",
+  "locationPlaceholder": "e.g., Shanghai / Tokyo",
+  "submitButton": "ENGAGE FIELD CONTROL"
 }
