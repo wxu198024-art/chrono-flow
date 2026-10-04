@@ -1,11 +1,46 @@
 {
-  "brand": "CHRONO–FLOW",
-  "subtitle": "时空场域",
-  "todayRhythm": "今日时空节律",
-  "themeDark": "青黑",
-  "themeLight": "暖沙",
-  "dictionary": "字典",
-  "terms": "条款",
-  "privacy": "隐私",
-  "copyright": "© CHRONO–FLOW. 保留所有权利。"
+  "nav": {
+    "home": "CHRONO–FLOW 首页",
+    "language": "语言选择"
+  },
+  "rhythm": {
+    "tag": "今日时空节律",
+    "date": "2026年10月4日",
+    "quote": "顺应节奏的人，从不需要与时间赛跑。",
+    "subQuote": "今日宜：将最重要的战略决策安排在能量峰值时段。",
+    "source": "GetChronoEngine · 今日能量箴言"
+  },
+  "matrix": {
+    "panel": "时空矩阵输入",
+    "idle": "等待接入",
+    "name": "姓名",
+    "namePh": "例如：林夕",
+    "gender": "性别",
+    "female": "女",
+    "male": "男",
+    "birthDate": "出生日期",
+    "birthTime": "出生时间",
+    "optional": "可选",
+    "location": "出生地点",
+    "locationPh": "例如：上海 / 东京",
+    "submit": "接入场域控制"
+  },
+  "status": {
+    "panel": "时空原点已锚定",
+    "online": "场域已激活",
+    "lead": "探索者：{name}",
+    "coords": "坐标原点",
+    "phase": "相位流",
+    "energy": "共振指数",
+    "code": "节律代码",
+    "progress": "轨道演进进度",
+    "reset": "重新对齐时空坐标",
+    "guestBadge": "临时场域（游客模式）",
+    "guestNote": "注册后即可永久保存您的时空场域。"
+  },
+  "footer": {
+    "dict": "时空字典",
+    "terms": "服务条款",
+    "privacy": "隐私政策"
+  }
 }
