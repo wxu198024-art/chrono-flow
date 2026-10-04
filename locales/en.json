@@ -1,11 +1,46 @@
 {
-  "brand": "CHRONO–FLOW",
-  "subtitle": "Spatiotemporal Field",
-  "todayRhythm": "Today's Temporal Rhythm",
-  "themeDark": "Dark Ink",
-  "themeLight": "Warm Sand",
-  "dictionary": "Dictionary",
-  "terms": "Terms",
-  "privacy": "Privacy",
-  "copyright": "© CHRONO–FLOW. All rights reserved."
+  "nav": {
+    "home": "CHRONO–FLOW Home",
+    "language": "Language"
+  },
+  "rhythm": {
+    "tag": "TODAY RHYTHM",
+    "date": "OCTOBER 4, 2026",
+    "quote": "Those who yield to the rhythm never race against time.",
+    "subQuote": "Optimal window: Schedule critical strategic execution during energy peak hours.",
+    "source": "GetChronoEngine · Daily Vector"
+  },
+  "matrix": {
+    "panel": "SPATIOTEMPORAL MATRIX INPUT",
+    "idle": "AWAITING INPUT",
+    "name": "Full Name",
+    "namePh": "e.g., Lin Xi",
+    "gender": "Gender",
+    "female": "Female",
+    "male": "Male",
+    "birthDate": "Birth Date",
+    "birthTime": "Birth Time",
+    "optional": "Optional",
+    "location": "Birth Location",
+    "locationPh": "e.g., Shanghai / Tokyo",
+    "submit": "ENGAGE FIELD CONTROL"
+  },
+  "status": {
+    "panel": "SPATIOTEMPORAL MATRIX ANCHORED",
+    "online": "FIELD ACTIVE",
+    "lead": "Observer: {name}",
+    "coords": "Coordinates",
+    "phase": "Phase State",
+    "energy": "Resonance Index",
+    "code": "Rhythm Vector",
+    "progress": "Cycle Orbital Progress",
+    "reset": "Re-align Spatiotemporal Coordinates",
+    "guestBadge": "Temporary Matrix (Guest)",
+    "guestNote": "Register to persist your origin field permanently."
+  },
+  "footer": {
+    "dict": "Spatiotemporal Dictionary",
+    "terms": "Terms of Service",
+    "privacy": "Privacy Policy"
+  }
 }
