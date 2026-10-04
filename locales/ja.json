@@ -42,5 +42,15 @@
     "dict": "時空辞書",
     "terms": "利用規約",
     "privacy": "プライバシーポリシー"
-  }
+  },
+  "dictionary": "時空辞書",
+  "terms": "利用規約",
+  "privacy": "プライバシーポリシー",
+  "copyright": "© CHRONO–FLOW. All rights reserved.",
+  "privacyTitle": "プライバシーポリシー",
+  "privacyContent": "CHRONO–FLOWはユーザーの時空データおよび個人プライバシーを尊重します...",
+  "termsTitle": "利用規約",
+  "termsContent": "CHRONO–FLOW時空マトリックスを利用することにより、本規約に同意したものとみなされます...",
+  "formTitle": "時空マトリックス入力",
+  "formNotice": "正確な出生時間と座標を入力してください。"
 }
