@@ -42,5 +42,15 @@
     "dict": "Spatiotemporal Dictionary",
     "terms": "Terms of Service",
     "privacy": "Privacy Policy"
-  }
+  },
+  "dictionary": "Spatiotemporal Dictionary",
+  "terms": "Terms of Service",
+  "privacy": "Privacy Policy",
+  "copyright": "© CHRONO–FLOW. All rights reserved.",
+  "privacyTitle": "Privacy Policy",
+  "privacyContent": "CHRONO–FLOW respects and protects your spatiotemporal boundary privacy...",
+  "termsTitle": "Terms of Service",
+  "termsContent": "By accessing CHRONO–FLOW spatiotemporal matrix, you agree to these terms...",
+  "formTitle": "Spatiotemporal Matrix Input",
+  "formNotice": "Please provide accurate temporal coordinates for field alignment."
 }
