@@ -1,32 +1,26 @@
-import { SiteHeader } from '@/components/site-header'
-import { DailyRhythm } from '@/components/daily-rhythm'
-import { CoreMatrix } from '@/components/core-matrix'
-import { SiteFooter } from '@/components/site-footer'
-import InkBackground from '@/components/InkBackground' // 缝合你原有的动态物理双圈与鼠标跟随组件
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
+import InkBackground from '@/components/InkBackground'
+import BirthForm from '@/components/BirthForm'
 
-export default function Page() {
+export default function Home() {
   return (
     <div className="relative flex min-h-screen flex-col overflow-x-clip bg-background text-foreground">
-      {/* 底层动态物理双圈背景：内逆外顺与向心粒子 */}
+      {/* 底层：你原有的 2D Canvas 动态物理双圈与鼠标跟随 */}
       <div className="pointer-events-none fixed inset-0 z-0">
         <InkBackground />
       </div>
 
-      {/* 顶部微光高质感 Grid */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0">
-        <div className="bg-dot-grid absolute inset-x-0 top-0 h-[760px] [mask-image:radial-gradient(ellipse_at_top,black_20%,transparent_70%)]" />
-      </div>
-
-      {/* 上层内容区域 */}
+      {/* 顶层：v0 现代极简布局 */}
       <div className="relative z-10 flex min-h-screen flex-col">
-        <SiteHeader />
+        <Header />
 
-        <main className="relative mx-auto w-full max-w-5xl flex-1 px-6">
-          <DailyRhythm />
-          <CoreMatrix />
+        <main className="relative mx-auto w-full max-w-5xl flex-1 px-6 py-12">
+          {/* 表单或已锚定卡片容器 */}
+          <BirthForm />
         </main>
 
-        <SiteFooter />
+        <Footer />
       </div>
     </div>
   )
