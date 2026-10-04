@@ -1,11 +1,46 @@
 {
-  "brand": "CHRONO–FLOW",
-  "subtitle": "時空フィールド",
-  "todayRhythm": "本日の時空リズム",
-  "themeDark": "青黒",
-  "themeLight": "暖砂",
-  "dictionary": "辞書",
-  "terms": "利用规约",
-  "privacy": "プライバシー",
-  "copyright": "© CHRONO–FLOW. All rights reserved."
+  "nav": {
+    "home": "CHRONO–FLOW ホーム",
+    "language": "言語選択"
+  },
+  "rhythm": {
+    "tag": "今日の時空リズム",
+    "date": "2026年10月4日",
+    "quote": "リズムに従う者は、時間と競う必要がない。",
+    "subQuote": "本日の推奨：エネルギーピークの時間帯に最も重要な戦略を実行してください。",
+    "source": "GetChronoEngine · 今日のベクトル"
+  },
+  "matrix": {
+    "panel": "時空マトリックス入力",
+    "idle": "待機中",
+    "name": "氏名",
+    "namePh": "例：林 夕",
+    "gender": "性別",
+    "female": "女性",
+    "male": "男性",
+    "birthDate": "生年月日",
+    "birthTime": "出生時間",
+    "optional": "任意",
+    "location": "出生地",
+    "locationPh": "例：東京 / 上海",
+    "submit": "フィールド制御を開始"
+  },
+  "status": {
+    "panel": "時空原点固定完了",
+    "online": "フィールドアクティブ",
+    "lead": "探索者：{name}",
+    "coords": "座標原点",
+    "phase": "フェーズ状態",
+    "energy": "共振指数",
+    "code": "リズムコード",
+    "progress": "軌道進化進捗",
+    "reset": "時空座標を再調整",
+    "guestBadge": "一時フィールド（ゲスト）",
+    "guestNote": "会員登録すると、時空フィールドを永久保存できます。"
+  },
+  "footer": {
+    "dict": "時空辞書",
+    "terms": "利用規約",
+    "privacy": "プライバシーポリシー"
+  }
 }
