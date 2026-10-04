@@ -1,231 +1,64 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500&family=Noto+Serif+SC:wght@300;400;600&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ==========================================================================
-   CHRONO–FLOW DUAL THEME FIELD SYSTEM
-   ========================================================================== */
+@layer base {
+  :root {
+    /* 基础颜色架构 (暗黑玄色为主调) */
+    --bg-card: rgba(18, 18, 20, 0.75);
+    --bg-card-hover: rgba(28, 28, 32, 0.85);
+    --border-line: rgba(255, 255, 255, 0.12);
+    --border-line-hover: rgba(255, 255, 255, 0.28);
+    
+    /* 文本色阶 */
+    --text-primary: #f3f4f6;
+    --text-secondary: #9ca3af;
+    --text-muted: #6b7280;
+    
+    /* 输入框与交互色 */
+    --input-bg: rgba(0, 0, 0, 0.35);
+    --input-border: rgba(255, 255, 255, 0.15);
+    
+    /* 核心主题色 (朱砂红与爻光) */
+    --cinnabar: #e64a19;
+    --accent-glow: rgba(230, 74, 25, 0.15);
+    --yao-light: rgba(255, 255, 255, 0.6);
+  }
 
-/* 1. 【虚 / 阴】暗黑科技禅 (Dark Cyber Zen) - 默认 */
-:root,
-[data-theme="dark"] {
-  --bg-primary: #0B0F12;           /* 深渊青黑 */
-  --bg-card: rgba(18, 24, 29, 0.75);/* 青黑毛玻璃卡片 */
-  --bg-card-hover: rgba(26, 35, 42, 0.90);
-  
-  --text-primary: #F5F4F0;         /* 宣纸冷白 (清晰高对比) */
-  --text-secondary: #B0C0CC;       /* 灰青次要字 (再次提高对比度) */
-  --text-muted: #788A96;           /* 舒适辅助灰字 (大幅提升可读性) */
-  
-  --border-line: rgba(255, 255, 255, 0.18); /* 1px 极细几何边框 */
-  --border-line-hover: rgba(0, 255, 204, 0.55);
-  
-  --input-bg: rgba(13, 18, 22, 0.85);       /* 输入框加深底色 */
-  --input-border: rgba(255, 255, 255, 0.25);
-  
-  --yao-light: rgba(0, 255, 204, 0.75);    /* 玉冷青光线 */
-  --cinnabar: #C8322B;                     /* 朱砂红 */
-  --accent-glow: rgba(0, 255, 204, 0.15);
-  
-  /* 解决 Amber 刺眼眩光问题，改用沉稳微光琥珀金 */
-  --accent-amber: #E0A96D;
-  --accent-amber-glow: rgba(224, 169, 109, 0.18);
+  .dark {
+    --bg-card: rgba(12, 12, 14, 0.85);
+    --bg-card-hover: rgba(22, 22, 26, 0.95);
+    --border-line: rgba(255, 255, 255, 0.1);
+    --border-line-hover: rgba(255, 255, 255, 0.22);
+    
+    --text-primary: #f9fafb;
+    --text-secondary: #9ca3af;
+    --text-muted: #4b5563;
+    
+    --input-bg: rgba(0, 0, 0, 0.5);
+    --input-border: rgba(255, 255, 255, 0.12);
+  }
 }
 
-/* 2. 【实 / 阳】暖沙寂素 (Modern Wabi-Sabi) */
-[data-theme="light"] {
-  --bg-primary: #E8E3D8;           /* 暖钛砂石 / 哑光粗陶 */
-  --bg-card: rgba(255, 253, 248, 0.88); /* 提高卡片底色高光白色对比 */
-  --bg-card-hover: rgba(255, 255, 255, 0.98);
-  
-  --text-primary: #1C1917;         /* 浓墨碳木色 (最高清晰度) */
-  --text-secondary: #3D3732;       /* 深沉风蚀灰棕 (大幅提升字迹识别度) */
-  --text-muted: #6B6158;           /* 沉静浅赭 (避免虚化) */
-  
-  --border-line: rgba(42, 39, 37, 0.28); /* 明显刻痕线 */
-  --border-line-hover: rgba(184, 58, 46, 0.6);
-  
-  --input-bg: rgba(238, 233, 222, 0.95);  /* 输入框明暗分层 */
-  --input-border: rgba(42, 39, 37, 0.40);  /* 输入框高对比边框 */
-  
-  --yao-light: rgba(100, 80, 60, 0.85);   /* 浅赭断续线 */
-  --cinnabar: #B83A2E;                     /* 沉暗朱砂 */
-  --accent-glow: rgba(184, 58, 46, 0.15);
-  
-  /* 暖沙模式下的沉稳棕琥珀，替代黄字 */
-  --accent-amber: #B45309;
-  --accent-amber-glow: rgba(180, 83, 9, 0.12);
-}
-
-/* ==========================================================================
-   GLOBAL BASE STYLES & TYPOGRAPHY SCALING (字号放大与舒适度修复)
-   ========================================================================== */
-
-body {
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  min-height: 100vh;
-  overflow-x: hidden;
-  line-height: 1.65;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  transition: background-color 0.4s ease, color 0.4s ease;
-}
-
-/* 放大微小字号，解决视觉费眼问题 */
-.text-\[10px\] {
-  font-size: 0.75rem !important; /* 原 10px 强制升级为 12px */
-  line-height: 1.1rem !important;
-}
-
-.text-xs {
-  font-size: 0.875rem !important; /* 原 12px 强制升级为 14px */
-  line-height: 1.4rem !important;
-}
-
-.text-sm {
-  font-size: 1rem !important; /* 原 14px 强制升级为 16px */
-  line-height: 1.65rem !important;
-}
-
-/* 高冷史诗感衬线标题 */
-.font-serif-title {
-  font-family: 'Cinzel', 'Noto Serif SC', serif;
-  letter-spacing: 0.15em;
-}
-
-/* ==========================================================================
-   THEME ADAPTATION FOR TAILWIND UTILITIES (解决刺眼与多主题看不清)
-   ========================================================================== */
-
-/* 映射 TailWind 琥珀色/黄色系到高舒适度变量 */
-.text-amber-200, .text-amber-300, .text-amber-400, .text-amber-500 {
-  color: var(--accent-amber) !important;
-}
-
-.bg-amber-500\/15, .bg-amber-950\/30, .bg-amber-950\/20 {
-  background-color: var(--accent-amber-glow) !important;
-}
-
-.border-amber-500\/40, .border-amber-900\/50, .border-amber-800 {
-  border-color: var(--border-line) !important;
-}
-
-/* 映射 TailWind 暗暗中灰色文本到当前主题的高可读次要字体 */
-.text-neutral-300, .text-neutral-400 {
-  color: var(--text-secondary) !important;
-}
-
-.text-neutral-500 {
-  color: var(--text-muted) !important;
-}
-
-/* 卡片背景与边框主题自适应 */
-.bg-neutral-900\/40, .bg-neutral-900\/80, .bg-neutral-950\/60 {
-  background-color: var(--bg-card) !important;
-}
-
-.border-neutral-800, .border-neutral-800\/90, .border-neutral-900 {
-  border-color: var(--border-line) !important;
-}
-
-/* ==========================================================================
-   DATE & TIME PICKER ICON COLOR FIX (解决暗色模式下日历/时钟图标纯黑问题)
-   ========================================================================== */
-
-/* 在暗色主题下将原生的 Picker 控件图标反色为白色 */
-:root[data-theme="dark"] input[type="date"]::-webkit-calendar-picker-indicator,
-:root[data-theme="dark"] input[type="time"]::-webkit-calendar-picker-indicator,
-[data-theme="dark"] input[type="date"]::-webkit-calendar-picker-indicator,
-[data-theme="dark"] input[type="time"]::-webkit-calendar-picker-indicator {
-  filter: invert(0.9) hue-rotate(180deg);
-  cursor: pointer;
-  opacity: 0.8;
-  transition: opacity 0.2s ease;
-}
-
-:root[data-theme="dark"] input[type="date"]::-webkit-calendar-picker-indicator:hover,
-:root[data-theme="dark"] input[type="time"]::-webkit-calendar-picker-indicator:hover,
-[data-theme="dark"] input[type="date"]::-webkit-calendar-picker-indicator:hover,
-[data-theme="dark"] input[type="time"]::-webkit-calendar-picker-indicator:hover {
-  opacity: 1;
-}
-
-/* 亮色模式下保持适当灰度不刺眼 */
-[data-theme="light"] input[type="date"]::-webkit-calendar-picker-indicator,
-[data-theme="light"] input[type="time"]::-webkit-calendar-picker-indicator {
-  cursor: pointer;
-  opacity: 0.65;
-}
-
-/* ==========================================================================
-   1PX TRIGRAM & YAO GEOMETRY (1px 几何爻线系统)
-   ========================================================================== */
-
-/* 阳爻 (Continuous Line) */
+/* 装饰性极简节点与爻线 */
 .yao-yang {
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--yao-light), transparent);
-  width: 100%;
+  background: linear-gradient(90deg, transparent, var(--border-line-hover), transparent);
 }
 
-/* 阴爻 (Broken Line) */
-.yao-yin {
-  height: 1px;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-}
-.yao-yin::before, .yao-yin::after {
-  content: '';
-  width: 44%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, var(--yao-light));
-}
-
-/* 极简朱砂能量点 */
 .cinnabar-dot {
-  width: 6px;
-  height: 6px;
-  background-color: var(--cinnabar);
-  border-radius: 50%;
   display: inline-block;
-  box-shadow: 0 0 8px var(--cinnabar);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--cinnabar);
 }
 
-/* 时空参数矩阵字体 */
-.stems-matrix {
-  font-family: 'Cinzel', monospace;
-  letter-spacing: 0.2em;
-  color: var(--text-muted);
-}
-/* 在 app/globals.css 底端加入以下补丁 */
-
-[data-theme="light"] .text-amber-100,
-[data-theme="light"] .text-amber-200,
-[data-theme="light"] .text-amber-300,
-[data-theme="light"] .text-amber-400,
-[data-theme="light"] .text-amber-500 {
-  color: #9A3412 !important; /* 暖沙模式下强制替换为高对比深赤琥珀色 */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
-[data-theme="light"] .text-neutral-100,
-[data-theme="light"] .text-neutral-200,
-[data-theme="light"] .text-neutral-300 {
-  color: #1C1917 !important; /* 暖沙模式下强制替换为高对比深碳木色 */
-}
-
-[data-theme="light"] .text-neutral-400,
-[data-theme="light"] .text-neutral-500 {
-  color: #4A443F !important; /* 暖沙模式下强制替换为高对比灰棕色 */
-}
-
-[data-theme="light"] .bg-neutral-900\/40,
-[data-theme="light"] .bg-neutral-900\/60,
-[data-theme="light"] .bg-neutral-950\/60 {
-  background-color: rgba(255, 253, 248, 0.90) !important; /* 暖沙卡片底色高亮 */
-  border-color: rgba(42, 39, 37, 0.25) !important;
+.animate-spin-slow {
+  animation: spin-slow 12s linear infinite;
 }
